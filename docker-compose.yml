@@ -1,0 +1,18 @@
+version: '2'
+services:
+  wordpress:
+    image: wordpress
+    ports:
+      - 8000:80
+    environment:
+      WORDPRESS_DB_PASSWORD: example
+          volumes:
+      - ./screenly-wp-cast:/var/www/html/wp-content/plugins/screenly-wp-cast
+  mysql:
+    image: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+    volumes:
+      - db_data:/var/lib/mysql
+volumes:
+  db_data:
