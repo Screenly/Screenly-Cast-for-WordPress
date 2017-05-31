@@ -5,7 +5,10 @@ IFS=$'\n\t'
 PLUGIN_VERSION="$(head -n1 VERSION)"
 GIT_HASH="$(git rev-parse --short HEAD)"
 
-svn co --username "$WP_USER" --password "$WP_PASS" https://plugins.svn.wordpress.org/screenly-cast wp_org
+svn co \
+  --username "$WP_USER" \
+  --password "$WP_PASS" \
+  https://plugins.svn.wordpress.org/screenly-cast wp_org
 
 if [ -d "wp_org/tags/$PLUGIN_VERSION" ]; then
   echo "Version exist. Exiting."
@@ -19,4 +22,8 @@ sed -i "s/VERSION_PLACEHOLDER/${PLUGIN_VERSION}/" $(find trunk -type f -iname '*
 svn add --force trunk
 svn diff
 svn cp trunk "tags/$PLUGIN_VERSION"
-svn ci --username "$WP_USER" --password "$WP_PASS" -m "Adds version $PLUGIN_VERSION (git hash $GIT_HASH)"
+svn ci \
+  --no-auth-cache \
+  --username "$WP_USER" \
+  --password "$WP_PASS" \
+  -m "Adds version $PLUGIN_VERSION (git hash $GIT_HASH)"
