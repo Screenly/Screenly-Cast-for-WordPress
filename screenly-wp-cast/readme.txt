@@ -1,11 +1,12 @@
-=== Screenly Cast for WordPress===
+=== Screenly Cast ===
 Tags: digital signage, screenly
 Requires at least: 3.7
 License: GPLv2
 
-Screenly Cast is a simple plugin for WordPress that can convert posts and media files (images) to digital signage friendly content.
+Screenly Cast for WordPress is a simple plugin for WordPress that can convert posts and media files (images) to digital signage friendly content.
 
 == Description ==
+
 The goal with Screenly Cast for WordPress is to turn WordPress into a simple content creation tool for digital signage.
 
 Contrary to some other WordPress plugins or themes out there, the goal is not to convert WordPress into a full-fledged digital signage CMS. Instead, the plugin is designed for simple content creation that can be used assets in your digital signage CMS.
