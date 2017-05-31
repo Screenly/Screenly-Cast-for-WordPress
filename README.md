@@ -21,7 +21,7 @@ To make use of the plugin on your **Screenly Screen** you just need to follow th
     - `http://www.mydomain.com/my-attachment-url?srly`
     - `http://www.mydomain.com/?somevar=1&anothervar=2&srly` - In case your using more than one var
     - **Note** There is no need to apply any value to the var. It just needs to exist on the query.
-  4. [Login** to Screenly](https://login.screenlyapp.com) and navigate to **Assets** on the top menu.
+  4. [Login to Screenly](https://login.screenlyapp.com) and navigate to **Assets** on the top menu.
   5. Click on the button **+ Add Asset**
   6. Select the tab **URL**
   7. **Paste** the pre-edited URL (from step 3)
