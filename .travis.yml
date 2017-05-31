@@ -1,0 +1,8 @@
+before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get install -qq -y rsync subversion
+branches:
+    only:
+        - master
+script:
+  - ./bin/push_to_wordpress_org.sh
