@@ -15,11 +15,14 @@ if [ -d "wp_org/tags/$PLUGIN_VERSION" ]; then
 fi
 
 cp -rfv screenly-wp-cast/* wp_org/trunk/
+cp -rfv assets/* wp_org/assets/
 
 cd wp_org
 sed -i "s/VERSION_PLACEHOLDER/${PLUGIN_VERSION}/" $(find trunk -type f -iname '*.php')
 
 svn add --force trunk
+svn add --force assets
+
 svn diff
 svn cp trunk "tags/$PLUGIN_VERSION"
 svn ci \
