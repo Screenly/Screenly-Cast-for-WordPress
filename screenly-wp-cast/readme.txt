@@ -15,5 +15,10 @@ Also, instead of trying to add support for zones, feeds and all kind of other fe
 For more information, please visit https://github.com/Screenly/Screenly-Cast-for-WordPress/
 
 == Installation ==
+
 * Install and activate the plugin
 * Navigate to a blog post or media attachment page and append "?srly" to the URL
+
+== Screenshots ==
+1. An example post in WordPress page without Screenly Cast.
+2. The same page with Screenly Cast enabled.
