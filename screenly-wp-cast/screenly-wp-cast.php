@@ -4,19 +4,19 @@
  *
  * @category ScreenlyCast
  * @package  ScreenlyCast
- * @author   Original Peter Monte <pmonte@screenly.io>
+ * @author   Peter Monte <pmonte@screenly.io>
  * @license  https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html  GPLv2
  * @link     https://github.com/Screenly/Screenly-Cast-for-WordPress
- * @since    VERSION_PLACEHOLDER
+ * @since    0.0.1
  */
 /**
 Plugin Name: Screenly Cast for WordPress
 Plugin URI: https://github.com/wireload/screenly-wp-cast
 Description: WordPress plugin to enable casting of content on Screenly devices.
-Version: 0.0.1
-Author: Screenly Inc
+Version: VERSION_PLACEHOLDER
+Author: Screenly, Inc
 Author URI: https://www.screenly.io/
-License:
+License: GPLv2
 Text Domain: screenly-cast
 */
 if (!function_exists('add_action')) {
@@ -27,7 +27,7 @@ if (!function_exists('add_action')) {
 /**
  * Define constants to make info about plugin available
  */
-define('SRLY_VERSION', '0.0.1');
+define('SRLY_VERSION', 'VERSION_PLACEHOLDER');
 define('SRLY_WP_VERSION', '3.7');
 define('SRLY_PLUGIN_URI', plugin_dir_url(__FILE__));
 define('SRLY_PLUGIN_DIR', plugin_dir_path(__FILE__));
