@@ -1,44 +1,50 @@
 # Screenly Cast for WordPress
 
-WordPress plugin to enable direct cast of pages, posts and image media on Screenly devices without you having to uninstall your current theme.
+A WordPress plugin to enable easy and beautiful casting of pages, posts and image media on [Screenly](https://www.screenly.io) digital signage devices.
 
-Screenly Cast for WordPress plugin optimizes your website content for a better display on devices that don't rely on any user interaction.
+The Screenly Cast plugin optimizes your website content for beautiful, easy to read display on TVs and other non-interactive devices.
 
 ## Installing
 
- * Search for Screenly Cast in the WordPress plugin directory
- * Activate the  plugin
+ * Search for *Screenly Cast* in the WordPress plugin directory
+ * Activate the plugin
 
 ## Usage
+
 To make use of the plugin on your **Screenly Screen** you just need to follow these simple steps:
 
   1. Make sure the **plugin is activated**.
-  2. **Copy & Paste** the URL of your website, post, page or attachment.
-  3. Pre-edit that same URL you selected with a **var** called `srly` like:
+  2. **Copy and Paste** the URL of your website, post, page or attachment.
+  3. Change the URL, adding a parameter called `srly`, like this::
     - `http://www.mydomain.com/?srly`
     - `http://www.mydomain.com/my-post-url?srly`
     - `http://www.mydomain.com/my-page-url?srly`
     - `http://www.mydomain.com/my-attachment-url?srly`
-    - `http://www.mydomain.com/?somevar=1&anothervar=2&srly` - In case your using more than one var
-    - **Note** There is no need to apply any value to the var. It just needs to exist on the query.
+    - `http://www.mydomain.com/?somevar=1&anothervar=2&srly` - In case your using more than one parameter
+    - **Note:** There is no need to apply any value to the parameter. It just needs to exist on the query.
   4. [Login to Screenly](https://login.screenlyapp.com) and navigate to **Assets** on the top menu.
-  5. Click on the button **+ Add Asset**
-  6. Select the tab **URL**
-  7. **Paste** the pre-edited URL (from step 3)
-  8. Hit **Save**
-  9. Once prompt to edit the new asset details, make sure to define a **recognizable title** since Screenly will not display any vars later.
-  10. Go to the menu **Playlists** and **add the new asset** - Make sure to select a nice **Duration** for better user reading.
-  11. Hit **Save**
-  12. Profit
+  5. Click on the button **+ Add Asset**.
+  6. Select the tab **URL**.
+  7. **Paste** the edited URL (from step 3).
+  8. Hit **Save**.
+  9. On the asset detail page, make sure to set a **recognizable title** since this is what you will see in Screenly later.
+  10. Go to the **Playlists** section and **add the new asset**. Make sure to pick an appropriate **Duration** for a good reading experience.
+  11. Hit **Save**.
+  12. Profit.
 
 ## How it works
 
-The plugin is packed with a simple theme that will display the content. Once the plugin catches a var `srly` on your url, ex: `http://www.myblog.com/?srly`, a `template_include` filter is activated to redirect to the plugin's theme files. This means that your content will be treated by the plugin's theme and not with the theme you previously installed.
+The plugin comes with a simple theme that will be used specifically for Screenly content. The plugin detects the `srly` parameter in your URL, like in `http://www.myblog.com/?srly`, and applies the template. A `template_include` filter is used to activate the plugin's theme files. Your content will be rendered using the Screenly theme, without affecting your normal theme still in use for the rest of your site.
 
-Because the plugin is targeting Screenly devices with no end user interaction, content will be treated with the basics of WordPress. This means the use of the title, content and featured image. A reduction in markup and functionalities is applied. Example of that is the fact that a text link becomes obsolete since there will be no direct interaction. Providing the extended link would consume plenty of space not available. You must assume a maximum of 250 characters if you want all content to fit on screen. Screenly doesn't rely on automatic page scrolling giving the fact that each assets has it's own timing and that would create conflict with the page script.
+Because the plugin targets Screenly devices with no end user interaction, content will be laid out in a simple and TV friendly layout. Just the title, content and featured image are used. The plugin automatically simplifies the markup and removes functionality not appropriate for the medium. For example, since there is no interaction, any clickable links is simplified to just the title text.
+
+For the best experience for your reader you should assume that no more than 250 characters or so will be displayed. Screenly Cast does not try to automatically scroll the content because for these non-interactive, often large TV displays, fixed unmoving content usually looks and reads the best.
 
 ## Development
 
 To setup a local development, simply install Docker and:
- * Run `docker-compose up` from the root of the repository
- * Navigate to https://localhost:8000
+ * Run `docker-compose up` from the root of the repository.
+ * Navigate to https://localhost:8000.
+ * Create your account and activate the plugin.
+
+Please note that you do not need to install the plugin from the plugin directory. The code plugin folder is automatically added to the WordPress installation. All you need to do is to activate the plugin.
