@@ -15,7 +15,7 @@ To after installing and activated the plugin, simply append `?srly` to the end o
 The goal with Screenly Cast for WordPress is to turn WordPress into a simple content creation tool for digital signage (and for [Screenly](https://www.screenly.io) in particular).
 
 Contrary to some other WordPress plugins or themes out there, the goal is not to convert WordPress into a full-fledged digital signage CMS. Instead, the plugin is designed for simple content creation that can be used assets in your digital signage CMS.
-Also, instead of trying to add support for zones, feeds and all kind of other features, we’ve focused on ensuring a good-end-user viewing experience.
+Also, instead of trying to add support for zones, feeds and all kind of other features, we’ve focused on ensuring a good end-user viewing experience.
 
 For more information, check out Screenly Cast for WordPress' home on [Github](https://github.com/Screenly/Screenly-Cast-for-WordPress/) and this [blog post](https://news.screenly.io/introducing-screenly-cast-for-wordpress-a27ff26667b7?source=collection_home---4------0-----------).
 
