@@ -38,6 +38,8 @@ To make use of the plugin on your **Screenly Screen** you just need to follow th
   11. Hit **Save**.
   12. Profit.
 
+For detailed instructions, check out this [Medium post](https://news.screenly.io/introducing-screenly-cast-for-wordpress-a27ff26667b7).
+
 ## How it works
 
 The plugin comes with a simple theme that will be used specifically for Screenly content. The plugin detects the `srly` parameter in your URL, like in `http://www.myblog.com/?srly`, and applies the template. A `template_include` filter is used to activate the plugin's theme files. Your content will be rendered using the Screenly theme, without affecting your normal theme still in use for the rest of your site.
