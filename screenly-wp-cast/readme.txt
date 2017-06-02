@@ -9,7 +9,7 @@ The Screenly Cast plugin optimizes your website content for beautiful, easy to r
 
 To after installing and activated the plugin, simply append `?srly` to the end of page, posts and media URLs.
 
-For more details check out our our video [An introduction to Screenly Cast for WordPress](https://youtu.be/rX6b9ZAYi34).
+[youtube http://www.youtube.com/watch?v=rX6b9ZAYi34]
 
 == Description ==
 
@@ -20,11 +20,20 @@ Also, instead of trying to add support for zones, feeds and all kind of other fe
 
 For more information, check out Screenly Cast for WordPress' home on [Github](https://github.com/Screenly/Screenly-Cast-for-WordPress/) and this [blog post](https://news.screenly.io/introducing-screenly-cast-for-wordpress-a27ff26667b7?source=collection_home---4------0-----------).
 
+[youtube http://www.youtube.com/watch?v=rX6b9ZAYi34]
+
 == Installation ==
 
 * Install and activate the plugin
 * Navigate to a blog post or media attachment page and append "?srly" to the URL
 
 == Screenshots ==
+
 1. An example post in WordPress page without Screenly Cast.
 2. The same page with Screenly Cast enabled.
+
+== Frequently Asked Questions ==
+
+When should I use "?srly" and when should I use "&srly" in the URL?
+
+In most cases, you only need to use "?srly". However, if you already got an existing parameter or variable in your URL string, you need to use "&srly" to chain it. For instance, if you "https://www.mydomain.com/?somevar=1&anothervar=2", you need to add "&srly". In most cases, your URL will look like "https://www.mydomain.com/some-page", in which case you just need to add "?srly"
