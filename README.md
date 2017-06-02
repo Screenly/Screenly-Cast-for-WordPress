@@ -15,17 +15,18 @@ With Screenly Cast for WordPress:
  * Search for *Screenly Cast* in the WordPress plugin directory
  * Activate the plugin
 
-You can also check out our video introduction to the plugin:
+
+## Usage with Screenly Pro
+
+Check out our video introduction to Screenly Cast for WordPress:
 
 [![An introduction to Screenly Cast for WordPress](https://img.youtube.com/vi/rX6b9ZAYi34/0.jpg)](https://www.youtube.com/watch?v=rX6b9ZAYi34)
-
-## Usage with Screenly
 
 To make use of the plugin on your **Screenly Screen** you just need to follow these simple steps:
 
   1. Make sure the **plugin is activated**.
   2. **Copy and Paste** the URL of your website, post, page or attachment.
-  3. Change the URL, adding a parameter called `srly`, like this::
+  3. Change the URL, adding a parameter called `srly`, like this:
     - `https://www.mydomain.com/?srly`
     - `https://www.mydomain.com/my-post-url?srly`
     - `https://www.mydomain.com/my-page-url?srly`
