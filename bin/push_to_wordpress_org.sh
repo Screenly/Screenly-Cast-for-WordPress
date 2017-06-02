@@ -12,6 +12,7 @@ svn co \
 
 if [ -d "wp_org/tags/$PLUGIN_VERSION" ]; then
   echo "Version exist. Exiting."
+  exit 1
 fi
 
 cp -rfv screenly-wp-cast/* wp_org/trunk/
