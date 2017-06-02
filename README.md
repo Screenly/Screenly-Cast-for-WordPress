@@ -22,11 +22,11 @@ To make use of the plugin on your **Screenly Screen** you just need to follow th
   1. Make sure the **plugin is activated**.
   2. **Copy and Paste** the URL of your website, post, page or attachment.
   3. Change the URL, adding a parameter called `srly`, like this::
-    - `http://www.mydomain.com/?srly`
-    - `http://www.mydomain.com/my-post-url?srly`
-    - `http://www.mydomain.com/my-page-url?srly`
-    - `http://www.mydomain.com/my-attachment-url?srly`
-    - `http://www.mydomain.com/?somevar=1&anothervar=2&srly` - In case your using more than one parameter
+    - `https://www.mydomain.com/?srly`
+    - `https://www.mydomain.com/my-post-url?srly`
+    - `https://www.mydomain.com/my-page-url?srly`
+    - `https://www.mydomain.com/my-attachment-url?srly`
+    - `https://www.mydomain.com/?somevar=1&anothervar=2&srly` - In case your using more than one parameter
     - **Note:** There is no need to apply any value to the parameter. It just needs to exist on the query.
   4. [Login to Screenly](https://login.screenlyapp.com) and navigate to **Assets** on the top menu.
   5. Click on the button **+ Add Asset**.
