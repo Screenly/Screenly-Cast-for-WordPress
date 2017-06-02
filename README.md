@@ -4,6 +4,12 @@ A WordPress plugin to enable easy and beautiful casting of pages, posts and imag
 
 The Screenly Cast plugin optimizes your website content for beautiful, easy to read display on TVs and other non-interactive devices.
 
+Without Screenly Cast for WordPress:
+![Without Screenly Cast for WordPress](/assets/screenshot-1.png)
+
+With Screenly Cast for WordPress:
+![With Screenly Cast for WordPress](/assets/screenshot-2.png)
+
 ## Installing
 
  * Search for *Screenly Cast* in the WordPress plugin directory
