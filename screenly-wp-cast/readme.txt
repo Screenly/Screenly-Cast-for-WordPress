@@ -9,6 +9,8 @@ The Screenly Cast plugin optimizes your website content for beautiful, easy to r
 
 To after installing and activated the plugin, simply append `?srly` to the end of page, posts and media URLs.
 
+For more details check out our our video [An introduction to Screenly Cast for WordPress](https://youtu.be/rX6b9ZAYi34).
+
 == Description ==
 
 The goal with Screenly Cast for WordPress is to turn WordPress into a simple content creation tool for digital signage.
