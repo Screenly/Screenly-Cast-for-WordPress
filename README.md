@@ -15,7 +15,7 @@ With Screenly Cast for WordPress:
  * Search for *Screenly Cast* in the WordPress plugin directory
  * Activate the plugin
 
-## Usage
+## Usage with Screenly
 
 To make use of the plugin on your **Screenly Screen** you just need to follow these simple steps:
 
@@ -39,6 +39,8 @@ To make use of the plugin on your **Screenly Screen** you just need to follow th
   12. Profit.
 
 For detailed instructions, check out this [Medium post](https://news.screenly.io/introducing-screenly-cast-for-wordpress-a27ff26667b7).
+
+Screenly Cast for WordPress should also work just fine with most other digital signage solutions, but the usage will vary.
 
 ## How it works
 
