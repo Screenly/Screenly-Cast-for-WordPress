@@ -15,7 +15,7 @@ if [ -d "wp_org/tags/$PLUGIN_VERSION" ]; then
   exit 1
 fi
 
-cp -rfv screenly-wp-cast/* wp_org/trunk/
+cp -rfv screenly-cast/* wp_org/trunk/
 cp -rfv assets/* wp_org/assets/
 
 cd wp_org
