@@ -6,6 +6,7 @@ PLUGIN_VERSION="$(head -n1 VERSION)"
 GIT_HASH="$(git rev-parse --short HEAD)"
 
 svn co \
+  --quiet \
   --username "$WP_USER" \
   --password "$WP_PASS" \
   https://plugins.svn.wordpress.org/screenly-cast wp_org
