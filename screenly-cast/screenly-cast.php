@@ -1,7 +1,7 @@
 <?php
 /**
 Plugin Name: Screenly Cast for WordPress
-Plugin URI: https://github.com/wireload/screenly-cast
+Plugin URI: https://github.com/Screenly/Screenly-Cast-for-WordPress
 Description: WordPress plugin to enable casting of content on Screenly devices.
 Version: VERSION_PLACEHOLDER
 Author: Screenly, Inc
