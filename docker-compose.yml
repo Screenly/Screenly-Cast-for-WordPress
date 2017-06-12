@@ -7,7 +7,7 @@ services:
     environment:
       WORDPRESS_DB_PASSWORD: example
           volumes:
-      - ./screenly-wp-cast:/var/www/html/wp-content/plugins/screenly-wp-cast
+      - ./screenly-cast:/var/www/html/wp-content/plugins/screenly-cast
   mysql:
     image: mariadb
     environment:

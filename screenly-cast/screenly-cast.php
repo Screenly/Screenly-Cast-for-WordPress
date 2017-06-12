@@ -1,5 +1,15 @@
 <?php
 /**
+Plugin Name: Screenly Cast for WordPress
+Plugin URI: https://github.com/wireload/screenly-cast
+Description: WordPress plugin to enable casting of content on Screenly devices.
+Version: VERSION_PLACEHOLDER
+Author: Screenly, Inc
+Author URI: https://www.screenly.io/
+License: GPLv2
+Text Domain: screenly-cast
+*/
+/**
  * Make sure we don't expose any info if called directly.
  *
  * @category ScreenlyCast
@@ -9,18 +19,8 @@
  * @link     https://github.com/Screenly/Screenly-Cast-for-WordPress
  * @since    0.0.1
  */
-/**
-Plugin Name: Screenly Cast for WordPress
-Plugin URI: https://github.com/wireload/screenly-wp-cast
-Description: WordPress plugin to enable casting of content on Screenly devices.
-Version: VERSION_PLACEHOLDER
-Author: Screenly, Inc
-Author URI: https://www.screenly.io/
-License: GPLv2
-Text Domain: screenly-cast
-*/
 if (!function_exists('add_action')) {
-    echo 'Nothing to see here.';
+    echo "No script kiddies please!";
     exit;
 }
 
@@ -32,9 +32,9 @@ define('SRLY_WP_VERSION', '3.7');
 define('SRLY_PLUGIN_URI', plugin_dir_url(__FILE__));
 define('SRLY_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('SRLY_INC_DIR', SRLY_PLUGIN_DIR . 'inc');
-define('SRLY_THEME', 'screenly-wp-cast');
-define('SRLY_THEME_URI', SRLY_PLUGIN_URI . 'theme/screenly-wp-cast');
-define('SRLY_THEME_DIR', SRLY_PLUGIN_DIR . 'theme/screenly-wp-cast');
+define('SRLY_THEME', 'screenly-cast');
+define('SRLY_THEME_URI', SRLY_PLUGIN_URI . 'theme/screenly-cast');
+define('SRLY_THEME_DIR', SRLY_PLUGIN_DIR . 'theme/screenly-cast');
 define('SRLY_PREFIX', 'srly_');
 
 

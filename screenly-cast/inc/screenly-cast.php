@@ -15,7 +15,7 @@ defined('ABSPATH') or die("No script kiddies please!");
 
 
 /**
- * Screenly main class. Called by screenly-wp-cast.php.
+ * Screenly main class. Called by screenly-cast.php.
  *
  * @category PHP
  * @package  ScreenlyCast
@@ -37,8 +37,8 @@ class ScreenlyCast
      * @see     style.css file under theme folder
      */
     const QUERY_VAR  = 'srly';
-    const THEME_STYLESHEET = 'screenly-wp-cast';
-    const THEME_TEMPLATE = 'screenly-wp-cast';
+    const THEME_STYLESHEET = 'screenly-cast';
+    const THEME_TEMPLATE = 'screenly-cast';
 
     /**
      * Used to determine if class was initialized or not.
@@ -51,7 +51,7 @@ class ScreenlyCast
     private static $_running = false;
 
     /**
-     * Initializes Plugin. Called on screenly-wp-cast.php.
+     * Initializes Plugin. Called on screenly-cast.php.
      *
      * @package ScreenlyCast
      * @since   0.0.1

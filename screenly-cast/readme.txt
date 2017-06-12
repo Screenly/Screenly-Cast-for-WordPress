@@ -36,3 +36,10 @@ In most cases, you only need to use "?srly". However, if you already got an exis
 
 1. An example post in WordPress page without Screenly Cast.
 2. The same page with Screenly Cast enabled.
+
+
+
+== Changelog ==
+
+= 0.1.13 =
+* Core: Replaced plugin name and text-domain to "screenly-cast"
