@@ -6,7 +6,7 @@ services:
       - 8000:80
     environment:
       WORDPRESS_DB_PASSWORD: example
-          volumes:
+    volumes:
       - ./screenly-cast:/var/www/html/wp-content/plugins/screenly-cast
   mysql:
     image: mariadb
