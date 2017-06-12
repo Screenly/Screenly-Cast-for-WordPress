@@ -15,6 +15,10 @@ if [ -d "wp_org/tags/$PLUGIN_VERSION" ]; then
   exit 1
 fi
 
+# Clean out non-existing files and folders
+rm -rf wp_org/trunk/*
+
+# Copy in new data
 cp -rfv screenly-cast/* wp_org/trunk/
 cp -rfv assets/* wp_org/assets/
 
