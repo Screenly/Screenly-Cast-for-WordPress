@@ -6,6 +6,7 @@ PLUGIN_VERSION="$(head -n1 VERSION)"
 GIT_HASH="$(git rev-parse --short HEAD)"
 
 svn co \
+  --quiet \
   --username "$WP_USER" \
   --password "$WP_PASS" \
   https://plugins.svn.wordpress.org/screenly-cast wp_org
@@ -15,6 +16,10 @@ if [ -d "wp_org/tags/$PLUGIN_VERSION" ]; then
   exit 1
 fi
 
+# Clean out non-existing files and folders
+svn delete --force wp_org/trunk/*
+
+# Copy in new data
 cp -rfv screenly-cast/* wp_org/trunk/
 cp -rfv assets/* wp_org/assets/
 
