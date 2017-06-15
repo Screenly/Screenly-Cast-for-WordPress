@@ -50,6 +50,32 @@ class ScreenlyCast
      */
     private static $_running = false;
 
+
+
+    /**
+     * Runs on Admin Init
+     *
+     * @package ScreenlyCast
+     * @since   0.0.16
+     * @static
+     * @return  boolean
+     */
+    public static function adminInit()
+    {
+        /**
+         * Check for WP version compatability before any other action.
+         */
+        if (!self::checkWPVersion()){
+            add_action('admin_notices', array('ScreenlyCast', 'notifyWPVersion'));
+            add_action('network_admin_notices', array('ScreenlyCast', 'notifyWPVersion')); // for multisite
+            deactivate_plugins(SRLY_PLUGIN_NAME);
+            return false;
+        }
+    }
+
+
+
+
     /**
      * Initializes Plugin. Called on screenly-cast.php.
      *
@@ -244,6 +270,63 @@ class ScreenlyCast
     }
 
 
+
+    /**
+     * Check if WordPress version is compatable with plugin's version.
+     *
+     * @package ScreenlyCast
+     * @since   0.0.16
+     * @return  boolean
+     * @static
+     */
+    public static function checkWPVersion()
+    {
+        if (version_compare($GLOBALS['wp_version'], SRLY_WP_VERSION, '<')) {
+            return false;
+        }
+
+        return true;
+    }
+
+
+
+    /**
+     * Create admin notice markup.
+     *
+     * @package ScreenlyCast
+     * @since   0.0.16
+     * @return  boolean
+     * @static
+     */
+    public static function notifyWPVersion()
+    {
+        load_plugin_textdomain(self::THEME_STYLESHEET);
+        $message = '<strong>'.
+                    sprintf(
+                        esc_html__('Screenly Cast %s requires WordPress %s or higher.', SRLY_THEME),
+                        SRLY_VERSION, SRLY_WP_VERSION
+                    )
+                    .'</strong> '
+                    .sprintf(
+                        __('Please <a href="%1$s">upgrade WordPress</a> to a current version.', SRLY_THEME),
+                        'https://codex.wordpress.org/Upgrading_WordPress'
+                    );
+?>
+<div class="notice notice-success is-dismissible">
+    <?php
+        echo sprintf('<p>Screenly Cast <b>%s</b></p>',
+            __('deactivated', SRLY_THEME)
+        );
+    ?>
+</div>
+<div class="notice notice-error is-dismissible">
+    <p><?php echo $message;?></p>
+</div>
+<?php
+        return true;
+    }
+
+
     /**
      * Attached to activate_{ plugin_basename(__FILES__) }
      * by register_activation_hook().
@@ -255,26 +338,6 @@ class ScreenlyCast
      */
     public static function pluginActivation()
     {
-        /**
-         * Check if WordPress version is compatable
-         */
-        if (version_compare($GLOBALS['wp_version'], SRLY_WP_VERSION, '<')) {
-
-            load_plugin_textdomain(self::THEME_STYLESHEET);
-            $message = '<strong>'.
-                        sprintf(
-                            esc_html__('Screenly WP Cast %s requires WordPress %s or higher.', 'screenly'),
-                            SRLY_VERSION, SRLY_WP_VERSION
-                        )
-                        .'</strong> '
-                        .sprintf(
-                            __('Please <a href="%1$s">upgrade WordPress</a> to a current version.', 'screenly'),
-                            'https://codex.wordpress.org/Upgrading_WordPress'
-                        );
-
-            return false;
-        }
-
         return true;
     }
 
