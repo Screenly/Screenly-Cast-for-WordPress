@@ -41,5 +41,10 @@ In most cases, you only need to use "?srly". However, if you already got an exis
 
 == Changelog ==
 
+= 0.1.17 =
+* Core: Raised WP min version to 4.4.0 due to methods being used
+* - Fixed bug in duplicated message on settings saved
+* - Corrected `text-domain` in settings
+
 = 0.1.13 =
 * Core: Replaced plugin name and text-domain to "screenly-cast"
