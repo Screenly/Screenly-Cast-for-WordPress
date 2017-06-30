@@ -41,6 +41,12 @@ In most cases, you only need to use "?srly". However, if you already got an exis
 
 == Changelog ==
 
+= 0.1.18 =
+* Minor: PHP Version 5.2.4
+* - Replaces [] with array() to comply with WP minimum requirement of PHP Version 5.2.4
+* - Removes trailing comma in `screenly-cast-settings.php line 48
+* - Code formating
+
 = 0.1.17 =
 * Core: Raised WP min version to 4.4.0 due to methods being used
 * - Fixed bug in duplicated message on settings saved
