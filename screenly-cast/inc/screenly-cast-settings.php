@@ -30,7 +30,7 @@ function srlySettingsInit()
     // register a new section in the "wporg" page
     add_settings_section(
         'screenly_section',
-        __('Settings', 'screenly'),
+        __('Settings', SRLY_THEME),
         'srlySectionInput',
         'screenly'
     );
@@ -38,7 +38,7 @@ function srlySettingsInit()
     // register a new field in the "screenly_section" section, inside the "wporg" page
     add_settings_field(
         'screenly_logo_field',
-        __('Brand logo', 'screenly'),
+        __('Brand logo', SRLY_THEME),
         'srlyLogoField',
         'screenly',
         'screenly_section',
@@ -81,7 +81,7 @@ function srlySectionInput($args)
 {
 ?>
     <p id="<?php echo esc_attr($args['id']); ?>">
-        <?php esc_html_e('Use this page to change your settings.', 'screenly'); ?>
+        <?php esc_html_e('Use this page to change your settings.', SRLY_THEME); ?>
     </p>
 <?php
 }
@@ -109,8 +109,8 @@ function srlyLogoField($args)
     $var = esc_attr($args['label_for']);
 ?>
     <input type="url" id="<?php echo $var?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text">
-    <p class="description"><?php esc_html_e('Upload an image to you media library. Check it\'s url and copy paste to the input above.', 'screenly'); ?></p>
-    <p class="description"><?php _e('We recomend an image with the proportion of <b>314 x 98 px</b>.', 'screenly'); ?></p>
+    <p class="description"><?php esc_html_e('Upload an image to you media library. Check it\'s url and copy paste to the input above.', SRLY_THEME); ?></p>
+    <p class="description"><?php _e('We recomend an image with the proportion of <b>314 x 98 px</b>.', SRLY_THEME); ?></p>
 <?php
 }
 
@@ -129,7 +129,7 @@ function srlyOptionsPage()
     // add top level menu page
     add_submenu_page(
         'options-general.php',
-        'Screenly WP Cast',
+        'Screenly Cast',
         'Screenly',
         'manage_options',
         'screenly',
@@ -164,20 +164,6 @@ function srlyOptionsPageHTML()
     if (!current_user_can('manage_options')) {
         return;
     }
-
-    /**
-     * Add error/update messages check if the user have submitted the settings
-     * wordpress will add the "settings-updated" $_GET parameter to the url.
-     */
-    if (isset($_GET['settings-updated'])) {
-        add_settings_error(
-            'screenly_messages',
-            'screenly_message',
-            __('Settings Saved', 'screenly'),
-            'updated'
-        );
-    }
-    settings_errors('screenly_messages');
 ?>
 <div class="wrap">
     <h1><?php echo esc_html(get_admin_page_title()); ?></h1>
