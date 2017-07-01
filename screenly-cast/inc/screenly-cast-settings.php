@@ -42,11 +42,11 @@ function srlySettingsInit()
         'srlyLogoField',
         'screenly',
         'screenly_section',
-        [
+        array(
             'label_for' => 'screenly_options_logo',
             'class' => 'screenly-row',
-            'screenly_custom_data' => 'custom',
-        ]
+            'screenly_custom_data' => 'custom'
+        )
     );
 }
 

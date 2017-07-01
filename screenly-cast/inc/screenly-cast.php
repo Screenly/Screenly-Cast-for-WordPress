@@ -65,7 +65,7 @@ class ScreenlyCast
         /**
          * Check for WP version compatability before any other action.
          */
-        if (!self::checkWPVersion()){
+        if (!self::checkWPVersion()) {
             add_action('admin_notices', array('ScreenlyCast', 'notifyWPVersion'));
             add_action('network_admin_notices', array('ScreenlyCast', 'notifyWPVersion')); // for multisite
             deactivate_plugins(SRLY_PLUGIN_NAME);
@@ -103,7 +103,7 @@ class ScreenlyCast
              * Registers Screenly theme
              */
             $theme = wp_get_theme(SRLY_THEME);
-            if (!$theme->exists()){
+            if (!$theme->exists()) {
                 register_theme_directory(SRLY_PLUGIN_DIR.'theme');
             }
 
@@ -203,7 +203,7 @@ class ScreenlyCast
     private static function reverseToPreviousTheme()
     {
         $prevTheme = self::getPreviousTheme();
-        if (!empty($prevTheme->stylesheet)){
+        if (!empty($prevTheme->stylesheet)) {
             if ($prevTheme->stylesheet!=get_option('stylesheet')) {
                 switch_theme($prevTheme->stylesheet);
                 update_option('theme_switched', $prevTheme->stylesheet);
