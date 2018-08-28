@@ -1,8 +1,12 @@
 <?php
 /**
- * Class testThemeFunctions
+ * ScreenlyCastTest class test for themes.
  *
- * @package ScreenlyCast
+ * @category PHP
+ * @package  ScreenlyCast
+ * @link     https://github.com/Screenly/Screenly-Cast-for-WordPress
+ * @since    0.0.1
+ * @group   ScreenlyCast_theme_test
  */
 
 require_once SRLY_THEME_DIR.'/functions.php';
@@ -20,7 +24,7 @@ class TestThemeFunctions extends WP_UnitTestCase {
         parent::tearDown();
     }
     /**
-     * 
+     *  test for theme screenly_cast
      */
     public function testscreenlyCast() {
         $postId = $this->factory->post->create();
