@@ -4,7 +4,6 @@ use PHPUnit\Framework\TestCase;
 /**
  * ScreenlyCastTest class test for admin user..
  *
- * @category PHP
  * @package  ScreenlyCast
  * @link     https://github.com/Screenly/Screenly-Cast-for-WordPress
  * @since    0.0.1
@@ -19,21 +18,31 @@ class ScreenlyCastAdminTest extends WP_UnitTestCase {
         set_current_screen('edit-post');
     }
     
-    public function remove_admin_user() {
+    public function tearDown() {
         parent::tearDown();
     }
-    
+    /*
+         * 
+         * Test if ScreenlyCast::parseQuery execute without an error
+         * for admin users
+         * 
+    */
     public function testparseQuery() {
         if (isset($wp_query->query['srly'])) {
             $this->assertTrue(has_filter('template_include'));
         } else {
-            $this->assertFalse(has_filter('template_include'));
-            $wp_query->query['srly']='';
+            $this->assertFalse(has_filter('template_include'));            
         }
     }
+    
+    /*
+         * 
+         * Test if ScreenlyCast::templateInclude execute without an error
+         * for admin users
+         * 
+    */
     
     public function testtemplateInclude() {
         $this->assertEquals("sample_template",ScreenlyCast::templateInclude("sample_template"));
     }
-        
 }

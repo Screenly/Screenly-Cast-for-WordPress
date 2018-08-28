@@ -23,9 +23,10 @@ class TestThemeFunctions extends WP_UnitTestCase {
     public function tearDown() {
         parent::tearDown();
     }
+    
     /**
-     *  test for theme screenly_cast
-     */
+     *  test theme theme/screenly_cast
+    */
     public function testscreenlyCast() {
         $postId = $this->factory->post->create();
         $post = get_post($postId );

@@ -14,14 +14,19 @@ use PHPUnit\Framework\TestCase;
 class ScreenlyCastTest extends WP_UnitTestCase
 {
     public function setup() {
-        parent::setUp();
-        //$user_id = $this->factory->user->create(["role"=>'subscriber']);
-        //$user = wp_get_current_user($user_id);
+        parent::setUp();        
     }
     
     public function tearDown() {
         parent::tearDown();
     }
+    
+    /*
+         * Test if ScreenlyCast::adminInit execute without an error in two cases
+         * 1. When the PHP version is compatible and
+         * 2. When the PHP version is not compatible
+         * 
+    */
     
     public function testadminInit(){
         
@@ -34,6 +39,12 @@ class ScreenlyCastTest extends WP_UnitTestCase
             $this->assertFalse(ScreenlyCast::adminInit());
         }
     }
+    
+    /*
+         * Test if ScreenlyCast::init execute without an error
+         * Test if file SRLY_PLUGIN_DIR.'/inc/screenly-cast-settings.php' exists
+         * 
+    */
    
     public function testinit() {
         
@@ -41,7 +52,11 @@ class ScreenlyCastTest extends WP_UnitTestCase
         $this->assertTrue(ScreenlyCast::init());
       
     }
-         
+     /*
+         * 
+         * Test if ScreenlyCast::templateInclude execute without an error
+         * 
+    */
     public function testtemplateInclude() {
        
         $this->assertEquals("sample_template",ScreenlyCast::templateInclude("sample_template"));
