@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <phpunit
-	bootstrap="tests/bootstrap.php"
+	bootstrap="screenly-cast/tests/bootstrap.php"
 	backupGlobals="false"
 	colors="true"
 	convertErrorsToExceptions="true"
@@ -9,8 +9,8 @@
 	>
 	<testsuites>
 		<testsuite>
-			<directory prefix="test-" suffix=".php">./tests/</directory>
-			<exclude>./tests/test-sample.php</exclude>
+			<directory prefix="test-" suffix=".php">./screenly-cast/tests/</directory>
+			<exclude>./screenly-cast/tests/test-sample.php</exclude>
 		</testsuite>
 	</testsuites>
 </phpunit>

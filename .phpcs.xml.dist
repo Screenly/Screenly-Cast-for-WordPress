@@ -3,7 +3,7 @@
 	<description>Generally-applicable sniffs for WordPress plugins.</description>
 
 	<!-- What to scan -->
-	<file>.</file>
+	<file>./screenly-cast/</file>
 	<exclude-pattern>/vendor/</exclude-pattern>
 
 	<!-- How to scan -->
