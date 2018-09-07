@@ -13,7 +13,7 @@ svn co \
 
 if [ -d "wp_org/tags/$PLUGIN_VERSION" ]; then
   echo "Version exist. Exiting."
-  exit 12
+  exit 1
 fi
 
 # Clean out non-existing files and folders
