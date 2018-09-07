@@ -45,4 +45,8 @@ script:
       WP_MULTISITE=1 phpunit
     fi
    - test $TRAVIS_BRANCH = "master" && ./bin/push_to_wordpress_org.sh
-  
+  if [[ "$TRAVIS_BRANCH" == "master" ]] ; then
+    ./bin/push_to_wordpress_org.sh
+   fi
+   
+   echo $TRAVIS_BRANCH
