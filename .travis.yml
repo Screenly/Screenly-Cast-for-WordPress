@@ -11,6 +11,7 @@ before_install:
   - sudo apt-get install -qq -y rsync subversion
 branches:
     only:
+        - master
         - developent
 
 cache:
