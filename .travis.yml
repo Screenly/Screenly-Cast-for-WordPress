@@ -18,6 +18,23 @@ matrix:
   include:
     - php: 5.5
       env: WP_VERSION=latest
+    - php: 7.2
+      env: WP_VERSION=latest
+    - php: 7.1
+      env: WP_VERSION=latest
+    - php: 7.0
+      env: WP_VERSION=latest
+    - php: 5.6
+      env: WP_VERSION=3.7
+    - php: 5.6
+      env: WP_VERSION=latest
+    - php: 5.6
+      env: WP_VERSION=trunk
+    - php: 5.6
+      env: WP_TRAVISCI=phpcs
+    - php: 5.3
+      env: WP_VERSION=latest
+      dist: precise
       
 before_script:
   - export PATH="$HOME/.composer/vendor/bin:$PATH"
@@ -44,7 +61,7 @@ script:
       phpunit
       WP_MULTISITE=1 phpunit
     fi
-   - if [ "$TRAVIS_BRANCH" = "master" ] || [ "$TRAVIS_PULL_REQUEST" = "false" ]; 
-        then./bin/push_to_wordpress_org.sh
-     fi
-   -echo $TRAVIS_BRANCH
+   - test $TRAVIS_BRANCH = "master" && ./bin/push_to_wordpress_org.sh
+  if [[ "$TRAVIS_BRANCH" == "master" ]] ; then
+    ./bin/push_to_wordpress_org.sh
+    fi
