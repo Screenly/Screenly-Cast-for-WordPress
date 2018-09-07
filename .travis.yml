@@ -59,7 +59,5 @@ script:
       phpunit
       WP_MULTISITE=1 phpunit
     fi
-  - |
-    if [[ "$WP_TRAVISCI" == "phpcs" ]] ; then
-  - test $TRAVIS_BRANCH = "master" && ./bin/push_to_wordpress_org.sh
+   - test $TRAVIS_BRANCH = "master" && ./bin/push_to_wordpress_org.sh
   
