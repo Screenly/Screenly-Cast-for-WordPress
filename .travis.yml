@@ -16,6 +16,8 @@ cache:
 
 matrix:
   include:
+    - php: 5.5
+      env: WP_VERSION=latest
     - php: 7.2
       env: WP_VERSION=latest
     - php: 7.1
@@ -59,7 +61,8 @@ script:
       phpunit
       WP_MULTISITE=1 phpunit
     fi
-  - |
-    if [[ "$WP_TRAVISCI" == "phpcs" ]] ; then
-  - test $TRAVIS_BRANCH = "master" && ./bin/push_to_wordpress_org.sh
-  
+   -if [ "$TRAVIS_BRANCH" = "master" ] || [ "$TRAVIS_PULL_REQUEST" = "false" ]; 
+        then./bin/push_to_wordpress_org.sh
+        fi
+   - echo $TRAVIS_BRANCH
+   
