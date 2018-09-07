@@ -1,31 +1,53 @@
 <?php
 use PHPUnit\Framework\TestCase;
 
-//include_once plugin_dir_url((__FILE__)).'/screenly-cast.php';
 /**
- * ScreenlyCast class test for normal user.
- *
- * @category PHP
- * @package  ScreenlyCast
- * @link     https://github.com/Screenly/Screenly-Cast-for-WordPress
- * @since    0.0.1
- * @group   ScreenlyCast_initialization_and_setting
- */
+     *  This Class tests the normal(non-admin) user in class ScreenlyCast.
+     *  @package ScreenlyCast
+     *  @link     https://github.com/Screenly/Screenly-Cast-for-WordPress
+     *  @author Gilbert Karogo <gilbertkarogo@gmail.com>
+     *  @uses PHPunit A testing framework
+     *  @group   ScreenlyCast_initialization_and_setting
+     *  @test 
+     * 
+*/
 class ScreenlyCastTest extends WP_UnitTestCase
 {
+    /**
+     *  This method is a PHPUnit function runs before the test method runs e.g. ScreenlyCastTest::testadminInit() it is intended to set up the right environment for the test to run.
+     *  @package ScreenlyCast
+     *  @author Gilbert Karogo <gilbertkarogo@gmail.com>
+     *  @uses PHPunit A testing framework
+     *  @test 
+     * 
+    */
     public function setup() {
-        parent::setUp();        
+        parent::setUp();
     }
     
+     /**
+     *  This method is a PHPUnit function runs after the test method runs e.g. ScreenlyCastTest::testadminInit() it is intended to destroy the environment set by setup() method.
+     *  @package ScreenlyCast
+     *  @author Gilbert Karogo <gilbertkarogo@gmail.com>
+     *  @uses PHPunit A testing framework
+     *  @test 
+     * 
+    */
     public function tearDown() {
         parent::tearDown();
     }
     
-    /*
-         * Test if ScreenlyCast::adminInit execute without an error in two cases
-         * 1. When the PHP version is compatible and
-         * 2. When the PHP version is not compatible
-         * 
+    /**
+     *  This method tests if ScreenlyCast::adminInit execute without an erro
+     * * 1. When the PHP version is compatible and
+     * * 2. When the PHP version is not compatible in two cases
+     * 
+     *  @package ScreenlyCast
+     *  @author Gilbert Karogo <gilbertkarogo@gmail.com>
+     *  @uses PHPunit A testing framework
+     *  @test 
+     *  @return boolean Returns true if all tests are passed, on failiure the function returns a string describing the kind of error that occured.
+     * 
     */
     
     public function testadminInit(){
@@ -39,27 +61,39 @@ class ScreenlyCastTest extends WP_UnitTestCase
             $this->assertFalse(ScreenlyCast::adminInit());
         }
     }
-    
-    /*
-         * Test if ScreenlyCast::init execute without an error
-         * Test if file SRLY_PLUGIN_DIR.'/inc/screenly-cast-settings.php' exists
-         * 
+       
+    /**
+     *  This method tests
+     * 1. If ScreenlyCast::init execute without an error
+     * 2. If file SRLY_PLUGIN_DIR.'/inc/screenly-cast-settings.php' exists
+     * 
+     *  @package ScreenlyCast
+     *  @author Gilbert Karogo <gilbertkarogo@gmail.com>
+     *  @uses PHPunit A testing framework
+     *  @test 
+     *  @return boolean Returns true if all tests are passed, on failiure the function returns a string describing the kind of error that occured.
+     * 
     */
-   
     public function testinit() {
         
-        $this->assertFileExists(SRLY_PLUGIN_DIR.'/inc/screenly-cast-settings.php');            
+        $this->assertFileExists(SRLY_PLUGIN_DIR.'/inc/screenly-cast-settings.php');
         $this->assertTrue(ScreenlyCast::init());
-      
     }
-     /*
-         * 
-         * Test if ScreenlyCast::templateInclude execute without an error
-         * 
+     
+    /**
+     * This method tests if ScreenlyCast::templateInclude execute without an error
+     * 1. If ScreenlyCast::init execute without an error
+     * 2. If file SRLY_PLUGIN_DIR.'/inc/screenly-cast-settings.php' exists
+     * 
+     *  @package ScreenlyCast
+     *  @author Gilbert Karogo <gilbertkarogo@gmail.com>
+     *  @uses PHPunit A testing framework
+     *  @test 
+     *  @return boolean Returns true if all tests are passed, on failiure the function returns a string describing the kind of error that occured.
+     * 
     */
     public function testtemplateInclude() {
        
         $this->assertEquals("sample_template",ScreenlyCast::templateInclude("sample_template"));
-
     }
 }
