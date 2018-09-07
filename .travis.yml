@@ -61,8 +61,7 @@ script:
       phpunit
       WP_MULTISITE=1 phpunit
     fi
-   - |
-    if [ "$TRAVIS_BRANCH" = "master" ] || [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
-      ./bin/push_to_wordpress_org.sh
-    fi
 
+deploy:
+  provider: script
+  script: ./bin/push_to_wordpress_org.sh
