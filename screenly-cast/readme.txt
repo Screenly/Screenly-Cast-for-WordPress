@@ -54,3 +54,6 @@ In most cases, you only need to use "?srly". However, if you already got an exis
 
 = 0.1.13 =
 * Core: Replaced plugin name and text-domain to "screenly-cast"
+
+= 0.1.19
+* Added PHPUnit test files for wordpress. 
