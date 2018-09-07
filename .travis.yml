@@ -10,9 +10,8 @@ before_install:
   - sudo apt-get update -qq
   - sudo apt-get install -qq -y rsync subversion
 branches:
-    only:
-        - master
-        - developent
+    - master
+    - developent
 
 cache:
   directories:
@@ -65,7 +64,5 @@ script:
     fi
   - |
     if [[ "$WP_TRAVISCI" == "phpcs" ]] ; then
-      phpcs
-    fi
-    
-  - ./bin/push_to_wordpress_org.sh
+  - test $TRAVIS_BRANCH = "master" && ./bin/push_to_wordpress_org.sh
+  
