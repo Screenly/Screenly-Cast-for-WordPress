@@ -36,9 +36,9 @@ jQuery(document).ready(function($) {
 	$("#srly_time_font_size_slider_output").html($("#srly_time_font_size").val()+"px");
 	
 	$('#srly_time_font_weight').change(function(){
-		$("#srly_time_font_weight_slider_output").html($("#srly_time_font_weight").val()+"px");
+		$("#srly_time_font_weight_slider_output").html($("#srly_time_font_weight").val());
 	});
-	$("#srly_time_font_weight_slider_output").html($("#srly_time_font_weight").val()+"px");
+	$("#srly_time_font_weight_slider_output").html($("#srly_time_font_weight").val());
 	
 	$('#srly_h1_font_size').change(function(){
 		$("#srly_h1_font_size_slider_output").html($("#srly_h1_font_size").val()+"px");
@@ -46,14 +46,14 @@ jQuery(document).ready(function($) {
 	$("#srly_h1_font_size_slider_output").html($("#srly_h1_font_size").val()+"px");
 	
 	$('#srly_h1_font_weight').change(function(){
-		$("#srly_h1_font_weight_slider_output").html($("#srly_h1_font_weight").val()+"px");
+		$("#srly_h1_font_weight_slider_output").html($("#srly_h1_font_weight").val());
 	});
-	$("#srly_h1_font_weight_slider_output").html($("#srly_h1_font_weight").val()+"px");
+	$("#srly_h1_font_weight_slider_output").html($("#srly_h1_font_weight").val());
 	
 	$('#srly_a_font_weight').change(function(){
-		$("#srly_a_font_weight_slider_output").html($("#srly_a_font_weight").val()+"px");
+		$("#srly_a_font_weight_slider_output").html($("#srly_a_font_weight").val());
 	});
-	$("#srly_a_font_weight_slider_output").html($("#srly_a_font_weight").val()+"px");
+	$("#srly_a_font_weight_slider_output").html($("#srly_a_font_weight").val());
 	
 	$('#srly_a_font_size').change(function(){
 		$("#srly_a_font_size_slider_output").html($("#srly_a_font_size").val()+"px");
@@ -71,9 +71,9 @@ jQuery(document).ready(function($) {
 	$("#srly_content_line_height_slider_output").html($("#srly_content_line_height").val()+"px");
 	
 	$('#srly_content_font_weight').change(function(){
-		$("#srly_content_font_weight_slider_output").html($("#srly_content_font_weight").val()+"px");
+		$("#srly_content_font_weight_slider_output").html($("#srly_content_font_weight").val());
 	});
-	$("#srly_content_font_weight_slider_output").html($("#srly_content_font_weight").val()+"px");
+	$("#srly_content_font_weight_slider_output").html($("#srly_content_font_weight").val());
 	
 	$('#srly_content_font_size').change(function(){
 		$("#srly_content_font_size_slider_output").html($("#srly_content_font_size").val()+"px");
