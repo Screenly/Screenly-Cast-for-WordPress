@@ -13,6 +13,11 @@
  */
 defined('ABSPATH') or die("No script kiddies please!");
 
+/**
+ * Include generic plugin functions that are not specific to any theme.
+ * 
+ **/
+require_once dirname(__FILE__).'/functions.php';
 
 /**
  * Screenly main class. Called by screenly-cast.php.
@@ -71,6 +76,7 @@ class ScreenlyCast
             deactivate_plugins(SRLY_PLUGIN_NAME);
             return false;
         }
+        
     }
 
 

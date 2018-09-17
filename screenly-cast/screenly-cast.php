@@ -43,6 +43,7 @@ define('SRLY_PREFIX', 'srly_');
  * Ready, Steady, Go!
  */
 require_once SRLY_INC_DIR.'/screenly-cast.php';
+require_once SRLY_INC_DIR.'/functions.php';
 
 /**
  * Let's deal with the install and uninstall process correctly
@@ -55,9 +56,9 @@ register_deactivation_hook(__FILE__, array('ScreenlyCast', 'pluginDeactivation')
  */
 add_action('admin_init', array('ScreenlyCast', 'adminInit'), 0);
 add_action('init', array('ScreenlyCast', 'init'), 0);
-
 /**
  * Add action immediately after the query is parsed so that we can catch
  * our var.
  */
 add_action('parse_query', array('ScreenlyCast', 'parseQuery'), 0);
+add_action('admin_init', 'srlyAddAdminAssets',9999);//add admin css and JS

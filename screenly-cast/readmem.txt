@@ -40,15 +40,12 @@ In most cases, you only need to use "?srly". However, if you already got an exis
 
 
 == Changelog ==
-
 = 0.1.20 =
-*Core: Ability to customize style on the frontend.
-* -change of color and heneral feel of content
-* -Option to display or hide logo and time
+* Addition of of theme manager: enables you to change style - color and feel
+*
+*
 *
 
-= 0.1.19 =
-* Added PHPUnit test files for wordpress. 
 
 = 0.1.18 =
 * Minor: PHP Version 5.2.4

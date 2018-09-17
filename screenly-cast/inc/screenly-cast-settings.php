@@ -26,6 +26,40 @@ function srlySettingsInit()
 {
     // register a new setting for "wporg" page
     register_setting('screenly', 'screenly_options_logo');
+    //body style
+    register_setting('screenly', 'srly_body_font_family');
+    register_setting('screenly', 'srly_body_background');
+
+    //logo
+    register_setting('screenly', 'srly_brand_logo_width');
+    register_setting('screenly', 'srly_brand_logo_height');
+    register_setting('screenly', 'srly_brand_logo_display');
+
+    //time
+    register_setting('screenly', 'srly_time_color');
+    register_setting('screenly', 'srly_time_display');
+    register_setting('screenly', 'srly_time_font_size');
+    register_setting('screenly', 'srly_time_font_weight');
+
+    //heading
+    register_setting('screenly', 'srly_h1_margin');
+    register_setting('screenly', 'srly_h1_padding');
+    register_setting('screenly', 'srly_h1_font_size');
+    register_setting('screenly', 'srly_h1_font_weight');
+    register_setting('screenly', 'srly_h1_color');
+
+    //link
+    register_setting('screenly', 'srly_a_color');
+    register_setting('screenly', 'srly_a_text_decoration');
+    register_setting('screenly', 'srly_a_font_weight');
+    register_setting('screenly', 'srly_a_font_size');
+
+    //content
+    register_setting('screenly', 'srly_content_margin_top');
+    register_setting('screenly', 'srly_content_line_height');
+    register_setting('screenly', 'srly_content_color');
+    register_setting('screenly', 'srly_content_font_weight');
+    register_setting('screenly', 'srly_content_font_size');
 
     // register a new section in the "wporg" page
     add_settings_section(
@@ -48,9 +82,865 @@ function srlySettingsInit()
             'screenly_custom_data' => 'custom'
         )
     );
+    add_settings_field(
+        'srly_brand_logo_width',
+        __('Logo width', SRLY_THEME),
+        'srlyBrandLogowidthField',
+        'screenly',
+        'screenly_section',
+        array(
+            'label_for' => 'srly_brand_logo_width',
+            'class' => 'screenly-row',
+            'screenly_custom_data' => 'custom'
+        )
+    );
+    add_settings_field(
+        'srly_brand_logo_height',
+        __('Logo Height', SRLY_THEME),
+        'srlyBrandLogoHeightField',
+        'screenly',
+        'screenly_section',
+        array(
+            'label_for' => 'srly_brand_logo_height',
+            'class' => 'screenly-row',
+            'screenly_custom_data' => 'custom'
+        )
+    );
+    add_settings_field(
+        'srly_brand_logo_display',
+        __('Logo Display', SRLY_THEME),
+        'srlyBrandLogoDisplayField',
+        'screenly',
+        'screenly_section',
+        array(
+            'label_for' => 'srly_brand_logo_display',
+            'class' => 'screenly-row',
+            'screenly_custom_data' => 'custom'
+        )
+    );
+    add_settings_field(
+        'srly_body_font_family',
+        __('Body Font Family', SRLY_THEME),
+        'srlyBodyFontField',
+        'screenly',
+        'screenly_section',
+        array(
+            'label_for' => 'srly_body_font_family',
+            'class' => 'screenly-row',
+            'screenly_custom_data' => 'custom'
+        )
+    );
+    
+    add_settings_field(
+        'srly_time_color',
+        __('Time color', SRLY_THEME),
+        'srlyTimeColorField',
+        'screenly',
+        'screenly_section',
+        array(
+            'label_for' => 'srly_time_color',
+            'class' => 'screenly-row',
+            'screenly_custom_data' => 'custom'
+        )
+    );
+    
+    add_settings_field(
+        'srly_time_display',
+        __('Display time', SRLY_THEME),
+        'srlyTimeDisplayField',
+        'screenly',
+        'screenly_section',
+        array(
+            'label_for' => 'srly_time_display',
+            'class' => 'screenly-row',
+            'screenly_custom_data' => 'custom'
+        )
+    );
+    
+    add_settings_field(
+        'srly_time_font_size',
+        __('Time font size', SRLY_THEME),
+        'srlyTimeFontSizeField',
+        'screenly',
+        'screenly_section',
+        array(
+            'label_for' => 'srly_time_font_size',
+            'class' => 'screenly-row',
+            'screenly_custom_data' => 'custom'
+        )
+    );
+    
+    add_settings_field(
+        'srly_time_font_weight',
+        __('Time font weight', SRLY_THEME),
+        'srlyTimeFontWeightField',
+        'screenly',
+        'screenly_section',
+        array(
+            'label_for' => 'srly_time_font_weight',
+            'class' => 'screenly-row',
+            'screenly_custom_data' => 'custom'
+        )
+    );
+    
+    add_settings_field(
+        'srly_h1_margin',
+        __('Heading margin', SRLY_THEME),
+        'srlyHeadMarginField',
+        'screenly',
+        'screenly_section',
+        array(
+            'label_for' => 'srly_h1_margin',
+            'class' => 'screenly-row',
+            'screenly_custom_data' => 'custom'
+        )
+    );
+    
+    add_settings_field(
+        'srly_h1_padding',
+        __('Heading padding', SRLY_THEME),
+        'srlyHeadPaddingField',
+        'screenly',
+        'screenly_section',
+        array(
+            'label_for' => 'srly_h1_padding',
+            'class' => 'screenly-row',
+            'screenly_custom_data' => 'custom'
+        )
+    );
+    add_settings_field(
+        'srly_h1_font_size',
+        __('Heading font size', SRLY_THEME),
+        'srlyHeadFontSizeField',
+        'screenly',
+        'screenly_section',
+        array(
+            'label_for' => 'srly_h1_font_size',
+            'class' => 'screenly-row',
+            'screenly_custom_data' => 'custom'
+        )
+    );
+    
+    add_settings_field(
+        'srly_h1_font_weight',
+        __('Heading font weight', SRLY_THEME),
+        'srlyHeadFontWeightField',
+        'screenly',
+        'screenly_section',
+        array(
+            'label_for' => 'srly_h1_font_weight',
+            'class' => 'screenly-row',
+            'screenly_custom_data' => 'custom'
+        )
+    );
+    add_settings_field(
+        'srly_h1_color',
+        __('Heading font color', SRLY_THEME),
+        'srlyHeadFontColorField',
+        'screenly',
+        'screenly_section',
+        array(
+            'label_for' => 'srly_h1_color',
+            'class' => 'screenly-row',
+            'screenly_custom_data' => 'custom'
+        )
+    );
+    add_settings_field(
+        'srly_a_color',
+        __('Link color', SRLY_THEME),
+        'srlyLinkColorField',
+        'screenly',
+        'screenly_section',
+        array(
+            'label_for' => 'srly_a_color',
+            'class' => 'screenly-row',
+            'screenly_custom_data' => 'custom'
+        )
+    );
+    add_settings_field(
+        'srly_a_text_decoration',
+        __('Link decoration', SRLY_THEME),
+        'srlyLinkTextDecorationColorField',
+        'screenly',
+        'screenly_section',
+        array(
+            'label_for' => 'srly_a_text_decoration',
+            'class' => 'screenly-row',
+            'screenly_custom_data' => 'custom'
+        )
+    );
+    
+    add_settings_field(
+        'srly_a_font_weight',
+        __('Link font weight', SRLY_THEME),
+        'srlyLinkFontWeightColorField',
+        'screenly',
+        'screenly_section',
+        array(
+            'label_for' => 'srly_a_font_weight',
+            'class' => 'screenly-row',
+            'screenly_custom_data' => 'custom'
+        )
+    );
+    
+    add_settings_field(
+        'srly_a_font_size',
+        __('Link font size', SRLY_THEME),
+        'srlyLinkFontSizeField',
+        'screenly',
+        'screenly_section',
+        array(
+            'label_for' => 'srly_a_font_size',
+            'class' => 'screenly-row',
+            'screenly_custom_data' => 'custom'
+        )
+    );
+    
+    add_settings_field(
+        'srly_content_margin_top',
+        __('Content margin top', SRLY_THEME),
+        'srlyContentMarginTopField',
+        'screenly',
+        'screenly_section',
+        array(
+            'label_for' => 'srly_content_margin_top',
+            'class' => 'screenly-row',
+            'screenly_custom_data' => 'custom'
+        )
+    );
+    add_settings_field(
+        'srly_content_line_height',
+        __('Content line height', SRLY_THEME),
+        'srlyContentLineHeightField',
+        'screenly',
+        'screenly_section',
+        array(
+            'label_for' => 'srly_content_line_height',
+            'class' => 'screenly-row',
+            'screenly_custom_data' => 'custom'
+        )
+    );
+    add_settings_field(
+        'srly_content_color',
+        __('Content color', SRLY_THEME),
+        'srlyContentColorField',
+        'screenly',
+        'screenly_section',
+        array(
+            'label_for' => 'srly_content_color',
+            'class' => 'screenly-row',
+            'screenly_custom_data' => 'custom'
+        )
+    );
+    add_settings_field(
+        'srly_content_font_weight',
+        __('Content Font Weight', SRLY_THEME),
+        'srlyContentFontWeightField',
+        'screenly',
+        'screenly_section',
+        array(
+            'label_for' => 'srly_content_font_weight',
+            'class' => 'screenly-row',
+            'screenly_custom_data' => 'custom'
+        )
+    );
+    add_settings_field(
+        'srly_content_font_size',
+        __('Content font Size', SRLY_THEME),
+        'srlyContentFontSizeField',
+        'screenly',
+        'screenly_section',
+        array(
+            'label_for' => 'srly_content_font_size',
+            'class' => 'screenly-row',
+            'screenly_custom_data' => 'custom'
+        )
+    );
+}
+
+/**
+ * Print logo input
+ *
+ * @param $args srlyLogoField can accept an $args parameter, which is an array
+ *        defined at the add_settings_field() function - srlySettingsInit.
+ *        Wordpress has magic interaction with the following keys: label_for,
+ *        class. the "label_for" key value is used for the "for" attribute of the
+ *        <label>. the "class" key value is used for the "class" attribute of the
+ *        <tr> containing the field. you can add custom key value pairs to be used
+ *        inside your callbacks.
+ *
+ * @package ScreenlyCast
+ * @since   0.0.1
+ * @return  void
+ */
+function srlyContentMarginTopField($args) {
+    $path = get_option('srly_content_margin_top');
+    $var = esc_attr($args['label_for']);
+?>
+    <input type="range" min="0" max="500" id="<?php echo $var?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_slider">
+    <p> <span id="<?php echo $var.'_slider_output'?>"></span></p>
+<?php
 }
 
 
+/**
+ * Print logo input
+ *
+ * @param $args srlyLogoField can accept an $args parameter, which is an array
+ *        defined at the add_settings_field() function - srlySettingsInit.
+ *        Wordpress has magic interaction with the following keys: label_for,
+ *        class. the "label_for" key value is used for the "for" attribute of the
+ *        <label>. the "class" key value is used for the "class" attribute of the
+ *        <tr> containing the field. you can add custom key value pairs to be used
+ *        inside your callbacks.
+ *
+ * @package ScreenlyCast
+ * @since   0.0.1
+ * @return  void
+ */
+function srlyContentLineHeightField($args) {
+    $path = get_option('srly_content_line_height');
+    $var = esc_attr($args['label_for']);
+?>
+    <input type="range" min="0" max="500" id="<?php echo $var?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_slider">
+    <p> <span id="<?php echo $var.'_slider_output'?>"></span></p>
+<?php
+}
+
+
+/**
+ * Print logo input
+ *
+ * @param $args srlyLogoField can accept an $args parameter, which is an array
+ *        defined at the add_settings_field() function - srlySettingsInit.
+ *        Wordpress has magic interaction with the following keys: label_for,
+ *        class. the "label_for" key value is used for the "for" attribute of the
+ *        <label>. the "class" key value is used for the "class" attribute of the
+ *        <tr> containing the field. you can add custom key value pairs to be used
+ *        inside your callbacks.
+ *
+ * @package ScreenlyCast
+ * @since   0.0.1
+ * @return  void
+ */
+function srlyContentColorField($args) {
+    $path = get_option('srly_content_color');
+    $var = esc_attr($args['label_for']);
+?>
+    <input id="<?php echo $var?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_color_picker">
+<?php
+}
+
+
+/**
+ * Print logo input
+ *
+ * @param $args srlyLogoField can accept an $args parameter, which is an array
+ *        defined at the add_settings_field() function - srlySettingsInit.
+ *        Wordpress has magic interaction with the following keys: label_for,
+ *        class. the "label_for" key value is used for the "for" attribute of the
+ *        <label>. the "class" key value is used for the "class" attribute of the
+ *        <tr> containing the field. you can add custom key value pairs to be used
+ *        inside your callbacks.
+ *
+ * @package ScreenlyCast
+ * @since   0.0.1
+ * @return  void
+ */
+function srlyContentFontSizeField($args) {
+    $path = get_option('srly_content_font_size');
+    $var = esc_attr($args['label_for']);
+?>
+    <input type="range" min="0" max="500" id="<?php echo $var?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_slider">
+    <p> <span id="<?php echo $var.'_slider_output'?>"></span></p>
+<?php
+}
+
+
+/**
+ * Print logo input
+ *
+ * @param $args srlyLogoField can accept an $args parameter, which is an array
+ *        defined at the add_settings_field() function - srlySettingsInit.
+ *        Wordpress has magic interaction with the following keys: label_for,
+ *        class. the "label_for" key value is used for the "for" attribute of the
+ *        <label>. the "class" key value is used for the "class" attribute of the
+ *        <tr> containing the field. you can add custom key value pairs to be used
+ *        inside your callbacks.
+ *
+ * @package ScreenlyCast
+ * @since   0.0.1
+ * @return  void
+ */
+function srlyContentFontWeightField($args) {
+    $path = get_option('srly_content_font_weight');
+    $var = esc_attr($args['label_for']);
+?>
+    <input type="range" min="0" max="800" id="<?php echo $var?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_slider">
+    <p> <span id="<?php echo $var.'_slider_output'?>"></span></p>
+<?php
+}
+
+
+/**
+ * Print logo input
+ *
+ * @param $args srlyLogoField can accept an $args parameter, which is an array
+ *        defined at the add_settings_field() function - srlySettingsInit.
+ *        Wordpress has magic interaction with the following keys: label_for,
+ *        class. the "label_for" key value is used for the "for" attribute of the
+ *        <label>. the "class" key value is used for the "class" attribute of the
+ *        <tr> containing the field. you can add custom key value pairs to be used
+ *        inside your callbacks.
+ *
+ * @package ScreenlyCast
+ * @since   0.0.1
+ * @return  void
+ */
+function srlyLinkFontSizeField($args) {
+    $path = get_option('srly_a_font_size');
+    $var = esc_attr($args['label_for']);
+?>
+    <input type="range" min="0" max="500" id="<?php echo $var?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_slider">
+    <p> <span id="<?php echo $var.'_slider_output'?>"></span></p>
+<?php
+}
+
+
+/**
+ * Print logo input
+ *
+ * @param $args srlyLogoField can accept an $args parameter, which is an array
+ *        defined at the add_settings_field() function - srlySettingsInit.
+ *        Wordpress has magic interaction with the following keys: label_for,
+ *        class. the "label_for" key value is used for the "for" attribute of the
+ *        <label>. the "class" key value is used for the "class" attribute of the
+ *        <tr> containing the field. you can add custom key value pairs to be used
+ *        inside your callbacks.
+ *
+ * @package ScreenlyCast
+ * @since   0.0.1
+ * @return  void
+ */
+function srlyLinkFontWeightColorField($args) {
+    $path = get_option('srly_a_font_weight');
+    $var = esc_attr($args['label_for']);
+?>
+    <input type="range" min="0" max="800" id="<?php echo $var?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_slider">
+    <p> <span id="<?php echo $var.'_slider_output'?>"></span></p>
+<?php
+}
+
+
+/**
+ * Print logo input
+ *
+ * @param $args srlyLogoField can accept an $args parameter, which is an array
+ *        defined at the add_settings_field() function - srlySettingsInit.
+ *        Wordpress has magic interaction with the following keys: label_for,
+ *        class. the "label_for" key value is used for the "for" attribute of the
+ *        <label>. the "class" key value is used for the "class" attribute of the
+ *        <tr> containing the field. you can add custom key value pairs to be used
+ *        inside your callbacks.
+ *
+ * @package ScreenlyCast
+ * @since   0.0.1
+ * @return  void
+ */
+function srlyLinkTextDecorationColorField($args) {
+    $path = get_option('srly_a_text_decoration');
+    $var = esc_attr($args['label_for']);
+?>
+    <input id="<?php echo $var?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text">
+
+<?php
+}
+
+
+/**
+ * Print logo input
+ *
+ * @param $args srlyLogoField can accept an $args parameter, which is an array
+ *        defined at the add_settings_field() function - srlySettingsInit.
+ *        Wordpress has magic interaction with the following keys: label_for,
+ *        class. the "label_for" key value is used for the "for" attribute of the
+ *        <label>. the "class" key value is used for the "class" attribute of the
+ *        <tr> containing the field. you can add custom key value pairs to be used
+ *        inside your callbacks.
+ *
+ * @package ScreenlyCast
+ * @since   0.0.1
+ * @return  void
+ */
+function srlyLinkColorField($args) {
+    $path = get_option('srly_a_color');
+    $var = esc_attr($args['label_for']);
+?>
+    <input id="<?php echo $var?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_color_picker">
+
+<?php
+}
+
+
+/**
+ * Print logo input
+ *
+ * @param $args srlyLogoField can accept an $args parameter, which is an array
+ *        defined at the add_settings_field() function - srlySettingsInit.
+ *        Wordpress has magic interaction with the following keys: label_for,
+ *        class. the "label_for" key value is used for the "for" attribute of the
+ *        <label>. the "class" key value is used for the "class" attribute of the
+ *        <tr> containing the field. you can add custom key value pairs to be used
+ *        inside your callbacks.
+ *
+ * @package ScreenlyCast
+ * @since   0.0.1
+ * @return  void
+ */
+function srlyHeadFontColorField($args) {
+    $path = get_option('srly_h1_color');
+    $var = esc_attr($args['label_for']);
+?>
+    <input id="<?php echo $var?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_color_picker">
+
+<?php
+}
+
+
+/**
+ * Print logo input
+ *
+ * @param $args srlyLogoField can accept an $args parameter, which is an array
+ *        defined at the add_settings_field() function - srlySettingsInit.
+ *        Wordpress has magic interaction with the following keys: label_for,
+ *        class. the "label_for" key value is used for the "for" attribute of the
+ *        <label>. the "class" key value is used for the "class" attribute of the
+ *        <tr> containing the field. you can add custom key value pairs to be used
+ *        inside your callbacks.
+ *
+ * @package ScreenlyCast
+ * @since   0.0.1
+ * @return  void
+ */
+function srlyHeadFontWeightField($args) {
+    $path = get_option('srly_h1_font_weight');
+    $var = esc_attr($args['label_for']);
+?>
+    <input type="range" min="0" max="800" id="<?php echo $var?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_slider">
+    <p> <span id="<?php echo $var.'_slider_output'?>"></span></p>
+<?php
+}
+
+
+/**
+ * Print logo input
+ *
+ * @param $args srlyLogoField can accept an $args parameter, which is an array
+ *        defined at the add_settings_field() function - srlySettingsInit.
+ *        Wordpress has magic interaction with the following keys: label_for,
+ *        class. the "label_for" key value is used for the "for" attribute of the
+ *        <label>. the "class" key value is used for the "class" attribute of the
+ *        <tr> containing the field. you can add custom key value pairs to be used
+ *        inside your callbacks.
+ *
+ * @package ScreenlyCast
+ * @since   0.0.1
+ * @return  void
+ */
+function srlyHeadFontSizeField($args) {
+     $path = get_option('srly_h1_font_size');
+    $var = esc_attr($args['label_for']);
+?>
+    <input type="range" min="0" max="300" id="<?php echo $var?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_slider">
+    <p> <span id="<?php echo $var.'_slider_output'?>"></span></p>
+<?php
+}
+
+
+/**
+ * Print logo input
+ *
+ * @param $args srlyLogoField can accept an $args parameter, which is an array
+ *        defined at the add_settings_field() function - srlySettingsInit.
+ *        Wordpress has magic interaction with the following keys: label_for,
+ *        class. the "label_for" key value is used for the "for" attribute of the
+ *        <label>. the "class" key value is used for the "class" attribute of the
+ *        <tr> containing the field. you can add custom key value pairs to be used
+ *        inside your callbacks.
+ *
+ * @package ScreenlyCast
+ * @since   0.0.1
+ * @return  void
+ */
+function srlyHeadPaddingField($args) {
+     $path = get_option('srly_h1_padding');
+    $var = esc_attr($args['label_for']);
+?>
+    <input type="range" min="0" max="500" id="<?php echo $var?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_slider">
+    <p> <span id="<?php echo $var.'_slider_output'?>"></span></p>
+<?php
+}
+
+
+/**
+ * Print logo input
+ *
+ * @param $args srlyLogoField can accept an $args parameter, which is an array
+ *        defined at the add_settings_field() function - srlySettingsInit.
+ *        Wordpress has magic interaction with the following keys: label_for,
+ *        class. the "label_for" key value is used for the "for" attribute of the
+ *        <label>. the "class" key value is used for the "class" attribute of the
+ *        <tr> containing the field. you can add custom key value pairs to be used
+ *        inside your callbacks.
+ *
+ * @package ScreenlyCast
+ * @since   0.0.1
+ * @return  void
+ */
+function srlyHeadMarginField($args) {
+     $path = get_option('srly_h1_margin');
+    $var = esc_attr($args['label_for']);
+?>
+    <input type="range" min="0" max="500" id="<?php echo $var?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_slider">
+    <p> <span id="<?php echo $var.'_slider_output'?>"></span></p>
+<?php
+}
+
+
+/**
+ * Print logo input
+ *
+ * @param $args srlyLogoField can accept an $args parameter, which is an array
+ *        defined at the add_settings_field() function - srlySettingsInit.
+ *        Wordpress has magic interaction with the following keys: label_for,
+ *        class. the "label_for" key value is used for the "for" attribute of the
+ *        <label>. the "class" key value is used for the "class" attribute of the
+ *        <tr> containing the field. you can add custom key value pairs to be used
+ *        inside your callbacks.
+ *
+ * @package ScreenlyCast
+ * @since   0.0.1
+ * @return  void
+ */
+function srlyTimeFontWeightField($args) {
+     $path = get_option('srly_time_font_weight');
+    $var = esc_attr($args['label_for']);
+?>
+    <input type="range" min="0" max="800" id="<?php echo $var?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_slider">
+    <p> <span id="<?php echo $var.'_slider_output'?>"></span></p>
+<?php
+}
+
+
+/**
+ * Print logo input
+ *
+ * @param $args srlyLogoField can accept an $args parameter, which is an array
+ *        defined at the add_settings_field() function - srlySettingsInit.
+ *        Wordpress has magic interaction with the following keys: label_for,
+ *        class. the "label_for" key value is used for the "for" attribute of the
+ *        <label>. the "class" key value is used for the "class" attribute of the
+ *        <tr> containing the field. you can add custom key value pairs to be used
+ *        inside your callbacks.
+ *
+ * @package ScreenlyCast
+ * @since   0.0.1
+ * @return  void
+ */
+function srlyTimeFontSizeField($args) {
+     $path = get_option('srly_time_font_size');
+    $var = esc_attr($args['label_for']);
+?>
+    <input type="range" min="0" max="300" id="<?php echo $var?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_slider">
+    <p> <span id="<?php echo $var.'_slider_output'?>"></span></p>
+<?php
+}
+
+
+/**
+ * Print logo input
+ *
+ * @param $args srlyLogoField can accept an $args parameter, which is an array
+ *        defined at the add_settings_field() function - srlySettingsInit.
+ *        Wordpress has magic interaction with the following keys: label_for,
+ *        class. the "label_for" key value is used for the "for" attribute of the
+ *        <label>. the "class" key value is used for the "class" attribute of the
+ *        <tr> containing the field. you can add custom key value pairs to be used
+ *        inside your callbacks.
+ *
+ * @package ScreenlyCast
+ * @since   0.0.1
+ * @return  void
+ */
+function srlyTimeDisplayField($args) {
+     $path = get_option('srly_time_display');
+    $var = esc_attr($args['label_for']);
+?>
+    <select name="<?php echo $var?>" id="<?php echo $var?>" class="large-text" >
+	<option value="">(no selection)</option>
+        <option class="" value="block" <?php ($path=='block')? $Selected='selected="selected"':$Selected=""; echo $Selected; unset($Selected); ?> >Show time</option>
+        <option class="" value="none"  <?php ($path=='none')? $Selected='selected="selected"':$Selected=""; echo $Selected; unset($Selected); ?>>Hide time</option>
+    </select>
+
+<?php	
+}
+
+
+/**
+ * Print logo input
+ *
+ * @param $args srlyLogoField can accept an $args parameter, which is an array
+ *        defined at the add_settings_field() function - srlySettingsInit.
+ *        Wordpress has magic interaction with the following keys: label_for,
+ *        class. the "label_for" key value is used for the "for" attribute of the
+ *        <label>. the "class" key value is used for the "class" attribute of the
+ *        <tr> containing the field. you can add custom key value pairs to be used
+ *        inside your callbacks.
+ *
+ * @package ScreenlyCast
+ * @since   0.0.1
+ * @return  void
+ */
+function srlyTimeColorField($args) {
+     $path = get_option('srly_time_color');
+    $var = esc_attr($args['label_for']);
+?>
+    <input id="<?php echo $var?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_color_picker">
+
+<?php	
+}
+
+
+/**
+ * Print logo input
+ *
+ * @param $args srlyLogoField can accept an $args parameter, which is an array
+ *        defined at the add_settings_field() function - srlySettingsInit.
+ *        Wordpress has magic interaction with the following keys: label_for,
+ *        class. the "label_for" key value is used for the "for" attribute of the
+ *        <label>. the "class" key value is used for the "class" attribute of the
+ *        <tr> containing the field. you can add custom key value pairs to be used
+ *        inside your callbacks.
+ *
+ * @package ScreenlyCast
+ * @since   0.0.1
+ * @return  void
+ */
+function srlyBrandLogoDisplayField($args) {
+     $path = get_option('srly_brand_logo_display');
+    $var = esc_attr($args['label_for']);
+?>
+    <select name="<?php echo $var?>" id="<?php echo $var?>" class="large-text" >
+	<option value="">(no selection)</option>
+        <option class="" value="block" <?php ($path=='block')? $Selected='selected="selected"':$Selected=""; echo $Selected; unset($Selected); ?> >Show logo</option>
+        <option class="" value="none"  <?php ($path=='none')? $Selected='selected="selected"':$Selected=""; echo $Selected; unset($Selected); ?> >Hide logo</option>
+    </select>
+
+<?php	
+}
+
+/**
+ * Print logo input
+ *
+ * @param $args srlyLogoField can accept an $args parameter, which is an array
+ *        defined at the add_settings_field() function - srlySettingsInit.
+ *        Wordpress has magic interaction with the following keys: label_for,
+ *        class. the "label_for" key value is used for the "for" attribute of the
+ *        <label>. the "class" key value is used for the "class" attribute of the
+ *        <tr> containing the field. you can add custom key value pairs to be used
+ *        inside your callbacks.
+ *
+ * @package ScreenlyCast
+ * @since   0.0.1
+ * @return  void
+ */
+function srlyBrandLogoHeightField($args)
+{
+    $path = get_option('srly_brand_logo_height');
+    $var = esc_attr($args['label_for']);
+?>
+    <input type="range" min="0" max="500" id="<?php echo $var?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_slider">
+    <p> <span id="<?php echo $var.'_slider_output'?>"></span></p>
+<?php	
+}
+
+
+/**
+ * Print logo input
+ *
+ * @param $args srlyLogoField can accept an $args parameter, which is an array
+ *        defined at the add_settings_field() function - srlySettingsInit.
+ *        Wordpress has magic interaction with the following keys: label_for,
+ *        class. the "label_for" key value is used for the "for" attribute of the
+ *        <label>. the "class" key value is used for the "class" attribute of the
+ *        <tr> containing the field. you can add custom key value pairs to be used
+ *        inside your callbacks.
+ *
+ * @package ScreenlyCast
+ * @since   0.0.1
+ * @return  void
+ */
+function srlyBrandLogowidthField($args)
+{
+    $path = get_option('srly_brand_logo_width');
+    $var = esc_attr($args['label_for']);
+?>
+    <input type="range" min="0" max="800" id="<?php echo $var?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_slider">
+    <p> <span id="<?php echo $var.'_slider_output'?>"></span></p>
+<?php	
+}
+
+
+/**
+ * Print logo input
+ *
+ * @param $args srlyLogoField can accept an $args parameter, which is an array
+ *        defined at the add_settings_field() function - srlySettingsInit.
+ *        Wordpress has magic interaction with the following keys: label_for,
+ *        class. the "label_for" key value is used for the "for" attribute of the
+ *        <label>. the "class" key value is used for the "class" attribute of the
+ *        <tr> containing the field. you can add custom key value pairs to be used
+ *        inside your callbacks.
+ *
+ * @package ScreenlyCast
+ * @since   0.0.1
+ * @return  void
+ */
+function srlyBodyFontField($args)
+{
+    $path = get_option('srly_body_font_family');
+    $var = esc_attr($args['label_for']);
+?>
+    <input id="<?php echo $var?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text">
+
+<?php	
+}
+
+
+/**
+ * Print logo input
+ *
+ * @param $args srlyLogoField can accept an $args parameter, which is an array
+ *        defined at the add_settings_field() function - srlySettingsInit.
+ *        Wordpress has magic interaction with the following keys: label_for,
+ *        class. the "label_for" key value is used for the "for" attribute of the
+ *        <label>. the "class" key value is used for the "class" attribute of the
+ *        <tr> containing the field. you can add custom key value pairs to be used
+ *        inside your callbacks.
+ *
+ * @package ScreenlyCast
+ * @since   0.0.1
+ * @return  void
+ */
+function srlyBodyBackgroundField($args)
+{
+    $path = get_option('srly_body_background');
+    $var = esc_attr($args['label_for']);
+?>
+    <input id="<?php echo $var?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_color_picker">
+
+<?php	
+}
 
 
 /**
@@ -108,10 +998,14 @@ function srlyLogoField($args)
     $path = get_option('screenly_options_logo');
     $var = esc_attr($args['label_for']);
 ?>
+    <p><button id='srlySelectImage' >Select Logo</button></p>
     <input type="url" id="<?php echo $var?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text">
-    <p class="description"><?php esc_html_e('Upload an image to you media library. Check it\'s url and copy paste to the input above.', SRLY_THEME); ?></p>
+    <p><img id='media_image' src='' width='350px'></p>
     <p class="description"><?php _e('We recomend an image with the proportion of <b>314 x 98 px</b>.', SRLY_THEME); ?></p>
+
 <?php
+
+	
 }
 
 
