@@ -2,6 +2,11 @@
 set -euo pipefail
 IFS=$'\n\t'
 
+# Only deploy under the right conditions.
+if [ "$TRAVIS_BRANCH" != "master" ] || [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
+    echo "Not deploying..."
+fi
+
 PLUGIN_VERSION="$(head -n1 VERSION)"
 GIT_HASH="$(git rev-parse --short HEAD)"
 

@@ -1,5 +1,7 @@
 # Screenly Cast for WordPress
 
+[![Build Status](https://travis-ci.org/Screenly/Screenly-Cast-for-WordPress.svg?branch=master)](https://travis-ci.org/Screenly/Screenly-Cast-for-WordPress)
+
 A WordPress plugin to enable easy and beautiful casting of pages, posts and image media on [Screenly](https://www.screenly.io) digital signage devices.
 
 The Screenly Cast plugin optimizes your website content for beautiful, easy to read display on TVs and other non-interactive devices.
@@ -14,7 +16,6 @@ With Screenly Cast for WordPress:
 
  * Search for *Screenly Cast* in the WordPress plugin directory
  * Activate the plugin
-
 
 ## Usage with Screenly Pro
 

@@ -198,7 +198,7 @@ function srlyEnqueueThemeAssets()
 {
     $path = plugin_dir_url(__FILE__);
     // CSS
-    wp_enqueue_style(SRLY_THEME, $path.'style.css', array(), SRLY_VERSION, 'all');
+    wp_enqueue_style(SRLY_THEME, $path.'style.php', array(), SRLY_VERSION, 'all');
     // JS
     wp_enqueue_script(SRLY_THEME, $path.'assets/js/scripts.js', array(), SRLY_VERSION, true);
 

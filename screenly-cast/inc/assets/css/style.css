@@ -1,0 +1,50 @@
+#srlySelectImage{
+	color:#fff;
+	padding:10px;
+	border-radius:4px;
+	background-color:#6b8e88;
+}
+.screenly-row{
+	color:;
+}
+.screenly_options_large{
+	color :;
+}
+.srly_slidecontainer{
+	width:100%;
+}
+.srly_slider{
+	-webkit-appearance:none;
+	appearance:none;
+	width:100%;
+	height:25px;
+	background:#d3d3d3;
+	outline:none;
+	opacity:0.8;
+	-webkit-transition:0.2;
+	transition:opacity .2s;
+}
+.srly_slider:hover{
+	opacity:1;
+}
+.srly_slider::-webkit-slider-thumb{
+	-webkit-appearance:none;
+	appearance:none;
+	width:25px;
+	height:25px;
+	background:#4CAF50;
+	cursor:pointer;
+}
+.srly_slider::-moz-range-thumb{
+	width:25px;
+	height:25px;
+	background:#4CAF50;
+	cursor:pointer;
+}
+#srly_brand_logo_width_slider_output, #srly_brand_logo_height_slider_output, #srly_time_font_size_slider_output, #srly_time_font_weight_slider_output, #srly_h1_font_size_slider_output, #srly_h1_font_weight_slider_output, #srly_a_font_weight_slider_output, #srly_a_font_size_slider_output, #srly_content_margin_top_slider_output, #srly_content_line_height_slider_output, #srly_content_font_weight_slider_output, #srly_content_font_size_slider_output, #srly_h1_margin_slider_output, #srly_h1_padding_slider_output{
+	color:#fff;
+	background:#4CAF50;
+	border:gray;
+	padding:5px;
+	border-radius:4px;
+}
