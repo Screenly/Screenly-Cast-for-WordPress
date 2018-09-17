@@ -41,6 +41,15 @@ In most cases, you only need to use "?srly". However, if you already got an exis
 
 == Changelog ==
 
+= 0.1.20 =
+*Core: Ability to customize style on the frontend.
+* -change of color and heneral feel of content
+* -Option to display or hide logo and time
+*
+
+= 0.1.19 =
+* Added PHPUnit test files for wordpress. 
+
 = 0.1.18 =
 * Minor: PHP Version 5.2.4
 * - Replaces [] with array() to comply with WP minimum requirement of PHP Version 5.2.4
@@ -54,6 +63,3 @@ In most cases, you only need to use "?srly". However, if you already got an exis
 
 = 0.1.13 =
 * Core: Replaced plugin name and text-domain to "screenly-cast"
-
-= 0.1.19
-* Added PHPUnit test files for wordpress. 
