@@ -31,7 +31,7 @@ function srlyAddAdminAssets()
 function srly_get_css_settings_from_db() {
     require_once  dirname(__FILE__).'/../../../../wp-config.php';
     //get css settings from db and present it as an array
-    $css_values_from_db= [
+    $css_values_from_db= array(
     'srly_body_font_family' =>get_option('srly_body_font_family'),
     'srly_body_background'=>get_option('srly_body_background'),
     
@@ -92,7 +92,7 @@ function srly_get_css_settings_from_db() {
     'srly_h3_color'=>get_option('srly_h3_color'),
     'srly_h3_font_size'=>get_option('srly_h3_font_size'),
     'srly_h3_font_weight'=>  get_option('srly_h3_font_weight')      
-    ];
+    );
     return $css_values_from_db;
 }
 
@@ -107,7 +107,7 @@ function srly_get_css_settings_from_db() {
 
 function srly_get_css_values(){
 /* Set default style values */
-$css_values=[
+$css_values=  array(
     'srly_body_color'=>'black',
     'srly_body_font_size'=>'16px',
     'srly_body_font_weight'=>'200',
@@ -175,7 +175,7 @@ $css_values=[
     'srly_h3_color'=>'#00b6d4',
     'srly_h3_font_size'=>'2.6vw',
     'srly_h3_font_weight'=>'200'
-];
+);
 /* Update with custom values if they have been defined */
     $css_values_from_settings = srly_get_css_settings_from_db();
     foreach ($css_values_from_settings as $key => $value) {
