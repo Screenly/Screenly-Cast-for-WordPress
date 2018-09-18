@@ -23,7 +23,7 @@ class ScreenlyCastAdminTest extends WP_UnitTestCase {
 
     public function setup() {
         parent::setUp();
-        $user_id = $this->factory->user->create(["role"=>'administrator']);
+        $user_id = $this->factory->user->create(array("role"=>"administrator"));
         $user = wp_get_current_user($user_id);
         set_current_screen('edit-post');
     }
