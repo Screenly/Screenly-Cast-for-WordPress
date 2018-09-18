@@ -31,10 +31,8 @@ function srlyAddAdminAssets()
 function srly_get_css_settings_from_db() {
     require_once  dirname(__FILE__).'/../../../../wp-config.php';
     //get css settings from db and present it as an array
-    $css_values_from_db= array(
-    'srly_body_font_family' =>get_option('srly_body_font_family'),
+    $css_values_from_db= array('srly_body_font_family' =>get_option('srly_body_font_family'),
     'srly_body_background'=>get_option('srly_body_background'),
-    
     'srly_brand_logo_width'=>  !empty(get_option('srly_brand_logo_width'))? get_option('srly_brand_logo_width')."px": "",
     'srly_brand_logo_height'=> !empty(get_option('srly_brand_logo_height'))? get_option('srly_brand_logo_height')."px":"",
     'srly_brand_logo_display'=>get_option('srly_brand_logo_display'),
@@ -92,7 +90,7 @@ function srly_get_css_settings_from_db() {
     'srly_h3_color'=>get_option('srly_h3_color'),
     'srly_h3_font_size'=>get_option('srly_h3_font_size'),
     'srly_h3_font_weight'=>  get_option('srly_h3_font_weight')      
-    );
+    ];
     return $css_values_from_db;
 }
 
