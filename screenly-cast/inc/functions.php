@@ -31,69 +31,130 @@ function srlyAddAdminAssets()
 function srly_get_css_settings_from_db() {
     require_once  dirname(__FILE__).'/../../../../wp-config.php';
     $srly_brand_logo_width= get_option('srly_brand_logo_width');
+    $srly_h1_margin =  get_option('srly_h1_margin');
+    $srly_h1_font_size = get_option('srly_h1_font_size');
+    $srly_h1_font_weight = get_option('srly_h1_font_weight');
+    $srly_time_font_size= get_option('srly_time_font_size');
+    $srly_content_margin_top= get_option('srly_content_margin_top');
+    $srly_content_line_height= get_option('srly_content_line_height');
+    $srly_content_font_size= get_option('srly_content_font_size');
+    $srly_blockquote_font_size= get_option('srly_blockquote_font_size');
+    $srly_h23456_margin = get_option('srly_h23456_margin');
+    $srly_h2_font_size= get_option('srly_h2_font_size');
+    $srly_h4_font_size= get_option('srly_h4_font_size');
+    $srly_h5_font_size= get_option('srly_h5_font_size');
+    $srly_h6_font_size= get_option('srly_h6_font_size');
+    
+    
+    $srly_brand_logo_height = !empty($srly_brand_logo_height)? $srly_brand_logo_height."px":"";
+    $srly_h1_margin =  !empty($srly_h1_margin)? $srly_h1_margin."px":"";
+    $srly_h1_font_size = !empty($srly_h1_font_size)? $srly_h1_font_size."px":"";
+    $srly_h1_font_weight = !empty($srly_h1_font_weight)? $srly_h1_font_weight."px":"";
+    $srly_time_font_size= !empty($srly_time_font_size)? $srly_time_font_size."px":"";
+    $srly_content_margin_top= !empty($srly_content_margin_top)?  $srly_content_margin_top."px":"";
+    $srly_content_line_height= !empty($srly_content_line_height)? $srly_content_line_height."px":"";
+    $srly_content_font_size= !empty($srly_content_font_size)? $srly_content_font_size."px":"";
+    $srly_blockquote_font_size= !empty( $srly_blockquote_font_size)? $srly_blockquote_font_size."px":"";
+    $srly_h23456_margin = !empty( $srly_h23456_margin)? $srly_h23456_margin."px":"";
+    $srly_h2_font_size= !empty($srly_h2_font_size)? $srly_h2_font_size."px":"";
+    $srly_h4_font_size= !empty($srly_h4_font_size)? $srly_h4_font_size."px":"";
+    $srly_h5_font_size= !empty( $srly_h5_font_size)? $srly_h5_font_size."px":"";
+    $srly_h6_font_size= !empty( $srly_h6_font_size)? $srly_h6_font_size."px":"";
+   
     $srly_brand_logo_width=!empty($srly_brand_logo_width)? $srly_brand_logo_width."px": "";
+    $srly_body_font_family = $srly_body_font_family;
+    $srly_body_background=get_option('srly_body_background');
+    $srly_brand_logo_width =  $srly_brand_logo_width;
+    $srly_brand_logo_display=get_option('srly_brand_logo_display');
+    $srly_h1_padding = get_option('srly_h1_padding');
+    $srly_h1_color=get_option('srly_h1_color');
+    $srly_time_color=get_option('srly_time_color');
+    $srly_time_display=get_option('srly_time_display');
+    $srly_time_font_weight=get_option('srly_time_font_weight');
+    $srly_a_color=get_option('srly_a_color');
+    $srly_a_text_decoration=get_option('srly_a_text_decoration');
+    $srly_a_font_weight=get_option('srly_a_font_weight');
+    $srly_a_font_size=get_option('srly_a_font_size')."px";
+    $srly_content_color=get_option('srly_content_color');
+    $srly_content_font_weight=get_option('srly_content_font_weight');
+    $srly_blockquote_font_weight=get_option('srly_blockquote_font_weight');
+    $srly_blockquote_font_style=get_option('srly_blockquote_font_style');
+    $srly_blockquote_letter_spacing=get_option('srly_blockquote_letter_spacing');
+    $srly_h23456_font_weight = get_option('srly_h23456_font_weight');
+    $srly_h5_color = get_option('srly_h5_color');
+    $srly_h5_font_weight=get_option('srly_h5_font_weight');
+     $srly_h6_font_weight= get_option('srly_h6_font_weight');
+    $srly_h6_text_transform= get_option('srly_h6_text_transform');
+    $srly_b_strong_font_weight= get_option('srly_b_strong_font_weight');
+    $srly_ul_ol_padding_left= get_option('srly_ul_ol_padding_left');
+    $srly_ul_list_style_type= get_option('srly_ul_list_style_type');
+    $srly_ul_li_padding_left= get_option('srly_ul_li_padding_left');
+    $srly_h3_color = get_option('srly_h3_color');
+    $srly_h3_font_size= get_option('srly_h3_font_size');
+    $srly_h3_font_weight =  get_option('srly_h3_font_weight');
+    
     //get css settings from db and present it as an array
     $css_values_from_db= array(
-    'srly_body_font_family' =>get_option('srly_body_font_family'),
-    'srly_body_background'=>get_option('srly_body_background'),
+    'srly_body_font_family' =>$srly_body_font_family,
+    'srly_body_background'=>$srly_body_background,
     'srly_brand_logo_width'=>  $srly_brand_logo_width,
-    'srly_brand_logo_height'=> !empty(get_option('srly_brand_logo_height'))? get_option('srly_brand_logo_height')."px":"",
-    'srly_brand_logo_display'=>get_option('srly_brand_logo_display'),
+    'srly_brand_logo_height'=> $srly_brand_logo_height,
+    'srly_brand_logo_display'=>$srly_brand_logo_display,
 
-    'srly_h1_margin' =>  !empty(get_option('srly_h1_margin'))? get_option('srly_h1_margin')."px":"",
-    'srly_h1_padding' =>get_option('srly_h1_padding'),
-    'srly_h1_font_size' => !empty(get_option('srly_h1_font_size'))? get_option('srly_h1_font_size')."px":"",
-    'srly_h1_font_weight' => !empty(get_option('srly_h1_font_weight'))? get_option('srly_h1_font_weight')."px":"",
-    'srly_h1_color'=>get_option('srly_h1_color'),
+    'srly_h1_margin' =>  $srly_h1_margin,
+    'srly_h1_padding' => $srly_h1_padding,
+    'srly_h1_font_size' => $srly_h1_font_size,
+    'srly_h1_font_weight' => $srly_h1_font_weight,
+    'srly_h1_color'=> $srly_h1_color,
 
-    'srly_time_color'=>get_option('srly_time_color'),
-    'srly_time_display'=>get_option('srly_time_display'),
-    'srly_time_font_size'=> !empty(get_option('srly_time_font_size'))? get_option('srly_time_font_size')."px":"",
-    'srly_time_font_weight'=>get_option('srly_time_font_weight'),
+    'srly_time_color'=> $srly_time_color,
+    'srly_time_display'=> $srly_time_display,
+    'srly_time_font_size'=> $srly_time_font_size,
+    'srly_time_font_weight'=> $srly_time_font_weight,
 
-    'srly_a_color'=>get_option('srly_a_color'),
-    'srly_a_text_decoration'=>get_option('srly_a_text_decoration'),
-    'srly_a_font_weight'=>get_option('srly_a_font_weight'),
-    'srly_a_font_size'=>get_option('srly_a_font_size')."px",
+    'srly_a_color'=> $srly_a_color,
+    'srly_a_text_decoration'=> $srly_a_text_decoration,
+    'srly_a_font_weight'=> $srly_a_font_weight,
+    'srly_a_font_size'=> $srly_a_font_size,
 
-    'srly_content_margin_top'=>  !empty(get_option('srly_content_margin_top'))?get_option('srly_content_margin_top')."px":"",
-    'srly_content_line_height'=>  !empty(get_option('srly_content_line_height'))?get_option('srly_content_line_height')."px":"",
-    'srly_content_color'=>get_option('srly_content_color'),
-    'srly_content_font_weight'=>get_option('srly_content_font_weight'),
-    'srly_content_font_size'=> !empty(get_option('srly_content_font_size'))?get_option('srly_content_font_size')."px":"",
+    'srly_content_margin_top'=>  $srly_content_margin_top,
+    'srly_content_line_height'=>  $srly_content_line_height,
+    'srly_content_color'=> $srly_content_color,
+    'srly_content_font_weight'=>$srly_content_font_weight,
+    'srly_content_font_size'=> $srly_content_font_size,
 
-    'srly_blockquote_font_weight'=>get_option('srly_blockquote_font_weight'),
-    'srly_blockquote_font_style'=>get_option('srly_blockquote_font_style'),
-    'srly_blockquote_letter_spacing'=>get_option('srly_blockquote_letter_spacing'),
-    'srly_blockquote_font_size'=> !empty(get_option('srly_blockquote_font_size'))?get_option('srly_blockquote_font_size')."px":"",
+    'srly_blockquote_font_weight'=>$srly_blockquote_font_weight,
+    'srly_blockquote_font_style'=>$srly_blockquote_font_style,
+    'srly_blockquote_letter_spacing'=>$srly_blockquote_letter_spacing,
+    'srly_blockquote_font_size'=> $srly_blockquote_font_size,
 
-    'srly_h23456_margin' => !empty(get_option('srly_h23456_margin'))?get_option('srly_h23456_margin')."px":"",
-    'srly_h23456_font_weight' =>get_option('srly_h23456_font_weight'),
+    'srly_h23456_margin' => $srly_h23456_margin,
+    'srly_h23456_font_weight' =>$srly_h23456_font_weight,
 
-    'srly_h2_font_size'=> !empty(get_option('srly_h2_font_size'))? get_option('srly_h2_font_size')."px":"",
-    'srly_h4_font_size'=> !empty(get_option('srly_h4_font_size'))?get_option('srly_h4_font_size')."px":"",
+    'srly_h2_font_size'=> $srly_h2_font_size,
+    'srly_h4_font_size'=> $srly_h4_font_size,
 
-    'srly_h5_color'=>get_option('srly_h5_color'),
-    'srly_h5_font_size'=> !empty(get_option('srly_h5_font_size'))?get_option('srly_h5_font_size')."px":"",
-    'srly_h5_font_weight'=>get_option('srly_h5_font_weight'),
+    'srly_h5_color'=>$srly_h5_color,
+    'srly_h5_font_size'=> $srly_h5_font_size,
+    'srly_h5_font_weight'=>$srly_h5_font_weight,
 
-    'srly_h6_font_size'=> !empty(get_option('srly_h6_font_size'))?get_option('srly_h6_font_size')."px":"",
-    'srly_h6_font_weight'=>get_option('srly_h6_font_weight'),
-    'srly_h6_text_transform'=>get_option('srly_h6_text_transform'),
+    'srly_h6_font_size'=> $srly_h6_font_size,
+    'srly_h6_font_weight'=>$srly_h6_font_weight,
+    'srly_h6_text_transform'=>$srly_h6_text_transform,
 
-    'srly_b_strong_font_weight'=>get_option('srly_b_strong_font_weight'),
+    'srly_b_strong_font_weight'=>$srly_b_strong_font_weight,
 
+    'srly_ul_ol_padding_left'=>$srly_ul_ol_padding_left,
 
-    'srly_ul_ol_padding_left'=>get_option('srly_ul_ol_padding_left'),
+    'srly_ul_list_style_type'=>$srly_ul_list_style_type,
 
-    'srly_ul_list_style_type'=>get_option('srly_ul_list_style_type'),
+    'srly_ul_li_padding_left'=>$srly_ul_li_padding_left,
 
-    'srly_ul_li_padding_left'=>get_option('srly_ul_li_padding_left'),
-
-    'srly_h3_color'=>get_option('srly_h3_color'),
-    'srly_h3_font_size'=>get_option('srly_h3_font_size'),
-    'srly_h3_font_weight'=>  get_option('srly_h3_font_weight')      
+    'srly_h3_color'=>$srly_h3_color,
+    'srly_h3_font_size'=>$srly_h3_font_size,
+    'srly_h3_font_weight'=>  $srly_h3_font_weight      
     );
+    
     return $css_values_from_db;
 }
 
