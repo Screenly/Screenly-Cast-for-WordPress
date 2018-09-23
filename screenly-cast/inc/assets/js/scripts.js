@@ -89,4 +89,9 @@ jQuery(document).ready(function($) {
 		$("#srly_h1_padding_slider_output").html($("#srly_h1_padding").val()+"px");
 	});
 	$("#srly_h1_padding_slider_output").html($("#srly_h1_padding").val()+"px");
+	
+	$('#srly_category_switch_period').change(function(){
+		$("#srly_category_switch_period_slider_output").html($("#srly_category_switch_period").val()+" ms");
+	});
+	$("#srly_category_switch_period_slider_output").html($("#srly_category_switch_period").val()+" ms");
 });

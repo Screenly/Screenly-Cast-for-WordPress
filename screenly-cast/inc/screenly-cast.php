@@ -267,7 +267,12 @@ class ScreenlyCast
                 if (is_attachment()) {
                     return $path . 'attachment.php';
                 } else {
-                    return $path . 'index.php';
+                    if(is_single()){
+                        return $path . 'index.php';
+                    }
+                    else {
+                        return $path . 'category_index.php';
+                    }
                 }
             }
         }

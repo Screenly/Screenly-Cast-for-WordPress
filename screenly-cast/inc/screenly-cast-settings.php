@@ -60,6 +60,8 @@ function srlySettingsInit()
     register_setting('screenly', 'srly_content_color');
     register_setting('screenly', 'srly_content_font_weight');
     register_setting('screenly', 'srly_content_font_size');
+    
+    register_setting('screenly', 'srly_category_switch_period');
 
     // register a new section in the "wporg" page
     add_settings_section(
@@ -355,13 +357,25 @@ function srlySettingsInit()
             'class' => 'screenly-row',
             'screenly_custom_data' => 'custom'
         )
+    ); 
+    add_settings_field(
+        'srly_category_switch_period',
+        __('Category switch period', SRLY_THEME),
+        'srlyCategorySwitchPeriod',
+        'screenly',
+        'screenly_section',
+        array(
+            'label_for' => 'srly_category_switch_period',
+            'class' => 'screenly-row',
+            'screenly_custom_data' => 'custom'
+        )
     );
 }
 
 /**
- * Print logo input
+ * Print Content Margin Top Field input
  *
- * @param $args srlyLogoField can accept an $args parameter, which is an array
+ * @param $args srlyContentMarginTopField can accept an $args parameter, which is an array
  *        defined at the add_settings_field() function - srlySettingsInit.
  *        Wordpress has magic interaction with the following keys: label_for,
  *        class. the "label_for" key value is used for the "for" attribute of the
@@ -381,12 +395,34 @@ function srlyContentMarginTopField($args) {
     <p> <span id="<?php echo $var.'_slider_output'?>"></span></p>
 <?php
 }
-
+/**
+ * Print Category Switch Period input
+ *
+ * @param $args srlyCategorySwitchPeriod can accept an $args parameter, which is an array
+ *        defined at the add_settings_field() function - srlySettingsInit.
+ *        Wordpress has magic interaction with the following keys: label_for,
+ *        class. the "label_for" key value is used for the "for" attribute of the
+ *        <label>. the "class" key value is used for the "class" attribute of the
+ *        <tr> containing the field. you can add custom key value pairs to be used
+ *        inside your callbacks.
+ *
+ * @package ScreenlyCast
+ * @since   0.0.1
+ * @return  void
+ */
+function srlyCategorySwitchPeriod($args) {
+    $path = get_option('srly_category_switch_period');
+    $var = esc_attr($args['label_for']);
+    ?>
+        <input type="range" min="5000" max="500000" id="<?php echo $var?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_slider">
+        <p> <span id="<?php echo $var.'_slider_output'?>"></span></p>
+    <?php
+}
 
 /**
- * Print logo input
+ * Print Content Line Height Field input
  *
- * @param $args srlyLogoField can accept an $args parameter, which is an array
+ * @param $args srlyContentLineHeightField can accept an $args parameter, which is an array
  *        defined at the add_settings_field() function - srlySettingsInit.
  *        Wordpress has magic interaction with the following keys: label_for,
  *        class. the "label_for" key value is used for the "for" attribute of the
@@ -409,9 +445,9 @@ function srlyContentLineHeightField($args) {
 
 
 /**
- * Print logo input
+ * Print Content Color Field input
  *
- * @param $args srlyLogoField can accept an $args parameter, which is an array
+ * @param $args srlyContentColorField can accept an $args parameter, which is an array
  *        defined at the add_settings_field() function - srlySettingsInit.
  *        Wordpress has magic interaction with the following keys: label_for,
  *        class. the "label_for" key value is used for the "for" attribute of the
@@ -433,9 +469,9 @@ function srlyContentColorField($args) {
 
 
 /**
- * Print logo input
+ * Print Content Font Size Field input
  *
- * @param $args srlyLogoField can accept an $args parameter, which is an array
+ * @param $args srlyContentFontSizeField can accept an $args parameter, which is an array
  *        defined at the add_settings_field() function - srlySettingsInit.
  *        Wordpress has magic interaction with the following keys: label_for,
  *        class. the "label_for" key value is used for the "for" attribute of the
@@ -458,9 +494,9 @@ function srlyContentFontSizeField($args) {
 
 
 /**
- * Print logo input
+ * Print Content Font Weight Field input
  *
- * @param $args srlyLogoField can accept an $args parameter, which is an array
+ * @param $args srlyContentFontWeightField can accept an $args parameter, which is an array
  *        defined at the add_settings_field() function - srlySettingsInit.
  *        Wordpress has magic interaction with the following keys: label_for,
  *        class. the "label_for" key value is used for the "for" attribute of the
@@ -483,9 +519,9 @@ function srlyContentFontWeightField($args) {
 
 
 /**
- * Print logo input
+ * Print Link Font Size Field input
  *
- * @param $args srlyLogoField can accept an $args parameter, which is an array
+ * @param $args srlyLinkFontSizeField can accept an $args parameter, which is an array
  *        defined at the add_settings_field() function - srlySettingsInit.
  *        Wordpress has magic interaction with the following keys: label_for,
  *        class. the "label_for" key value is used for the "for" attribute of the
@@ -508,9 +544,9 @@ function srlyLinkFontSizeField($args) {
 
 
 /**
- * Print logo input
+ * Print Link Font Weight Color Field input
  *
- * @param $args srlyLogoField can accept an $args parameter, which is an array
+ * @param $args srlyLinkFontWeightColorField can accept an $args parameter, which is an array
  *        defined at the add_settings_field() function - srlySettingsInit.
  *        Wordpress has magic interaction with the following keys: label_for,
  *        class. the "label_for" key value is used for the "for" attribute of the
@@ -533,9 +569,9 @@ function srlyLinkFontWeightColorField($args) {
 
 
 /**
- * Print logo input
+ * Print Link Text Decoration Color Field input
  *
- * @param $args srlyLogoField can accept an $args parameter, which is an array
+ * @param $args srlyLinkTextDecorationColorField can accept an $args parameter, which is an array
  *        defined at the add_settings_field() function - srlySettingsInit.
  *        Wordpress has magic interaction with the following keys: label_for,
  *        class. the "label_for" key value is used for the "for" attribute of the
@@ -558,9 +594,9 @@ function srlyLinkTextDecorationColorField($args) {
 
 
 /**
- * Print logo input
+ * Print Link Color Field input
  *
- * @param $args srlyLogoField can accept an $args parameter, which is an array
+ * @param $args srlyLinkColorField can accept an $args parameter, which is an array
  *        defined at the add_settings_field() function - srlySettingsInit.
  *        Wordpress has magic interaction with the following keys: label_for,
  *        class. the "label_for" key value is used for the "for" attribute of the
@@ -583,9 +619,9 @@ function srlyLinkColorField($args) {
 
 
 /**
- * Print logo input
+ * Print Head Font Color Field input
  *
- * @param $args srlyLogoField can accept an $args parameter, which is an array
+ * @param $args srlyHeadFontColorField can accept an $args parameter, which is an array
  *        defined at the add_settings_field() function - srlySettingsInit.
  *        Wordpress has magic interaction with the following keys: label_for,
  *        class. the "label_for" key value is used for the "for" attribute of the
@@ -608,9 +644,9 @@ function srlyHeadFontColorField($args) {
 
 
 /**
- * Print logo input
+ * Print Head Font Weight Field input
  *
- * @param $args srlyLogoField can accept an $args parameter, which is an array
+ * @param $args srlyHeadFontWeightField can accept an $args parameter, which is an array
  *        defined at the add_settings_field() function - srlySettingsInit.
  *        Wordpress has magic interaction with the following keys: label_for,
  *        class. the "label_for" key value is used for the "for" attribute of the
@@ -633,9 +669,9 @@ function srlyHeadFontWeightField($args) {
 
 
 /**
- * Print logo input
+ * Print Head Font Size Field input
  *
- * @param $args srlyLogoField can accept an $args parameter, which is an array
+ * @param $args srlyHeadFontSizeField can accept an $args parameter, which is an array
  *        defined at the add_settings_field() function - srlySettingsInit.
  *        Wordpress has magic interaction with the following keys: label_for,
  *        class. the "label_for" key value is used for the "for" attribute of the
@@ -658,9 +694,9 @@ function srlyHeadFontSizeField($args) {
 
 
 /**
- * Print logo input
+ * Print Head Padding Field input
  *
- * @param $args srlyLogoField can accept an $args parameter, which is an array
+ * @param $args srlyHeadPaddingField can accept an $args parameter, which is an array
  *        defined at the add_settings_field() function - srlySettingsInit.
  *        Wordpress has magic interaction with the following keys: label_for,
  *        class. the "label_for" key value is used for the "for" attribute of the
@@ -683,9 +719,9 @@ function srlyHeadPaddingField($args) {
 
 
 /**
- * Print logo input
+ * Print Head Margin Field input
  *
- * @param $args srlyLogoField can accept an $args parameter, which is an array
+ * @param $args srlyHeadMarginField can accept an $args parameter, which is an array
  *        defined at the add_settings_field() function - srlySettingsInit.
  *        Wordpress has magic interaction with the following keys: label_for,
  *        class. the "label_for" key value is used for the "for" attribute of the
@@ -708,9 +744,9 @@ function srlyHeadMarginField($args) {
 
 
 /**
- * Print logo input
+ * Print Time Font Weight Field input
  *
- * @param $args srlyLogoField can accept an $args parameter, which is an array
+ * @param $args srlyTimeFontWeightField can accept an $args parameter, which is an array
  *        defined at the add_settings_field() function - srlySettingsInit.
  *        Wordpress has magic interaction with the following keys: label_for,
  *        class. the "label_for" key value is used for the "for" attribute of the
@@ -733,9 +769,9 @@ function srlyTimeFontWeightField($args) {
 
 
 /**
- * Print logo input
+ * Print Time Font Size Field input
  *
- * @param $args srlyLogoField can accept an $args parameter, which is an array
+ * @param $args srlyTimeFontSizeField can accept an $args parameter, which is an array
  *        defined at the add_settings_field() function - srlySettingsInit.
  *        Wordpress has magic interaction with the following keys: label_for,
  *        class. the "label_for" key value is used for the "for" attribute of the
@@ -758,9 +794,9 @@ function srlyTimeFontSizeField($args) {
 
 
 /**
- * Print logo input
+ * Print Time Display Field input
  *
- * @param $args srlyLogoField can accept an $args parameter, which is an array
+ * @param $args srlyTimeDisplayField can accept an $args parameter, which is an array
  *        defined at the add_settings_field() function - srlySettingsInit.
  *        Wordpress has magic interaction with the following keys: label_for,
  *        class. the "label_for" key value is used for the "for" attribute of the
@@ -787,9 +823,9 @@ function srlyTimeDisplayField($args) {
 
 
 /**
- * Print logo input
+ * Print Time Color Field input
  *
- * @param $args srlyLogoField can accept an $args parameter, which is an array
+ * @param $args srlyTimeColorField can accept an $args parameter, which is an array
  *        defined at the add_settings_field() function - srlySettingsInit.
  *        Wordpress has magic interaction with the following keys: label_for,
  *        class. the "label_for" key value is used for the "for" attribute of the
@@ -812,9 +848,9 @@ function srlyTimeColorField($args) {
 
 
 /**
- * Print logo input
+ * Print Brand Logo Display Field input
  *
- * @param $args srlyLogoField can accept an $args parameter, which is an array
+ * @param $args srlyBrandLogoDisplayField can accept an $args parameter, which is an array
  *        defined at the add_settings_field() function - srlySettingsInit.
  *        Wordpress has magic interaction with the following keys: label_for,
  *        class. the "label_for" key value is used for the "for" attribute of the
@@ -840,9 +876,9 @@ function srlyBrandLogoDisplayField($args) {
 }
 
 /**
- * Print logo input
+ * Print Brand Logo Height Field input
  *
- * @param $args srlyLogoField can accept an $args parameter, which is an array
+ * @param $args srlyBrandLogoHeightField can accept an $args parameter, which is an array
  *        defined at the add_settings_field() function - srlySettingsInit.
  *        Wordpress has magic interaction with the following keys: label_for,
  *        class. the "label_for" key value is used for the "for" attribute of the
@@ -866,9 +902,9 @@ function srlyBrandLogoHeightField($args)
 
 
 /**
- * Print logo input
+ * Print Brand Logo width Field input
  *
- * @param $args srlyLogoField can accept an $args parameter, which is an array
+ * @param $args srlyBrandLogowidthField can accept an $args parameter, which is an array
  *        defined at the add_settings_field() function - srlySettingsInit.
  *        Wordpress has magic interaction with the following keys: label_for,
  *        class. the "label_for" key value is used for the "for" attribute of the
@@ -892,9 +928,9 @@ function srlyBrandLogowidthField($args)
 
 
 /**
- * Print logo input
+ * Print Body Font Field input
  *
- * @param $args srlyLogoField can accept an $args parameter, which is an array
+ * @param $args srlyBodyFontField can accept an $args parameter, which is an array
  *        defined at the add_settings_field() function - srlySettingsInit.
  *        Wordpress has magic interaction with the following keys: label_for,
  *        class. the "label_for" key value is used for the "for" attribute of the
@@ -918,9 +954,9 @@ function srlyBodyFontField($args)
 
 
 /**
- * Print logo input
+ * Print Body Background Field input
  *
- * @param $args srlyLogoField can accept an $args parameter, which is an array
+ * @param $args srlyBodyBackgroundField can accept an $args parameter, which is an array
  *        defined at the add_settings_field() function - srlySettingsInit.
  *        Wordpress has magic interaction with the following keys: label_for,
  *        class. the "label_for" key value is used for the "for" attribute of the

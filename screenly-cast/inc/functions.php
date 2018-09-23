@@ -9,13 +9,14 @@
 function srlyAddAdminAssets()
 {
     wp_enqueue_style('admin_init', '/wp-content/plugins/screenly-cast/inc/assets/css/style.css', 'style');
-        
-    //Core media script
-    wp_enqueue_media();
     
-    //add color picker css file
-    wp_enqueue_style('wp-color-picker');
-
+    $screen=get_current_screen();
+       
+    if ('settings_page_screenly' == $screen->base) {
+        //Core media script
+        wp_enqueue_media();
+    }
+    
     // Your custom js file
     wp_enqueue_script( 'media-lib-uploader-js', '/wp-content/plugins/screenly-cast/inc/assets/js/scripts.js' , array('jquery', 'wp-color-picker') );
 }

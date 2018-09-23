@@ -186,7 +186,21 @@ function srlyTheQrcodeLink($data, $w=200, $h=200, $m=0)
     return true;
 }
 
-
+function srlyCategoryBottomNavigation($no_of_posts='') {
+    
+    $loop_times=$no_of_posts-1;
+    $display_nav = '<div class="srly_category_nav"><center> <span class="srly_category_nav_center">'
+            . '<span class="srly_category_nav_item srly_category_nav_item_active" id="srly_category_nav_0"></span>';
+    
+    for($i=0 ; $i<$loop_times; $i++) {
+        $span_id=$i+1;
+        $display_nav .='<span class="srly_category_nav_item" id="srly_category_nav_'.$span_id.'"></span>';
+    }
+    
+    $display_nav .='</span></center></div>';
+    
+    echo $display_nav;
+}
 
 /**
  * Enqueue and register theme styles and scripts
@@ -197,10 +211,18 @@ function srlyTheQrcodeLink($data, $w=200, $h=200, $m=0)
 function srlyEnqueueThemeAssets()
 {
     $path = plugin_dir_url(__FILE__);
-    // CSS
-    wp_enqueue_style(SRLY_THEME, $path.'style.php', array(), SRLY_VERSION, 'all');
-    // JS
-    wp_enqueue_script(SRLY_THEME, $path.'assets/js/scripts.js', array(), SRLY_VERSION, true);
+    if(is_single()){
+        // CSS
+        wp_enqueue_style(SRLY_THEME, $path.'style.php', array(), SRLY_VERSION, 'all');
+        // JS
+        wp_enqueue_script(SRLY_THEME, $path.'assets/js/scripts.js', array(), SRLY_VERSION, true);
+    }
+    else{
+        // CSS
+        wp_enqueue_style(SRLY_THEME, $path.'category_style.php', array(), SRLY_VERSION, 'all');
+        // JS
+        wp_enqueue_script(SRLY_THEME, $path.'assets/js/category_scripts.js', array('jquery'), SRLY_VERSION, true);
+    }
 
     return true;
 }

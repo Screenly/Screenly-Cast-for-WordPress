@@ -61,4 +61,4 @@ add_action('init', array('ScreenlyCast', 'init'), 0);
  * our var.
  */
 add_action('parse_query', array('ScreenlyCast', 'parseQuery'), 0);
-add_action('admin_init', 'srlyAddAdminAssets',9999);//add admin css and JS
+add_action('admin_enqueue_scripts', 'srlyAddAdminAssets',9999);//add admin css and JS
