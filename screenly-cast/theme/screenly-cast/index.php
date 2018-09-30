@@ -32,7 +32,7 @@ require_once 'header.php';
             <time datetime="<?php echo get_the_date('T Y-m-d H:i'); ?>">
                 <?php the_date('M d Y'); ?>
             </time>
-            <?php the_content();?>
+            <?php the_content(); ?>
         </article>
 
     </section>

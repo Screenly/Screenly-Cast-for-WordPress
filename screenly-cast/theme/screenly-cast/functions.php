@@ -23,7 +23,8 @@ defined('ABSPATH') or die("No script kiddies please!");
 function srlyAllowedContentTags()
 {
     $tags = '<h1>,<h2>,<h3>,<h4>,<h5>,<h6>,<br>,<em>,<i>,<strong>,<b>,<ul>,<ol>,';
-    $tags .= '<li>,<blockquote>,<ins>,<code>,<pre>,<del>,<p>';
+    $tags .= '<li>,<blockquote>,<ins>,<code>,<pre>,<del>,<p>,<img>,<dl>,<dt>,<dd>,'
+            . '<figure>, <figcaption>';
     return $tags;
 }
 add_filter('get_the_content_limit_custom_allowedtags', 'srlyAllowedContentTags');
@@ -211,7 +212,7 @@ function srlyCategoryBottomNavigation($no_of_posts='') {
 function srlyEnqueueThemeAssets()
 {
     $path = plugin_dir_url(__FILE__);
-    if(is_single()){
+    if(is_singular()){
         // CSS
         wp_enqueue_style(SRLY_THEME, $path.'style.php', array(), SRLY_VERSION, 'all');
         // JS

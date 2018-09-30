@@ -114,13 +114,6 @@ class ScreenlyCast
             }
 
             /**
-             * Reverse to previous theme while in admin mode.
-             */
-            if (is_admin()) {
-                self::reverseToPreviousTheme();
-            }
-
-            /**
              * Adds admin page for plugin settings.
              */
             include_once 'screenly-cast-settings.php';
@@ -133,92 +126,7 @@ class ScreenlyCast
 
         return true;
     }
-
-
-    /**
-     * Saves the previous theme in use.
-     *
-     * @package ScreenlyCast
-     *
-     * @return boolean
-     * @static
-     * @since  0.0.1
-     */
-    private static function savePreviousTheme()
-    {
-        $currTheme = wp_get_theme();
-        if (!empty($currTheme) && $currTheme->exists()) {
-            if ($currTheme->stylesheet!=SRLY_THEME) {
-                update_option (SRLY_PREFIX.'saved_theme', $currTheme);
-                return true;
-            }
-        }
-
-        return true;
-    }
-
-
-    /**
-     * Get the previous saved theme.
-     *
-     * @package ScreenlyCast
-     *
-     * @return string
-     * @static
-     * @since  0.0.1
-     */
-    private static function getPreviousTheme()
-    {
-        $saved = get_option (SRLY_PREFIX.'saved_theme');
-        if (!empty($saved)) {
-            return $saved;
-        }
-        return '';
-    }
-
-
-    /**
-     * Activates Screenly theme.
-     *
-     * @package ScreenlyCast
-     *
-     * @return boolean
-     * @static
-     * @since  0.0.1
-     */
-    private static function activateScreenlyTheme()
-    {
-        if (self::savePreviousTheme()) {
-            switch_theme(SRLY_THEME);
-            update_option('theme_switched', SRLY_THEME);
-            return true;
-        }
-        return false;
-    }
-
-
-    /**
-     * Activates previously active theme.
-     *
-     * @package ScreenlyCast
-     *
-     * @return boolean
-     * @static
-     * @since  0.0.1
-     */
-    private static function reverseToPreviousTheme()
-    {
-        $prevTheme = self::getPreviousTheme();
-        if (!empty($prevTheme->stylesheet)) {
-            if ($prevTheme->stylesheet!=get_option('stylesheet')) {
-                switch_theme($prevTheme->stylesheet);
-                update_option('theme_switched', $prevTheme->stylesheet);
-                return true;
-            }
-        }
-        return false;
-    }
-
+	
 
     /**
      * Parse WP Query to find our var.
@@ -235,10 +143,8 @@ class ScreenlyCast
         if (!is_admin()) {
             $scope = array('ScreenlyCast', 'templateInclude');
             if (isset($wp_query->query['srly'])) {
-                self::activateScreenlyTheme();
                 add_filter('template_include', $scope);
             } else {
-                self::reverseToPreviousTheme();
                 remove_filter('template_include', $scope);
             }
         }
@@ -267,7 +173,7 @@ class ScreenlyCast
                 if (is_attachment()) {
                     return $path . 'attachment.php';
                 } else {
-                    if(is_single()){
+                    if(is_singular()){
                         return $path . 'index.php';
                     }
                     else {
@@ -336,22 +242,6 @@ class ScreenlyCast
 <?php
         return true;
     }
-
-
-    /**
-     * Attached to activate_{ plugin_basename(__FILES__) }
-     * by register_activation_hook().
-     *
-     * @package ScreenlyCast
-     * @since   0.0.1
-     * @return  boolean
-     * @static
-     */
-    public static function pluginActivation()
-    {
-        return true;
-    }
-
 
     /**
      * Attached to deactivate_{ plugin_basename(__FILES__) }

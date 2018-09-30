@@ -84,6 +84,7 @@ function srlySettingsInit()
             'screenly_custom_data' => 'custom'
         )
     );
+	
     add_settings_field(
         'srly_brand_logo_width',
         __('Logo width', SRLY_THEME),
@@ -96,6 +97,7 @@ function srlySettingsInit()
             'screenly_custom_data' => 'custom'
         )
     );
+	
     add_settings_field(
         'srly_brand_logo_height',
         __('Logo Height', SRLY_THEME),
@@ -108,6 +110,7 @@ function srlySettingsInit()
             'screenly_custom_data' => 'custom'
         )
     );
+	
     add_settings_field(
         'srly_brand_logo_display',
         __('Logo Display', SRLY_THEME),
@@ -120,6 +123,7 @@ function srlySettingsInit()
             'screenly_custom_data' => 'custom'
         )
     );
+	
     add_settings_field(
         'srly_body_font_family',
         __('Body Font Family', SRLY_THEME),
@@ -210,6 +214,7 @@ function srlySettingsInit()
             'screenly_custom_data' => 'custom'
         )
     );
+    
     add_settings_field(
         'srly_h1_font_size',
         __('Heading font size', SRLY_THEME),
@@ -235,6 +240,7 @@ function srlySettingsInit()
             'screenly_custom_data' => 'custom'
         )
     );
+	
     add_settings_field(
         'srly_h1_color',
         __('Heading font color', SRLY_THEME),
@@ -247,6 +253,7 @@ function srlySettingsInit()
             'screenly_custom_data' => 'custom'
         )
     );
+	
     add_settings_field(
         'srly_a_color',
         __('Link color', SRLY_THEME),
@@ -259,6 +266,7 @@ function srlySettingsInit()
             'screenly_custom_data' => 'custom'
         )
     );
+	
     add_settings_field(
         'srly_a_text_decoration',
         __('Link decoration', SRLY_THEME),
@@ -310,6 +318,7 @@ function srlySettingsInit()
             'screenly_custom_data' => 'custom'
         )
     );
+	
     add_settings_field(
         'srly_content_line_height',
         __('Content line height', SRLY_THEME),
@@ -322,6 +331,7 @@ function srlySettingsInit()
             'screenly_custom_data' => 'custom'
         )
     );
+	
     add_settings_field(
         'srly_content_color',
         __('Content color', SRLY_THEME),
@@ -334,6 +344,7 @@ function srlySettingsInit()
             'screenly_custom_data' => 'custom'
         )
     );
+	
     add_settings_field(
         'srly_content_font_weight',
         __('Content Font Weight', SRLY_THEME),
@@ -346,6 +357,7 @@ function srlySettingsInit()
             'screenly_custom_data' => 'custom'
         )
     );
+	
     add_settings_field(
         'srly_content_font_size',
         __('Content font Size', SRLY_THEME),
@@ -358,6 +370,7 @@ function srlySettingsInit()
             'screenly_custom_data' => 'custom'
         )
     ); 
+	
     add_settings_field(
         'srly_category_switch_period',
         __('Category switch period', SRLY_THEME),
@@ -371,6 +384,7 @@ function srlySettingsInit()
         )
     );
 }
+
 
 /**
  * Print Content Margin Top Field input
@@ -395,8 +409,10 @@ function srlyContentMarginTopField($args) {
     <p> <span id="<?php echo $var.'_slider_output'?>"></span></p>
 <?php
 }
+
+
 /**
- * Print Category Switch Period input
+ * Print Category Post Switch Period input
  *
  * @param $args srlyCategorySwitchPeriod can accept an $args parameter, which is an array
  *        defined at the add_settings_field() function - srlySettingsInit.
@@ -418,6 +434,7 @@ function srlyCategorySwitchPeriod($args) {
         <p> <span id="<?php echo $var.'_slider_output'?>"></span></p>
     <?php
 }
+
 
 /**
  * Print Content Line Height Field input
@@ -875,6 +892,7 @@ function srlyBrandLogoDisplayField($args) {
 <?php	
 }
 
+
 /**
  * Print Brand Logo Height Field input
  *
@@ -988,7 +1006,6 @@ function srlyBodyBackgroundField($args)
 add_action('admin_init', 'srlySettingsInit');
 
 
-
 /**
  * Custom option and settings: callback functions section callbacks can accept an
  * $args parameter, which is an array. $args have the following keys defined:
@@ -1011,7 +1028,6 @@ function srlySectionInput($args)
     </p>
 <?php
 }
-
 
 
 /**
@@ -1040,10 +1056,7 @@ function srlyLogoField($args)
     <p class="description"><?php _e('We recomend an image with the proportion of <b>314 x 98 px</b>.', SRLY_THEME); ?></p>
 
 <?php
-
-	
 }
-
 
 
 /**

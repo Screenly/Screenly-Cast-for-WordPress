@@ -40,10 +40,19 @@ In most cases, you only need to use "?srly". However, if you already got an exis
 
 
 == Changelog ==
+= 0.1.22 =
+* Minor: Correction of errors.
+* Image with text overlay not working
+* Screenly clearing CSS Customizations 
+* Screenly Cast for WordPress(on Wamp) not Working 
+* Screenly breaks site theme 
+
+= 0.1.21 =
+*Core: Ability to display posts in categories and tags.
 
 = 0.1.20 =
 *Core: Ability to customize style on the frontend.
-* -change of color and heneral feel of content
+* -change of color and general feel of content
 * -Option to display or hide logo and time
 *
 

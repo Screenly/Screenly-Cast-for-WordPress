@@ -401,3 +401,16 @@ body.attachment article .content
 {
     margin-top: 0;
 }
+.alignleft{
+	float: left;
+	margin: 0.5em 1em 0.5em 0;
+}
+.alignright {
+    float: right;
+    margin: 0.5em 0 0.5em 1em;
+}
+.aligncenter {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
