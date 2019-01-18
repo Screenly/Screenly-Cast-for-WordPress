@@ -44,12 +44,12 @@ jQuery(document).ready(function($) {
 	
 	srly_next_post_id=1;
 	srly_current_post_id=0;
-	srly_post_ceiling=2;
-		
-	if(srly_category_switch_period == undefined){
+	
+	if(typeof(srly_category_switch_period) == 'undefined'){
 		srly_category_switch_period = 5000;
 	}
-	
+	console.log(typeof(window.srly_post_ceiling));
+	console.log(srly_category_switch_period);
 	srly_category_manager={
 		rotate_post:function(){	//rotate posts on category
 			
@@ -75,9 +75,10 @@ jQuery(document).ready(function($) {
 	};
 	
 	$("#srly_category_section_0").show();
-	
+	if(srly_post_ceiling>0){
 	setInterval(
 		function(){
 			srly_category_manager.rotate_post();
 		},srly_category_switch_period );
+	}
 });

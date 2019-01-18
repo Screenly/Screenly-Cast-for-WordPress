@@ -22,46 +22,11 @@
  * @since   0.0.1
  * @return  void
  */
+
 function srlySettingsInit()
 {
     // register a new setting for "wporg" page
-    register_setting('screenly', 'screenly_options_logo');
-    //body style
-    register_setting('screenly', 'srly_body_font_family');
-    register_setting('screenly', 'srly_body_background');
-
-    //logo
-    register_setting('screenly', 'srly_brand_logo_width');
-    register_setting('screenly', 'srly_brand_logo_height');
-    register_setting('screenly', 'srly_brand_logo_display');
-
-    //time
-    register_setting('screenly', 'srly_time_color');
-    register_setting('screenly', 'srly_time_display');
-    register_setting('screenly', 'srly_time_font_size');
-    register_setting('screenly', 'srly_time_font_weight');
-
-    //heading
-    register_setting('screenly', 'srly_h1_margin');
-    register_setting('screenly', 'srly_h1_padding');
-    register_setting('screenly', 'srly_h1_font_size');
-    register_setting('screenly', 'srly_h1_font_weight');
-    register_setting('screenly', 'srly_h1_color');
-
-    //link
-    register_setting('screenly', 'srly_a_color');
-    register_setting('screenly', 'srly_a_text_decoration');
-    register_setting('screenly', 'srly_a_font_weight');
-    register_setting('screenly', 'srly_a_font_size');
-
-    //content
-    register_setting('screenly', 'srly_content_margin_top');
-    register_setting('screenly', 'srly_content_line_height');
-    register_setting('screenly', 'srly_content_color');
-    register_setting('screenly', 'srly_content_font_weight');
-    register_setting('screenly', 'srly_content_font_size');
-    
-    register_setting('screenly', 'srly_category_switch_period');
+    register_setting('screenly', 'srly_options');
 
     // register a new section in the "wporg" page
     add_settings_section(
@@ -79,9 +44,10 @@ function srlySettingsInit()
         'screenly',
         'screenly_section',
         array(
-            'label_for' => 'screenly_options_logo',
+            'label_for' => 'srly_options[screenly_options_logo]',
             'class' => 'screenly-row',
-            'screenly_custom_data' => 'custom'
+            'screenly_custom_data' => 'custom',
+            'id_field' => 'screenly_options_logo',
         )
     );
 	
@@ -92,8 +58,9 @@ function srlySettingsInit()
         'screenly',
         'screenly_section',
         array(
-            'label_for' => 'srly_brand_logo_width',
+            'label_for' => 'srly_options[srly_brand_logo_width]',
             'class' => 'screenly-row',
+            'id_field' => 'srly_brand_logo_width',
             'screenly_custom_data' => 'custom'
         )
     );
@@ -105,8 +72,9 @@ function srlySettingsInit()
         'screenly',
         'screenly_section',
         array(
-            'label_for' => 'srly_brand_logo_height',
+            'label_for' => 'srly_options[srly_brand_logo_height]',
             'class' => 'screenly-row',
+            'id_field' => 'srly_brand_logo_height',
             'screenly_custom_data' => 'custom'
         )
     );
@@ -118,8 +86,9 @@ function srlySettingsInit()
         'screenly',
         'screenly_section',
         array(
-            'label_for' => 'srly_brand_logo_display',
+            'label_for' => 'srly_options[srly_brand_logo_display]',
             'class' => 'screenly-row',
+            'id_field' => 'srly_brand_logo_display',
             'screenly_custom_data' => 'custom'
         )
     );
@@ -131,8 +100,9 @@ function srlySettingsInit()
         'screenly',
         'screenly_section',
         array(
-            'label_for' => 'srly_body_font_family',
+            'label_for' => 'srly_options[srly_body_font_family]',
             'class' => 'screenly-row',
+            'id_field' => 'srly_body_font_family',
             'screenly_custom_data' => 'custom'
         )
     );
@@ -144,8 +114,9 @@ function srlySettingsInit()
         'screenly',
         'screenly_section',
         array(
-            'label_for' => 'srly_time_color',
+            'label_for' => 'srly_options[srly_time_color]',
             'class' => 'screenly-row',
+            'id_field' => 'srly_time_color',
             'screenly_custom_data' => 'custom'
         )
     );
@@ -157,8 +128,9 @@ function srlySettingsInit()
         'screenly',
         'screenly_section',
         array(
-            'label_for' => 'srly_time_display',
+            'label_for' => 'srly_options[srly_time_display]',
             'class' => 'screenly-row',
+            'id_field' => 'srly_time_display',
             'screenly_custom_data' => 'custom'
         )
     );
@@ -170,8 +142,9 @@ function srlySettingsInit()
         'screenly',
         'screenly_section',
         array(
-            'label_for' => 'srly_time_font_size',
+            'label_for' => 'srly_options[srly_time_font_size]',
             'class' => 'screenly-row',
+            'id_field' => 'srly_time_font_size',
             'screenly_custom_data' => 'custom'
         )
     );
@@ -183,8 +156,9 @@ function srlySettingsInit()
         'screenly',
         'screenly_section',
         array(
-            'label_for' => 'srly_time_font_weight',
+            'label_for' => 'srly_options[srly_time_font_weight]',
             'class' => 'screenly-row',
+            'id_field' => 'srly_time_font_weight',
             'screenly_custom_data' => 'custom'
         )
     );
@@ -196,8 +170,9 @@ function srlySettingsInit()
         'screenly',
         'screenly_section',
         array(
-            'label_for' => 'srly_h1_margin',
+            'label_for' => 'srly_options[srly_h1_margin]',
             'class' => 'screenly-row',
+            'id_field' => 'srly_h1_margin',
             'screenly_custom_data' => 'custom'
         )
     );
@@ -209,8 +184,9 @@ function srlySettingsInit()
         'screenly',
         'screenly_section',
         array(
-            'label_for' => 'srly_h1_padding',
+            'label_for' => 'srly_options[srly_h1_padding]',
             'class' => 'screenly-row',
+            'id_field' => 'srly_h1_padding',
             'screenly_custom_data' => 'custom'
         )
     );
@@ -222,8 +198,9 @@ function srlySettingsInit()
         'screenly',
         'screenly_section',
         array(
-            'label_for' => 'srly_h1_font_size',
+            'label_for' => 'srly_options[srly_h1_font_size]',
             'class' => 'screenly-row',
+            'id_field' => 'srly_h1_font_size',
             'screenly_custom_data' => 'custom'
         )
     );
@@ -235,8 +212,9 @@ function srlySettingsInit()
         'screenly',
         'screenly_section',
         array(
-            'label_for' => 'srly_h1_font_weight',
+            'label_for' => 'srly_options[srly_h1_font_weight]',
             'class' => 'screenly-row',
+            'id_field' => 'srly_h1_font_weight',
             'screenly_custom_data' => 'custom'
         )
     );
@@ -248,8 +226,9 @@ function srlySettingsInit()
         'screenly',
         'screenly_section',
         array(
-            'label_for' => 'srly_h1_color',
+            'label_for' => 'srly_options[srly_h1_color]',
             'class' => 'screenly-row',
+            'id_field' => 'srly_h1_color',
             'screenly_custom_data' => 'custom'
         )
     );
@@ -261,8 +240,9 @@ function srlySettingsInit()
         'screenly',
         'screenly_section',
         array(
-            'label_for' => 'srly_a_color',
+            'label_for' => 'srly_options[srly_a_color]',
             'class' => 'screenly-row',
+            'id_field' => 'srly_a_color',
             'screenly_custom_data' => 'custom'
         )
     );
@@ -274,8 +254,9 @@ function srlySettingsInit()
         'screenly',
         'screenly_section',
         array(
-            'label_for' => 'srly_a_text_decoration',
+            'label_for' => 'srly_options[srly_a_text_decoration]',
             'class' => 'screenly-row',
+            'id_field' => 'srly_a_text_decoration',
             'screenly_custom_data' => 'custom'
         )
     );
@@ -287,8 +268,9 @@ function srlySettingsInit()
         'screenly',
         'screenly_section',
         array(
-            'label_for' => 'srly_a_font_weight',
+            'label_for' => 'srly_options[srly_a_font_weight]',
             'class' => 'screenly-row',
+            'id_field' => 'srly_a_font_weight',
             'screenly_custom_data' => 'custom'
         )
     );
@@ -300,8 +282,9 @@ function srlySettingsInit()
         'screenly',
         'screenly_section',
         array(
-            'label_for' => 'srly_a_font_size',
+            'label_for' => 'srly_options[srly_a_font_size]',
             'class' => 'screenly-row',
+            'id_field' => 'srly_a_font_size',
             'screenly_custom_data' => 'custom'
         )
     );
@@ -313,8 +296,9 @@ function srlySettingsInit()
         'screenly',
         'screenly_section',
         array(
-            'label_for' => 'srly_content_margin_top',
+            'label_for' => 'srly_options[srly_content_margin_top]',
             'class' => 'screenly-row',
+            'id_field' => 'srly_content_margin_top',
             'screenly_custom_data' => 'custom'
         )
     );
@@ -326,8 +310,9 @@ function srlySettingsInit()
         'screenly',
         'screenly_section',
         array(
-            'label_for' => 'srly_content_line_height',
+            'label_for' => 'srly_options[srly_content_line_height]',
             'class' => 'screenly-row',
+            'id_field' => 'srly_content_line_height',
             'screenly_custom_data' => 'custom'
         )
     );
@@ -339,8 +324,9 @@ function srlySettingsInit()
         'screenly',
         'screenly_section',
         array(
-            'label_for' => 'srly_content_color',
+            'label_for' => 'srly_options[srly_content_color]',
             'class' => 'screenly-row',
+            'id_field' => 'srly_content_color',
             'screenly_custom_data' => 'custom'
         )
     );
@@ -352,8 +338,9 @@ function srlySettingsInit()
         'screenly',
         'screenly_section',
         array(
-            'label_for' => 'srly_content_font_weight',
+            'label_for' => 'srly_options[srly_content_font_weight]',
             'class' => 'screenly-row',
+            'id_field' => 'srly_content_font_weight',
             'screenly_custom_data' => 'custom'
         )
     );
@@ -365,8 +352,9 @@ function srlySettingsInit()
         'screenly',
         'screenly_section',
         array(
-            'label_for' => 'srly_content_font_size',
+            'label_for' => 'srly_options[srly_content_font_size]',
             'class' => 'screenly-row',
+            'id_field' => 'srly_content_font_size',
             'screenly_custom_data' => 'custom'
         )
     ); 
@@ -378,8 +366,9 @@ function srlySettingsInit()
         'screenly',
         'screenly_section',
         array(
-            'label_for' => 'srly_category_switch_period',
+            'label_for' => 'srly_options[srly_category_switch_period]',
             'class' => 'screenly-row',
+            'id_field' => 'srly_category_switch_period',
             'screenly_custom_data' => 'custom'
         )
     );
@@ -402,11 +391,13 @@ function srlySettingsInit()
  * @return  void
  */
 function srlyContentMarginTopField($args) {
-    $path = get_option('srly_content_margin_top');
+    $srly_options_data = get_option('srly_options');
+    $path = $srly_options_data['srly_content_margin_top'];
     $var = esc_attr($args['label_for']);
+    $id_field = esc_attr($args['id_field']);
 ?>
-    <input type="range" min="0" max="500" id="<?php echo $var?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_slider">
-    <p> <span id="<?php echo $var.'_slider_output'?>"></span></p>
+    <input type="range" min="0" max="500" id="<?php echo $id_field?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_slider">
+    <p> <span id="<?php echo $id_field.'_slider_output'?>"></span></p>
 <?php
 }
 
@@ -427,11 +418,13 @@ function srlyContentMarginTopField($args) {
  * @return  void
  */
 function srlyCategorySwitchPeriod($args) {
-    $path = get_option('srly_category_switch_period');
+    $srly_options_data = get_option('srly_options');
+    $path = $srly_options_data['srly_category_switch_period'];
     $var = esc_attr($args['label_for']);
+    $id_field = esc_attr($args['id_field']);
     ?>
-        <input type="range" min="5000" max="500000" id="<?php echo $var?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_slider">
-        <p> <span id="<?php echo $var.'_slider_output'?>"></span></p>
+        <input type="range" min="5000" max="500000" id="<?php echo $id_field?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_slider">
+        <p> <span id="<?php echo $id_field.'_slider_output'?>"></span></p>
     <?php
 }
 
@@ -452,11 +445,13 @@ function srlyCategorySwitchPeriod($args) {
  * @return  void
  */
 function srlyContentLineHeightField($args) {
-    $path = get_option('srly_content_line_height');
+    $srly_options_data = get_option('srly_options');
+    $path = $srly_options_data['srly_content_line_height'];
     $var = esc_attr($args['label_for']);
+    $id_field = esc_attr($args['id_field']);
 ?>
-    <input type="range" min="0" max="500" id="<?php echo $var?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_slider">
-    <p> <span id="<?php echo $var.'_slider_output'?>"></span></p>
+    <input type="range" min="0" max="500" id="<?php echo $id_field?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_slider">
+    <p> <span id="<?php echo $id_field.'_slider_output'?>"></span></p>
 <?php
 }
 
@@ -477,10 +472,12 @@ function srlyContentLineHeightField($args) {
  * @return  void
  */
 function srlyContentColorField($args) {
-    $path = get_option('srly_content_color');
+    $srly_options_data = get_option('srly_options');
+    $path = $srly_options_data['srly_content_color'];
     $var = esc_attr($args['label_for']);
+    $id_field = esc_attr($args['id_field']);
 ?>
-    <input id="<?php echo $var?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_color_picker">
+    <input id="<?php echo $id_field?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_color_picker">
 <?php
 }
 
@@ -501,11 +498,13 @@ function srlyContentColorField($args) {
  * @return  void
  */
 function srlyContentFontSizeField($args) {
-    $path = get_option('srly_content_font_size');
+    $srly_options_data = get_option('srly_options');
+    $path = $srly_options_data['srly_content_font_size'];
     $var = esc_attr($args['label_for']);
+    $id_field = esc_attr($args['id_field']);
 ?>
-    <input type="range" min="0" max="500" id="<?php echo $var?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_slider">
-    <p> <span id="<?php echo $var.'_slider_output'?>"></span></p>
+    <input type="range" min="0" max="500" id="<?php echo $id_field?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_slider">
+    <p> <span id="<?php echo $id_field.'_slider_output'?>"></span></p>
 <?php
 }
 
@@ -526,11 +525,13 @@ function srlyContentFontSizeField($args) {
  * @return  void
  */
 function srlyContentFontWeightField($args) {
-    $path = get_option('srly_content_font_weight');
+    $srly_options_data = get_option('srly_options');
+    $path = $srly_options_data['srly_content_font_weight'];
     $var = esc_attr($args['label_for']);
+    $id_field = esc_attr($args['id_field']);
 ?>
-    <input type="range" min="0" max="800" id="<?php echo $var?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_slider">
-    <p> <span id="<?php echo $var.'_slider_output'?>"></span></p>
+    <input type="range" min="0" max="800" id="<?php echo $id_field?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_slider">
+    <p> <span id="<?php echo $id_field.'_slider_output'?>"></span></p>
 <?php
 }
 
@@ -551,11 +552,13 @@ function srlyContentFontWeightField($args) {
  * @return  void
  */
 function srlyLinkFontSizeField($args) {
-    $path = get_option('srly_a_font_size');
+    $srly_options_data = get_option('srly_options');
+    $path = $srly_options_data['srly_a_font_size'];
     $var = esc_attr($args['label_for']);
+    $id_field = esc_attr($args['id_field']);
 ?>
-    <input type="range" min="0" max="500" id="<?php echo $var?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_slider">
-    <p> <span id="<?php echo $var.'_slider_output'?>"></span></p>
+    <input type="range" min="0" max="500" id="<?php echo $id_field?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_slider">
+    <p> <span id="<?php echo $id_field.'_slider_output'?>"></span></p>
 <?php
 }
 
@@ -576,11 +579,13 @@ function srlyLinkFontSizeField($args) {
  * @return  void
  */
 function srlyLinkFontWeightColorField($args) {
-    $path = get_option('srly_a_font_weight');
+    $srly_options_data = get_option('srly_options');
+    $path = $srly_options_data['srly_a_font_weight'];
     $var = esc_attr($args['label_for']);
+    $id_field = esc_attr($args['id_field']);
 ?>
-    <input type="range" min="0" max="800" id="<?php echo $var?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_slider">
-    <p> <span id="<?php echo $var.'_slider_output'?>"></span></p>
+    <input type="range" min="0" max="800" id="<?php echo $id_field?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_slider">
+    <p> <span id="<?php echo $id_field.'_slider_output'?>"></span></p>
 <?php
 }
 
@@ -601,10 +606,12 @@ function srlyLinkFontWeightColorField($args) {
  * @return  void
  */
 function srlyLinkTextDecorationColorField($args) {
-    $path = get_option('srly_a_text_decoration');
+    $srly_options_data = get_option('srly_options');
+    $path = $srly_options_data['srly_a_text_decoration'];
     $var = esc_attr($args['label_for']);
+    $id_field = esc_attr($args['id_field']);
 ?>
-    <input id="<?php echo $var?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text">
+    <input id="<?php echo $id_field?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text">
 
 <?php
 }
@@ -626,10 +633,12 @@ function srlyLinkTextDecorationColorField($args) {
  * @return  void
  */
 function srlyLinkColorField($args) {
-    $path = get_option('srly_a_color');
+    $srly_options_data = get_option('srly_options');
+    $path = $srly_options_data['srly_a_color'];
     $var = esc_attr($args['label_for']);
+    $id_field = esc_attr($args['id_field']);
 ?>
-    <input id="<?php echo $var?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_color_picker">
+    <input id="<?php echo $id_field?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_color_picker">
 
 <?php
 }
@@ -651,10 +660,12 @@ function srlyLinkColorField($args) {
  * @return  void
  */
 function srlyHeadFontColorField($args) {
-    $path = get_option('srly_h1_color');
+    $srly_options_data = get_option('srly_options');
+    $path = $srly_options_data['srly_h1_color'];
     $var = esc_attr($args['label_for']);
+    $id_field = esc_attr($args['id_field']);
 ?>
-    <input id="<?php echo $var?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_color_picker">
+    <input id="<?php echo $id_field?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_color_picker">
 
 <?php
 }
@@ -676,11 +687,13 @@ function srlyHeadFontColorField($args) {
  * @return  void
  */
 function srlyHeadFontWeightField($args) {
-    $path = get_option('srly_h1_font_weight');
+    $srly_options_data = get_option('srly_options');
+    $path = $srly_options_data['srly_h1_font_weight'];
     $var = esc_attr($args['label_for']);
+    $id_field = esc_attr($args['id_field']);
 ?>
-    <input type="range" min="0" max="800" id="<?php echo $var?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_slider">
-    <p> <span id="<?php echo $var.'_slider_output'?>"></span></p>
+    <input type="range" min="0" max="800" id="<?php echo $id_field?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_slider">
+    <p> <span id="<?php echo $id_field.'_slider_output'?>"></span></p>
 <?php
 }
 
@@ -701,11 +714,13 @@ function srlyHeadFontWeightField($args) {
  * @return  void
  */
 function srlyHeadFontSizeField($args) {
-     $path = get_option('srly_h1_font_size');
+    $srly_options_data = get_option('srly_options');
+    $path = $srly_options_data['srly_h1_font_size'];
     $var = esc_attr($args['label_for']);
+    $id_field = esc_attr($args['id_field']);
 ?>
-    <input type="range" min="0" max="300" id="<?php echo $var?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_slider">
-    <p> <span id="<?php echo $var.'_slider_output'?>"></span></p>
+    <input type="range" min="0" max="300" id="<?php echo $id_field?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_slider">
+    <p> <span id="<?php echo $id_field.'_slider_output'?>"></span></p>
 <?php
 }
 
@@ -726,11 +741,13 @@ function srlyHeadFontSizeField($args) {
  * @return  void
  */
 function srlyHeadPaddingField($args) {
-     $path = get_option('srly_h1_padding');
+    $srly_options_data = get_option('srly_options');
+     $path = $srly_options_data['srly_h1_padding'];
     $var = esc_attr($args['label_for']);
+    $id_field = esc_attr($args['id_field']);
 ?>
-    <input type="range" min="0" max="500" id="<?php echo $var?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_slider">
-    <p> <span id="<?php echo $var.'_slider_output'?>"></span></p>
+    <input type="range" min="0" max="500" id="<?php echo $id_field?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_slider">
+    <p> <span id="<?php echo $id_field.'_slider_output'?>"></span></p>
 <?php
 }
 
@@ -751,11 +768,13 @@ function srlyHeadPaddingField($args) {
  * @return  void
  */
 function srlyHeadMarginField($args) {
-     $path = get_option('srly_h1_margin');
+    $srly_options_data = get_option('srly_options');
+    $path = $srly_options_data['srly_h1_margin'];
     $var = esc_attr($args['label_for']);
+    $id_field = esc_attr($args['id_field']);
 ?>
-    <input type="range" min="0" max="500" id="<?php echo $var?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_slider">
-    <p> <span id="<?php echo $var.'_slider_output'?>"></span></p>
+    <input type="range" min="0" max="500" id="<?php echo $id_field?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_slider">
+    <p> <span id="<?php echo $id_field.'_slider_output'?>"></span></p>
 <?php
 }
 
@@ -776,11 +795,13 @@ function srlyHeadMarginField($args) {
  * @return  void
  */
 function srlyTimeFontWeightField($args) {
-     $path = get_option('srly_time_font_weight');
+    $srly_options_data = get_option('srly_options');
+    $path = $srly_options_data['srly_time_font_weight'];
     $var = esc_attr($args['label_for']);
+    $id_field = esc_attr($args['id_field']);
 ?>
-    <input type="range" min="0" max="800" id="<?php echo $var?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_slider">
-    <p> <span id="<?php echo $var.'_slider_output'?>"></span></p>
+    <input type="range" min="0" max="800" id="<?php echo $id_field?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_slider">
+    <p> <span id="<?php echo $id_field.'_slider_output'?>"></span></p>
 <?php
 }
 
@@ -801,11 +822,13 @@ function srlyTimeFontWeightField($args) {
  * @return  void
  */
 function srlyTimeFontSizeField($args) {
-     $path = get_option('srly_time_font_size');
+    $srly_options_data = get_option('srly_options');
+    $path = $srly_options_data['srly_time_font_size'];
     $var = esc_attr($args['label_for']);
+    $id_field = esc_attr($args['id_field']);
 ?>
-    <input type="range" min="0" max="300" id="<?php echo $var?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_slider">
-    <p> <span id="<?php echo $var.'_slider_output'?>"></span></p>
+    <input type="range" min="0" max="300" id="<?php echo $id_field?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_slider">
+    <p> <span id="<?php echo $id_field.'_slider_output'?>"></span></p>
 <?php
 }
 
@@ -826,10 +849,12 @@ function srlyTimeFontSizeField($args) {
  * @return  void
  */
 function srlyTimeDisplayField($args) {
-     $path = get_option('srly_time_display');
+    $srly_options_data = get_option('srly_options');
+    $path = $srly_options_data['srly_time_display'];
     $var = esc_attr($args['label_for']);
+    $id_field = esc_attr($args['id_field']);
 ?>
-    <select name="<?php echo $var?>" id="<?php echo $var?>" class="large-text" >
+    <select name="<?php echo $var?>" id="<?php echo $id_field?>" class="large-text" >
 	<option value="">(no selection)</option>
         <option class="" value="block" <?php ($path=='block')? $Selected='selected="selected"':$Selected=""; echo $Selected; unset($Selected); ?> >Show time</option>
         <option class="" value="none"  <?php ($path=='none')? $Selected='selected="selected"':$Selected=""; echo $Selected; unset($Selected); ?>>Hide time</option>
@@ -855,10 +880,12 @@ function srlyTimeDisplayField($args) {
  * @return  void
  */
 function srlyTimeColorField($args) {
-     $path = get_option('srly_time_color');
+    $srly_options_data = get_option('srly_options');
+    $path = $srly_options_data['srly_time_color'];
     $var = esc_attr($args['label_for']);
+    $id_field = esc_attr($args['id_field']);
 ?>
-    <input id="<?php echo $var?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_color_picker">
+    <input id="<?php echo $id_field?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_color_picker">
 
 <?php	
 }
@@ -880,10 +907,12 @@ function srlyTimeColorField($args) {
  * @return  void
  */
 function srlyBrandLogoDisplayField($args) {
-     $path = get_option('srly_brand_logo_display');
+    $srly_options_data = get_option('srly_options');
+    $path = $srly_options_data['srly_brand_logo_display'];
     $var = esc_attr($args['label_for']);
+    $id_field = esc_attr($args['id_field']);
 ?>
-    <select name="<?php echo $var?>" id="<?php echo $var?>" class="large-text" >
+    <select name="<?php echo $id_field?>" id="<?php echo $var?>" class="large-text" >
 	<option value="">(no selection)</option>
         <option class="" value="block" <?php ($path=='block')? $Selected='selected="selected"':$Selected=""; echo $Selected; unset($Selected); ?> >Show logo</option>
         <option class="" value="none"  <?php ($path=='none')? $Selected='selected="selected"':$Selected=""; echo $Selected; unset($Selected); ?> >Hide logo</option>
@@ -910,11 +939,13 @@ function srlyBrandLogoDisplayField($args) {
  */
 function srlyBrandLogoHeightField($args)
 {
-    $path = get_option('srly_brand_logo_height');
+    $srly_options_data = get_option('srly_options');
+    $path = $srly_options_data['srly_brand_logo_height'];
     $var = esc_attr($args['label_for']);
+    $id_field = esc_attr($args['id_field']);
 ?>
-    <input type="range" min="0" max="500" id="<?php echo $var?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_slider">
-    <p> <span id="<?php echo $var.'_slider_output'?>"></span></p>
+    <input type="range" min="0" max="500" id="<?php echo $id_field?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_slider">
+    <p> <span id="<?php echo $id_field.'_slider_output'?>"></span></p>
 <?php	
 }
 
@@ -936,11 +967,13 @@ function srlyBrandLogoHeightField($args)
  */
 function srlyBrandLogowidthField($args)
 {
-    $path = get_option('srly_brand_logo_width');
+    $srly_options_data = get_option('srly_options');
+    $path = $srly_options_data['srly_brand_logo_width'];
     $var = esc_attr($args['label_for']);
+    $id_field = esc_attr($args['id_field']);
 ?>
-    <input type="range" min="0" max="800" id="<?php echo $var?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_slider">
-    <p> <span id="<?php echo $var.'_slider_output'?>"></span></p>
+    <input type="range" min="0" max="800" id="<?php echo $id_field?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_slider">
+    <p> <span id="<?php echo $id_field.'_slider_output'?>"></span></p>
 <?php	
 }
 
@@ -962,10 +995,12 @@ function srlyBrandLogowidthField($args)
  */
 function srlyBodyFontField($args)
 {
-    $path = get_option('srly_body_font_family');
+    $srly_options_data = get_option('srly_options');
+    $path = $srly_options_data['srly_body_font_family'];
     $var = esc_attr($args['label_for']);
+    $id_field = esc_attr($args['id_field']);
 ?>
-    <input id="<?php echo $var?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text">
+    <input id="<?php echo $id_field?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text">
 
 <?php	
 }
@@ -988,10 +1023,12 @@ function srlyBodyFontField($args)
  */
 function srlyBodyBackgroundField($args)
 {
-    $path = get_option('srly_body_background');
+    $srly_options_data = get_option('srly_options');
+    $path = $srly_options_data['srly_body_background'];
     $var = esc_attr($args['label_for']);
+    $id_field = esc_attr($args['id_field']);
 ?>
-    <input id="<?php echo $var?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_color_picker">
+    <input id="<?php echo $id_field?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text srly_color_picker">
 
 <?php	
 }
@@ -1047,11 +1084,13 @@ function srlySectionInput($args)
  */
 function srlyLogoField($args)
 {
-    $path = get_option('screenly_options_logo');
+    $srly_options_data = get_option('srly_options');
+    $path = $srly_options_data['screenly_options_logo'];
     $var = esc_attr($args['label_for']);
+    $id_field = esc_attr($args['id_field']);
 ?>
     <p><button id='srlySelectImage' >Select Logo</button></p>
-    <input type="url" id="<?php echo $var?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text">
+    <input type="url" id="<?php echo $id_field?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text">
     <p><img id='media_image' src='' width='350px'></p>
     <p class="description"><?php _e('We recomend an image with the proportion of <b>314 x 98 px</b>.', SRLY_THEME); ?></p>
 

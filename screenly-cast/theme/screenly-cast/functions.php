@@ -214,13 +214,13 @@ function srlyEnqueueThemeAssets()
     $path = plugin_dir_url(__FILE__);
     if(is_singular()){
         // CSS
-        wp_enqueue_style(SRLY_THEME, $path.'style.php', array(), SRLY_VERSION, 'all');
+        wp_enqueue_style(SRLY_THEME, $path.'style.css', array(), SRLY_VERSION, 'all');
         // JS
         wp_enqueue_script(SRLY_THEME, $path.'assets/js/scripts.js', array(), SRLY_VERSION, true);
     }
     else{
         // CSS
-        wp_enqueue_style(SRLY_THEME, $path.'category_style.php', array(), SRLY_VERSION, 'all');
+        wp_enqueue_style(SRLY_THEME, $path.'category_style.css', array(), SRLY_VERSION, 'all');
         // JS
         wp_enqueue_script(SRLY_THEME, $path.'assets/js/category_scripts.js', array('jquery'), SRLY_VERSION, true);
     }

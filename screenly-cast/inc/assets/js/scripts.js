@@ -16,7 +16,7 @@ jQuery(document).ready(function($) {
 			$('#screenly_options_logo').val(attachment.url);
 		})
 		.open();
-	});
+	}); 
 	$('#media_image').attr('src', $('#screenly_options_logo').val());
 	$('.srly_color_picker').wpColorPicker();
 	

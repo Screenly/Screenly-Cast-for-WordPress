@@ -18,7 +18,7 @@ function srlyAddAdminAssets()
     }
     
     // Your custom js file
-    wp_enqueue_script( 'screenly-media-lib-uploader-js', '/wp-content/plugins/screenly-cast/inc/assets/js/scripts.js' , array('jquery', 'wp-color-picker') );
+    wp_enqueue_script( 'screenly-main-media-lib-uploader-js', '/wp-content/plugins/screenly-cast/inc/assets/js/scripts.js' , array('jquery', 'wp-color-picker') );
 }
 
 
@@ -117,7 +117,8 @@ function srly_get_css_settings_from_db() {
     $srly_h3_font_weight =  get_option('srly_h3_font_weight');
     
     //get css settings from db and present it as an array
-    $css_values_from_db = array(
+    $css_values_from_db = get_option('srly_options');
+    array(
     'srly_body_font_family' =>$srly_body_font_family,
     'srly_body_background'=>$srly_body_background,
     'srly_brand_logo_width'=>  $srly_brand_logo_width,
@@ -196,7 +197,7 @@ $css_values=  array(
     'srly_body_color'=>'black',
     'srly_body_font_size'=>'16px',
     'srly_body_font_weight'=>'200',
-    'srly_body_font_family' =>"'Work Sans', sans-serif",
+    'srly_body_font_family' =>"'Open Sans', sans-serif",
     'srly_body_background'=>'white',
     
     'srly_brand_logo_left'=>'5%',
@@ -264,13 +265,13 @@ $css_values=  array(
 /* Update with custom values if they have been defined */
 
     $css_values_from_settings = srly_get_css_settings_from_db();
-	
+	//var_dump($css_values_from_settings);
     foreach ($css_values_from_settings as $key => $value) {
 		
-        if(!empty($css_values_from_settings[$key])){
+        if(isset($css_values_from_settings[$key])){
+
             $css_values[$key]=$css_values_from_settings[$key];
         }
-		
     }
 
     return $css_values;

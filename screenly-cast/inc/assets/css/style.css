@@ -41,7 +41,7 @@
 	background:#4CAF50;
 	cursor:pointer;
 }
-#srly_brand_logo_width_slider_output, #srly_brand_logo_height_slider_output, #srly_time_font_size_slider_output, #srly_time_font_weight_slider_output, #srly_h1_font_size_slider_output, #srly_h1_font_weight_slider_output, #srly_a_font_weight_slider_output, #srly_a_font_size_slider_output, #srly_content_margin_top_slider_output, #srly_content_line_height_slider_output, #srly_content_font_weight_slider_output, #srly_content_font_size_slider_output, #srly_h1_margin_slider_output, #srly_h1_padding_slider_output{
+#srly_category_switch_period_slider_output, #srly_brand_logo_width_slider_output, #srly_brand_logo_height_slider_output, #srly_time_font_size_slider_output, #srly_time_font_weight_slider_output, #srly_h1_font_size_slider_output, #srly_h1_font_weight_slider_output, #srly_a_font_weight_slider_output, #srly_a_font_size_slider_output, #srly_content_margin_top_slider_output, #srly_content_line_height_slider_output, #srly_content_font_weight_slider_output, #srly_content_font_size_slider_output, #srly_h1_margin_slider_output, #srly_h1_padding_slider_output{
 	color:#fff;
 	background:#4CAF50;
 	border:gray;
