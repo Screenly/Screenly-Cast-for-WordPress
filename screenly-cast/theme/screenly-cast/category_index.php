@@ -20,26 +20,62 @@ require_once 'header.php';
 ?>
 
 <main>
-    <?php if (have_posts()) : the_post(); ?>
-    <section>
+    <?php 
 
-        <?php if (srlyHasTheFeaturedImage()) : ?>
-        <div class="figure"<?php srlyTheFeaturedImage();?>></div>
-        <?php endif; ?>
+    $srly_category_section_id = 0;
+	
+    if (have_posts()) : 
+        while(have_posts()) : the_post();     
+    ?>
+	
+			<section id="srly_category_section_<?php echo $srly_category_section_id; ?>">
+				
+				<?php if (srlyHasTheFeaturedImage()) : ?>
+				<div class="figure"<?php srlyTheFeaturedImage();?>></div>
+				<?php endif; ?>
 
-        <article>
-            <h1><?php the_title();?></h1>
-            <time datetime="<?php echo get_the_date('T Y-m-d H:i'); ?>">
-                <?php the_date('M d Y'); ?>
-            </time>
-            <?php the_content(); ?>
-        </article>
+				<article>
+					<h1><?php the_title();?></h1>
+					<time datetime="<?php echo get_the_date('T Y-m-d H:i'); ?>">
+						<?php the_date('M d Y'); ?>
+					</time>
+					<?php the_content();
 
-    </section>
-    <?php endif; ?>
+					?>					
+				</article>
+				
+			</section>
+			
+			<?php
+			
+			$srly_category_section_id++;
+		endwhile;
+		
+		srlyCategoryBottomNavigation($srly_category_section_id);
+		
+    endif; ?>
 </main>
+
 <script type="text/javascript">
+var srly_post_ceiling = <?php 
+$srly_category_section_id--;
+echo $srly_category_section_id; ?> ;
+
+var srly_category_switch_period= <?php
+
+$get_option_srly_category_switch_period=get_option('srly_category_switch_period');
+
+if(isset($get_option_srly_category_switch_period)){
+	echo $get_option_srly_category_switch_period; 
+}
+else{
+	echo '5000';
+}
+?>;
+
 <?php $srly_css_values = srly_get_css_values(); ?>
+
+
 jQuery(document).ready(function($) {
 
 	$("html, body").css({    
@@ -137,9 +173,11 @@ jQuery(document).ready(function($) {
 });
 </script>
 
+
 <?php
 /**
  * Require footer
  */
+
 require_once 'footer.php';
 ?>

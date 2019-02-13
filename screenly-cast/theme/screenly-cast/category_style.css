@@ -15,20 +15,14 @@ html, body
 {
     margin: 0;
     padding: 0;
-    width: 100%;
+    width: 98%;
     height: 100%;
-    color: <?= $srly_body_color ?>;
-    font-size: <?= $srly_body_font_size ?>;
-    font-weight: <?= $srly_body_font_weight ?>;
-    letter-spacing: 0.04em;
-    font-family:<?= $srly_body_font_family ?>;
 }
 
 body
 {
-    width: 100%;
-    height: 100%;
-    background: <?= $srly_body_background ?>;
+    width: 98%;
+    height: 100
 }
 
 /*
@@ -44,85 +38,12 @@ body:not(.debug)
 
 h1
 {
-    margin: <?= $srly_h1_margin ?>;
-    padding: <?= $srly_h1_padding ?>;
-    font-size: <?= $srly_h1_font_size ?>;
     text-indent: -.7%;
-    font-weight: <?= $srly_h1_font_weight ?>;
-    color: <?= $srly_h1_color ?>;
-}
-
-h2, h3, h4, h5, h6
-{
-    margin: <?= $srly_h23456_margin ?>;
-    font-weight: <?= $srly_h23456_font_weight ?>;
-}
-
-h2 {
-    font-size: <?= $srly_h2_font_size ?>;
-}
-
-h3 {
-    color: <?= $srly_h3_color ?> ;
-    font-size: <?= $srly_h3_font_size ?>;
-    font-weight: <?= $srly_h3_font_weight ?>;
-}
-
-h4 {
-    font-size: <?= $srly_h4_font_size ?>;
-}
-
-h5 {
-    color: <?= $srly_h5_color ?>;
-    font-size: <?= $srly_h5_font_size ?>;
-    font-weight: <?= $srly_h5_font_weight ?>;
-}
-
-h6 {
-    font-size: <?= $srly_h6_font_size ?>;
-    font-weight: <?= $srly_h6_font_weight ?>;
-    text-transform: <?= $srly_h6_text_transform ?>;
-}
-
-blockquote
-{
-    font-weight: <?= $srly_blockquote_font_weight ?>;
-    font-style: <?= $srly_blockquote_font_style ?>;
-    letter-spacing: <?= $srly_blockquote_letter_spacing ?>;
-    font-size: <?= $srly_blockquote_font_size ?>;
 }
 
 p
 {
     margin: .3em 0;
-}
-
-a
-{
-    color: <?= $srly_a_color ?>;
-    text-decoration: <?= $srly_a_text_decoration ?> ;
-    font-weight:<?= $srly_a_font_weight ?>;
-    font-size;<?= $srly_a_font_size ?>;
-}
-
-b, strong
-{
-    font-weight: <?= $srly_b_strong_font_weight ?>;
-}
-
-ul, ol
-{
-    padding-left: <?= $srly_ul_ol_padding_left ?>;
-}
-
-ul
-{
-    list-style-type: <?= $srly_ul_list_style_type ?>;
-}
-
-ul li
-{
-    padding-left: <?= $srly_ul_li_padding_left ?>;
 }
 
 ul li:before
@@ -145,41 +66,7 @@ ol li + li
 
 time
 {
-    color: <?= $srly_time_color ?>;
-    display: <?= $srly_time_display ?>;
-    font-size: <?= $srly_time_font_size ?>;
-    font-weight: <?= $srly_time_font_weight ?>;
     letter-spacing: 0;
-}
-
-#brand-logo
-{
-    left: <?= $srly_brand_logo_left ?>;
-    top: <?= $srly_brand_logo_top ?>;
-    width: <?= $srly_brand_logo_width ?>;
-    height: <?= $srly_brand_logo_height ?>;
-    z-index: <?= $srly_brand_logo_z_index?>;
-    display: <?=  $srly_brand_logo_display ?>;
-    position: <?= $srly_brand_logo_position ?>;
-}
-
-main
-{
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    position: absolute;
-}
-
-section
-{
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: white;
-    position: absolute;
 }
 
 .figure
@@ -217,15 +104,6 @@ article
 .figure + article
 {
     left: 50%;
-}
-
-.content
-{
-    margin-top: <?= $srly_content_margin_top ?>;
-    line-height: <?= $srly_content_line_height ?>;
-    color: <?= $srly_content_color ?>;
-    font-weight: <?= $srly_content_font_weight ?>;
-    font-size: <?= $srly_content_font_size ?>;
 }
 
 .qrcode
@@ -327,6 +205,47 @@ body.attachment article .content
 {
     margin-top: 0;
 }
+
+.srly_category_nav{
+    width:95%;
+    position:absolute;
+    bottom:20px;
+    left:0%;
+    right:0%;
+    padding-bottom:10px;
+}
+
+.srly_category_nav_item
+{
+    width:15px;
+    background-color:;
+    margin:10px;
+    color:#443344b3;
+}
+
+.srly_category_nav_item:before
+{
+   content:'\25CF';
+   font-size:20px;
+}
+.srly_category_nav_item_active:before{
+    content:'\25CF';
+   font-size:40px;
+}
+.srly_category_nav_item_active{
+    color:#009200;
+}
+section{
+    display:none;
+    width:95%;
+}
+.srly_category_nav_center{
+    background-color:#fff;
+    padding:30px 20px 20px 20px;
+    border-radius:5px;
+	border:1px solid #8080804d;
+}
+
 .alignleft{
 	float: left;
 	margin: 0.5em 1em 0.5em 0;

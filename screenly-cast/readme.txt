@@ -40,6 +40,24 @@ In most cases, you only need to use "?srly". However, if you already got an exis
 
 
 == Changelog ==
+= 0.1.22 =
+* Minor: Correction of errors.
+* Image with text overlay not working
+* Screenly clearing CSS Customizations 
+* Screenly Cast for WordPress(on Wamp) not Working 
+* Screenly breaks site theme 
+
+= 0.1.21 =
+*Core: Ability to display posts in categories and tags.
+
+= 0.1.20 =
+*Core: Ability to customize style on the frontend.
+* -change of color and general feel of content
+* -Option to display or hide logo and time
+*
+
+= 0.1.19 =
+* Added PHPUnit test files for wordpress. 
 
 = 0.1.18 =
 * Minor: PHP Version 5.2.4
@@ -54,6 +72,3 @@ In most cases, you only need to use "?srly". However, if you already got an exis
 
 = 0.1.13 =
 * Core: Replaced plugin name and text-domain to "screenly-cast"
-
-= 0.1.19
-* Added PHPUnit test files for wordpress. 

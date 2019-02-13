@@ -1,3 +1,4 @@
+<?php header('Content-type: text/css'); 
 /**
 Theme Name: Screenly Cast for WordPress
 Theme URI: https://github.com/Screenly/Screenly-Cast-for-WordPress
@@ -10,6 +11,79 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Tags: full-page, screenly, tv, digital-signage, no-intereact, zero-ui
 Text Domain: screenly-cast
 */
+
+require_once dirname(__FILE__).'/../../inc/functions.php';
+
+$srly_css_values = srly_get_css_values();
+$srly_body_color=$srly_css_values['srly_body_color'];
+$srly_body_font_size=$srly_css_values['srly_body_font_size'];
+$srly_body_font_weight=$srly_css_values['srly_body_font_weight'];
+$srly_body_font_family=$srly_css_values['srly_body_font_family'];
+$srly_body_background=$srly_css_values['srly_body_background'];
+
+//logo
+$srly_brand_logo_width=$srly_css_values['srly_brand_logo_width'];
+$srly_brand_logo_height=$srly_css_values['srly_brand_logo_height'];
+$srly_brand_logo_display=$srly_css_values['srly_brand_logo_display'];
+$srly_brand_logo_left = $srly_css_values['srly_brand_logo_left'];
+$srly_brand_logo_top = $srly_css_values['srly_brand_logo_top'];
+$srly_brand_logo_z_index = $srly_css_values['srly_brand_logo_z_index'];
+$srly_brand_logo_position = $srly_css_values['srly_brand_logo_position'];
+
+//h1
+$srly_h1_margin =$srly_css_values['srly_h1_margin'];
+$srly_h1_padding =$srly_css_values['srly_h1_padding'];
+$srly_h1_font_size =$srly_css_values['srly_h1_font_size'];
+$srly_h1_font_weight =$srly_css_values['srly_h1_font_weight'];
+$srly_h1_color=$srly_css_values['srly_h1_color'];
+
+$srly_time_color=$srly_css_values['srly_time_color'];
+$srly_time_display=$srly_css_values['srly_time_display'];
+$srly_time_font_size=$srly_css_values['srly_time_font_size'];
+$srly_time_font_weight=$srly_css_values['srly_time_font_weight'];
+
+$srly_a_color=$srly_css_values['srly_a_color'];
+$srly_a_text_decoration=$srly_css_values['srly_a_text_decoration'];
+$srly_a_font_weight=$srly_css_values['srly_a_font_weight'];
+$srly_a_font_size=$srly_css_values['srly_a_font_size'];
+
+$srly_content_margin_top=$srly_css_values['srly_content_margin_top'];
+$srly_content_line_height=$srly_css_values['srly_content_line_height'];
+$srly_content_color=$srly_css_values['srly_content_color'];
+$srly_content_font_weight=$srly_css_values['srly_content_font_weight'];
+$srly_content_font_size=$srly_css_values['srly_content_font_size'];
+
+$srly_blockquote_font_weight=$srly_css_values['srly_blockquote_font_weight'];
+$srly_blockquote_font_style=$srly_css_values['srly_blockquote_font_style'];
+$srly_blockquote_letter_spacing=$srly_css_values['srly_blockquote_letter_spacing'];
+$srly_blockquote_font_size=$srly_css_values['srly_blockquote_font_size'];
+
+$srly_h23456_margin =$srly_css_values['srly_h23456_margin'];
+$srly_h23456_font_weight =$srly_css_values['srly_h23456_font_weight'];
+
+$srly_h2_font_size=$srly_css_values['srly_h2_font_size'];
+$srly_h4_font_size=$srly_css_values['srly_h4_font_size'];
+
+$srly_h5_color=$srly_css_values['srly_h5_color'];
+$srly_h5_font_size=$srly_css_values['srly_h5_font_size'];
+$srly_h5_font_weight=$srly_css_values['srly_h5_font_weight'];
+
+$srly_h6_font_size=$srly_css_values['srly_h6_font_size'];
+$srly_h6_font_weight=$srly_css_values['srly_h6_font_weight'];
+$srly_h6_text_transform=$srly_css_values['srly_h6_text_transform'];
+
+$srly_b_strong_font_weight=$srly_css_values['srly_b_strong_font_weight'];
+
+$srly_ul_ol_padding_left=$srly_css_values['srly_ul_ol_padding_left'];
+
+$srly_ul_list_style_type=$srly_css_values['srly_ul_list_style_type'];
+
+$srly_ul_li_padding_left=$srly_css_values['srly_ul_li_padding_left'];
+
+$srly_h3_color=$srly_css_values['srly_h3_color'];
+$srly_h3_font_size=$srly_css_values['srly_h3_font_size'];
+$srly_h3_font_weight=$srly_css_values['srly_h3_font_weight'];
+?>
 
 html, body
 {
