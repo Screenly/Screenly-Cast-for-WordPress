@@ -28,6 +28,12 @@ RUN chmod +x /usr/local/bin/install-wp-tests.sh
 
 # Create entrypoint script
 RUN echo '#!/bin/bash\n\
+echo "Testing MySQL connection..."\n\
+while ! mysql -h db-test -u root -pwordpress -e "SELECT 1" >/dev/null 2>&1; do\n\
+  echo "Waiting for MySQL..."\n\
+  sleep 1\n\
+done\n\
+echo "MySQL connection successful"\n\
 /usr/local/bin/install-wp-tests.sh wordpress_test root wordpress db-test 4.4\n\
 cd /var/www/html/wp-content/plugins/screenly-cast\n\
 exec phpunit "$@"' > /usr/local/bin/run-tests.sh && \
