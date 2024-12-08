@@ -1,16 +1,34 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <phpunit
-	bootstrap="screenly-cast/tests/bootstrap.php"
-	backupGlobals="false"
-	colors="true"
-	convertErrorsToExceptions="true"
-	convertNoticesToExceptions="true"
-	convertWarningsToExceptions="true"
-	>
-	<testsuites>
-		<testsuite>
-			<directory prefix="test-" suffix=".php">./screenly-cast/tests/</directory>
-			<exclude>./screenly-cast/tests/test-sample.php</exclude>
-		</testsuite>
-	</testsuites>
+    bootstrap="screenly-cast/tests/bootstrap.php"
+    backupGlobals="false"
+    colors="true"
+    convertErrorsToExceptions="true"
+    convertNoticesToExceptions="true"
+    convertWarningsToExceptions="true">
+
+    <testsuites>
+        <testsuite>
+            <directory prefix="test-" suffix=".php">./screenly-cast/tests/</directory>
+        </testsuite>
+    </testsuites>
+
+    <filter>
+        <whitelist>
+            <directory suffix=".php">./screenly-cast</directory>
+            <exclude>
+                <directory>./screenly-cast/tests</directory>
+                <directory>./screenly-cast/vendor</directory>
+            </exclude>
+        </whitelist>
+    </filter>
+
+    <logging>
+        <log type="coverage-clover" target="clover.xml"/>
+    </logging>
+
+    <php>
+        <env name="WP_TESTS_DIR" value="/tmp/wordpress-tests-lib"/>
+        <env name="WP_CORE_DIR" value="/tmp/wordpress/"/>
+    </php>
 </phpunit>
