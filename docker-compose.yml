@@ -1,60 +1,29 @@
 version: '3.8'
 
 services:
-  wordpress:
-    image: wordpress:4.4-php5.6-apache
-    platform: linux/amd64
-    ports:
-      - "8000:80"
-    environment:
-      WORDPRESS_DB_HOST: db
-      WORDPRESS_DB_USER: wordpress
-      WORDPRESS_DB_PASSWORD: wordpress
-      WORDPRESS_DB_NAME: wordpress
-      WORDPRESS_DEBUG: 1
-    volumes:
-      - wordpress_data:/var/www/html
-      - .:/var/www/html/wp-content/plugins/screenly-cast
-    depends_on:
-      - db
-
-  db:
-    image: mariadb:10.5
-    platform: linux/arm64/v8
-    environment:
-      MYSQL_ROOT_PASSWORD: somewordpress
-      MYSQL_DATABASE: wordpress
-      MYSQL_USER: wordpress
-      MYSQL_PASSWORD: wordpress
-    volumes:
-      - db_data:/var/lib/mysql
-
   # Test environment with PHP 5.3
   wordpress-test:
     build:
       context: .
       dockerfile: tests/Dockerfile
-    platform: linux/amd64
     environment:
+      - WP_TESTS_DIR=/tmp/wordpress-tests-lib
+      - WP_CORE_DIR=/tmp/wordpress
       - WP_TESTS_DB_HOST=db-test
+      - WP_TESTS_DB_USER=root
+      - WP_TESTS_DB_PASS=wordpress
       - WP_TESTS_DB_NAME=wordpress_test
-      - WP_TESTS_DB_USER=wordpress
-      - WP_TESTS_DB_PASSWORD=wordpress
       - WP_TESTS_DB_PORT=3306
     volumes:
       - .:/var/www/html/wp-content/plugins/screenly-cast
+      - ./phpunit.xml:/var/www/html/wp-content/plugins/screenly-cast/phpunit.xml
     depends_on:
       - db-test
 
   db-test:
-    image: mariadb:10.5
-    platform: linux/arm64/v8
+    image: mysql:5.6
+    platform: linux/amd64
+    tmpfs:
+      - /var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: wordpress
-      MYSQL_DATABASE: wordpress_test
-      MYSQL_USER: wordpress
-      MYSQL_PASSWORD: wordpress
-
-volumes:
-  wordpress_data:
-  db_data:
+      - MYSQL_ROOT_PASSWORD=wordpress

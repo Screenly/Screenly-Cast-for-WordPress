@@ -28,8 +28,8 @@ RUN chmod +x /usr/local/bin/install-wp-tests.sh
 
 # Create entrypoint script
 RUN echo '#!/bin/bash\n\
-WP_TESTS_TAG="tags/4.4"\n\
 /usr/local/bin/install-wp-tests.sh wordpress_test root wordpress db-test 4.4\n\
+cd /var/www/html/wp-content/plugins/screenly-cast\n\
 exec phpunit "$@"' > /usr/local/bin/run-tests.sh && \
     chmod +x /usr/local/bin/run-tests.sh
 
