@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit
-    bootstrap="screenly-cast/tests/bootstrap.php"
+    bootstrap="tests/bootstrap.php"
     backupGlobals="false"
     colors="true"
     convertErrorsToExceptions="true"
     convertNoticesToExceptions="true"
-    convertWarningsToExceptions="true">
+    convertWarningsToExceptions="true"
+    stopOnFailure="false">
 
     <testsuites>
-        <testsuite>
-            <directory prefix="test-" suffix=".php">./screenly-cast/tests/</directory>
+        <testsuite name="Screenly Cast Test Suite">
+            <directory prefix="test-" suffix=".php">./tests/</directory>
         </testsuite>
     </testsuites>
 
     <filter>
-        <whitelist>
-            <directory suffix=".php">./screenly-cast</directory>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">./</directory>
             <exclude>
-                <directory>./screenly-cast/tests</directory>
-                <directory>./screenly-cast/vendor</directory>
+                <directory>./tests</directory>
+                <directory>./vendor</directory>
             </exclude>
         </whitelist>
     </filter>

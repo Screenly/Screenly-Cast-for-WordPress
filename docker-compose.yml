@@ -5,7 +5,7 @@ services:
       context: .
       dockerfile: tests/Dockerfile
     volumes:
-      - .:/var/www/html/wp-content/plugins/screenly-cast
+      - .:/var/www/html/wp-content/plugins/screenly-cast-root
     depends_on:
       db-test:
         condition: service_healthy
