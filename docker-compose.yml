@@ -12,6 +12,7 @@ services:
 
   db-test:
     image: mysql:5.5
+    platform: linux/amd64
     environment:
       MYSQL_ROOT_PASSWORD: wordpress
       MYSQL_DATABASE: wordpress_test
