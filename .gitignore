@@ -1,3 +1,10 @@
 wp_org
 .swp
 .DS_Store
+
+# Coverage files
+clover.xml
+coverage.php
+coverage.json
+/coverage/
+*.cov

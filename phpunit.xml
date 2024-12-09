@@ -15,12 +15,9 @@
     </testsuites>
 
     <filter>
-        <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">./</directory>
-            <exclude>
-                <directory>./tests</directory>
-                <directory>./vendor</directory>
-            </exclude>
+        <whitelist addUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">./screenly-cast/inc</directory>
+            <file>./screenly-cast/screenly-cast.php</file>
         </whitelist>
     </filter>
 

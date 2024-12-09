@@ -68,8 +68,18 @@ done\n\
 echo "MySQL connection successful"\n\
 mysql -h db-test -u root -pwordpress -e "CREATE DATABASE IF NOT EXISTS wordpress_test"\n\
 cd /var/www/html/wp-content/plugins/screenly-cast-root\n\
-phpunit --coverage-php /tmp/coverage.php "$@" && \\\n\
-php -r "\$coverage = unserialize(file_get_contents(\"/tmp/coverage.php\")); echo json_encode(\$coverage, JSON_PRETTY_PRINT);"' > /usr/local/bin/run-tests.sh && \
+phpunit --coverage-text --colors=never --coverage-php /tmp/coverage.php "$@" && \\\n\
+echo "Coverage JSON:" && \\\n\
+php -r "\$coverage = unserialize(file_get_contents(\"/tmp/coverage.php\")); \$json = array(); \
+foreach (\$coverage->getTests() as \$test) { \
+  \$json[\"tests\"][] = array(\"name\" => \$test->getName(), \"size\" => \$test->getSize()); \
+} \
+\$json[\"summary\"] = array( \
+  \"classes\" => \$coverage->getNumTestedClassesAndTraits() . \"/\" . \$coverage->getNumClassesAndTraits(), \
+  \"methods\" => \$coverage->getNumTestedMethods() . \"/\" . \$coverage->getNumMethods(), \
+  \"lines\" => \$coverage->getNumExecutedLines() . \"/\" . \$coverage->getNumExecutableLines() \
+); \
+echo json_encode(\$json, JSON_PRETTY_PRINT);"' > /usr/local/bin/run-tests.sh && \
     chmod +x /usr/local/bin/run-tests.sh
 
 # Default command

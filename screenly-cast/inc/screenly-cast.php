@@ -94,13 +94,12 @@ class ScreenlyCast
             add_theme_support('post-thumbnails');
 
             /**
-             * Add screenly var to save query vars.
+             * Add screenly var to query vars using the proper filter
              */
-            global $wp;
-            $wp->add_query_var('srly');
+            add_filter('query_vars', array(__CLASS__, 'add_query_vars'));
 
             /**
-             * Registers Screenly theme
+             * Register theme directory if needed
              */
             $theme = wp_get_theme(SRLY_THEME);
             if (!$theme->exists()) {
@@ -108,10 +107,13 @@ class ScreenlyCast
             }
 
             /**
-             * Reverse to previous theme while in admin mode.
+             * Handle theme switching in admin
              */
-            if (is_admin()) {
-                self::reverseToPreviousTheme();
+            if (defined('WP_ADMIN') && WP_ADMIN) {
+                // In admin, always switch to default theme
+                if (get_stylesheet() === SRLY_THEME) {
+                    switch_theme(WP_DEFAULT_THEME);
+                }
             }
 
             /**
@@ -119,13 +121,57 @@ class ScreenlyCast
              */
             include_once 'screenly-cast-settings.php';
 
-            /**
-             * Mark plugin as running.
-             */
             self::$_running = true;
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Add custom query vars
+     *
+     * @param array $vars The array of available query variables
+     * @return array Modified array of query variables
+     */
+    public static function add_query_vars($vars)
+    {
+        $vars[] = self::QUERY_VAR;
+        return $vars;
+    }
+
+    /**
+     * Handle theme switching in admin context
+     *
+     * @return void
+     */
+    private static function handle_admin_theme()
+    {
+        // In admin, we should never use the Screenly theme
+        if (get_stylesheet() === SRLY_THEME) {
+            // Get the previous theme from WordPress core option
+            $previous_theme = get_option('theme_switched');
+            if ($previous_theme && $previous_theme !== SRLY_THEME) {
+                switch_theme($previous_theme);
+            } else {
+                // Fallback to default theme if no previous theme is found
+                switch_theme(WP_DEFAULT_THEME);
+            }
+        }
+    }
+
+    /**
+     * Switch to Screenly theme
+     *
+     * @return boolean
+     */
+    private static function switch_to_screenly_theme()
+    {
+        if (get_stylesheet() === SRLY_THEME) {
+            return true;
         }
 
-        return true;
+        switch_theme(SRLY_THEME);
+        return get_stylesheet() === SRLY_THEME;
     }
 
 
@@ -257,7 +303,12 @@ class ScreenlyCast
         if (!is_admin()) {
             if (isset($wp_query->query['srly'])) {
                 $path = SRLY_THEME_DIR."/";
-                include $path."functions.php";
+                // Only include functions.php once
+                static $functions_included = false;
+                if (!$functions_included && file_exists($path."functions.php")) {
+                    include_once $path."functions.php";
+                    $functions_included = true;
+                }
                 if (is_attachment()) {
                     return $path . 'attachment.php';
                 } else {
