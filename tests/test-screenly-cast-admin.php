@@ -70,15 +70,27 @@ class ScreenlyCastAdminTest extends WP_UnitTestCase {
         // Add filter to enable debug logging
         add_filter('screenly_cast_debug_log', '__return_true');
 
+        // Capture error log output
+        $temp_log = tempnam(sys_get_temp_dir(), 'wp_');
+        $original_log = ini_get('error_log');
+        ini_set('error_log', $temp_log);
+
         // Use reflection to access private method
         $class = new ReflectionClass('ScreenlyCast');
         $method = $class->getMethod('_log');
         $method->setAccessible(true);
 
         // Test logging
-        $this->assertTrue($method->invoke(null, 'Test log message'));
+        $test_message = 'Test log message';
+        $method->invoke(null, $test_message);
+
+        // Read log file
+        $log_content = file_get_contents($temp_log);
+        $this->assertContains($test_message, $log_content);
 
         // Clean up
+        ini_set('error_log', $original_log);
+        unlink($temp_log);
         remove_filter('screenly_cast_debug_log', '__return_true');
     }
 }

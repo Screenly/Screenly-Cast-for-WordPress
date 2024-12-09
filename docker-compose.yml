@@ -4,6 +4,7 @@ services:
     build:
       context: .
       dockerfile: tests/Dockerfile
+    image: ghcr.io/${GITHUB_REPOSITORY:-screenly/screenly-cast-for-wordpress}/wordpress-test:latest
     volumes:
       - .:/var/www/html/wp-content/plugins/screenly-cast-root
     depends_on:
