@@ -6,5 +6,6 @@ wp_org
 clover.xml
 coverage.php
 coverage.json
+coverage.txt
 /coverage/
 *.cov
