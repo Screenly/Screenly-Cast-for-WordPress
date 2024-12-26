@@ -19,8 +19,9 @@ WORKDIR /var/www/html/wp-content/plugins/screenly-cast
 # Copy the entire plugin first
 COPY . .
 
-# Install dependencies
-RUN composer install --prefer-dist --no-interaction --no-progress
+# Configure git to trust the directory and install dependencies
+RUN git config --global --add safe.directory /var/www/html/wp-content/plugins/screenly-cast \
+    && composer install --prefer-dist --no-interaction --no-progress
 
 # Copy test files
 COPY tests/docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh

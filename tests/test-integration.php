@@ -11,6 +11,8 @@ class TestIntegration extends WP_UnitTestCase {
 
     protected function setUp(): void {
         parent::setUp();
+        global $wp_version;
+        $wp_version = getenv('WP_VERSION') ?: '6.3.0';
         $this->plugin = new Plugin();
     }
 

@@ -60,7 +60,7 @@ class Core {
 	 * Initialize the core functionality.
 	 */
 	public function init(): void {
-		$this->addThemeSupport();
+		add_action( 'after_setup_theme', array( $this, 'addThemeSupport' ), 0 );
 		add_filter( 'query_vars', array( $this, 'addQueryVars' ) );
 		add_action( 'init', array( $this, 'registerPostTypes' ) );
 		add_action( 'init', array( $this, 'registerTaxonomies' ) );
@@ -69,18 +69,16 @@ class Core {
 	/**
 	 * Add theme support.
 	 */
-	private function addThemeSupport(): void {
-		add_action( 'after_setup_theme', function() {
-			add_theme_support( 'title-tag' );
-			add_theme_support( 'post-thumbnails' );
-			add_theme_support( 'html5', array(
-				'search-form',
-				'gallery',
-				'caption',
-				'style',
-				'script',
-			) );
-		} );
+	public function addThemeSupport(): void {
+		add_theme_support( 'title-tag' );
+		add_theme_support( 'post-thumbnails' );
+		add_theme_support( 'html5', array(
+			'search-form',
+			'gallery',
+			'caption',
+			'style',
+			'script',
+		) );
 	}
 
 	/**
