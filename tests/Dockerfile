@@ -7,8 +7,9 @@ RUN apt-get update && apt-get install -y \
     unzip \
     libzip-dev \
     default-mysql-client \
+    libxml2-utils \
     subversion \
-    && docker-php-ext-install zip mysqli pdo_mysql
+    && docker-php-ext-install zip mysqli
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer

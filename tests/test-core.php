@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace ScreenlyCast\Tests;
 
-use PHPUnit\Framework\TestCase;
+use WP_UnitTestCase;
 use ScreenlyCast\Core;
 use ScreenlyCast\Configuration;
 use ScreenlyCast\WordPressThemeManager;
@@ -12,7 +12,7 @@ use ScreenlyCast\WordPressPaths;
 use ScreenlyCast\Settings;
 use ScreenlyCast\WordPressVersionChecker;
 
-class TestCore extends TestCase {
+class TestCore extends WP_UnitTestCase {
     private Core $core;
     private WordPressPaths $paths;
     private WordPressLogger $logger;

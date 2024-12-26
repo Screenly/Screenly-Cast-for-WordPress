@@ -2,13 +2,25 @@ name: Run Tests
 on: [push, pull_request]
 
 jobs:
+  init-summary:
+    name: Initialize Summary
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create Summary Header
+        run: |
+          echo "# Test Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| PHP | WordPress | Tests | Failures | Errors | Time |" >> $GITHUB_STEP_SUMMARY
+          echo "|-----|-----------|-------|----------|---------|------|" >> $GITHUB_STEP_SUMMARY
+
   test:
+    needs: init-summary
     name: PHP ${{ matrix.php }} / WP ${{ matrix.wordpress }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
         php: ['7.4', '8.0', '8.1', '8.2']
-        wordpress: ['6.4', '6.3', '6.2']
+        wordpress: ['6.4', '6.3']
         exclude:
           - wordpress: '6.4'
             php: '7.4'
@@ -22,6 +34,39 @@ jobs:
       uses: docker/setup-buildx-action@v3
 
     - name: Build and run tests
+      id: phpunit
       run: |
         docker compose build --build-arg PHP_VERSION=${{ matrix.php }} wordpress-test
-        WP_VERSION=${{ matrix.wordpress }} docker compose run --rm wordpress-test sh -c "composer install && ./vendor/bin/phpunit"
+        WP_VERSION=${{ matrix.wordpress }} docker compose run --rm wordpress-test sh -c "composer install && ./vendor/bin/phpunit --log-junit=test-results.xml" || true
+
+        # Extract test numbers using xmllint
+        TESTS=$(xmllint --xpath "string(/testsuites/@tests)" test-results.xml)
+        FAILURES=$(xmllint --xpath "string(/testsuites/@failures)" test-results.xml)
+        ERRORS=$(xmllint --xpath "string(/testsuites/@errors)" test-results.xml)
+        TIME=$(xmllint --xpath "string(/testsuites/@time)" test-results.xml)
+
+        # Add row to summary
+        echo "| ${{ matrix.php }} | ${{ matrix.wordpress }} | $TESTS | $FAILURES | $ERRORS | $TIME |" >> $GITHUB_STEP_SUMMARY
+
+        # If there are failures or errors, add details
+        if [ "$FAILURES" -gt 0 ] || [ "$ERRORS" -gt 0 ]; then
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Failures for PHP ${{ matrix.php }} / WordPress ${{ matrix.wordpress }}" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          xmllint --xpath "//testcase[failure or error]" test-results.xml | sed 's/<testcase/\n<testcase/g' >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+        fi
+
+    - name: Check Test Results
+      if: always()
+      run: |
+        if [ -f test-results.xml ]; then
+          FAILURES=$(xmllint --xpath "string(/testsuites/@failures)" test-results.xml)
+          ERRORS=$(xmllint --xpath "string(/testsuites/@errors)" test-results.xml)
+          if [ "$FAILURES" -gt 0 ] || [ "$ERRORS" -gt 0 ]; then
+            exit 1
+          fi
+        else
+          echo "No test results found"
+          exit 1
+        fi

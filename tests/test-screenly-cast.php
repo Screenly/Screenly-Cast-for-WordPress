@@ -17,6 +17,10 @@ class ScreenlyCastTest extends WP_UnitTestCase {
     private Core $core;
     private WordPressVersionChecker $versionChecker;
     private string $originalVersion;
+    private WordPressPaths $paths;
+    private WordPressLogger $logger;
+    private WordPressThemeManager $theme_manager;
+    private WordPressVersionChecker $version_checker;
 
     /**
      * Set up test environment.

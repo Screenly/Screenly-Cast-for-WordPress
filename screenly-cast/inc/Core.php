@@ -30,6 +30,13 @@ class Core {
 	private Contracts\Logger $logger;
 
 	/**
+	 * The theme manager instance.
+	 *
+	 * @var Contracts\ThemeManager
+	 */
+	private Contracts\ThemeManager $theme_manager;
+
+	/**
 	 * The version checker instance.
 	 *
 	 * @var Contracts\VersionChecker
@@ -54,31 +61,74 @@ class Core {
 		$this->paths = $paths;
 		$this->theme_manager = $theme_manager;
 		$this->version_checker = $version_checker;
+
+		// Add theme support immediately
+		add_theme_support('title-tag');
+		add_theme_support('post-thumbnails');
+		add_theme_support('html5', array(
+			'search-form',
+			'gallery',
+			'caption',
+			'style',
+			'script',
+		));
 	}
 
 	/**
 	 * Initialize the core functionality.
 	 */
 	public function init(): void {
-		add_action( 'after_setup_theme', array( $this, 'addThemeSupport' ), 0 );
-		add_filter( 'query_vars', array( $this, 'addQueryVars' ) );
-		add_action( 'init', array( $this, 'registerPostTypes' ) );
-		add_action( 'init', array( $this, 'registerTaxonomies' ) );
+		add_filter('query_vars', array($this, 'addQueryVars'));
+		add_action('init', array($this, 'registerPostTypes'));
+		add_action('init', array($this, 'registerTaxonomies'));
 	}
 
 	/**
-	 * Add theme support.
+	 * Add query vars.
+	 *
+	 * @param array $vars The query vars.
+	 * @return array
 	 */
-	public function addThemeSupport(): void {
-		add_theme_support( 'title-tag' );
-		add_theme_support( 'post-thumbnails' );
-		add_theme_support( 'html5', array(
-			'search-form',
-			'gallery',
-			'caption',
-			'style',
-			'script',
-		) );
+	public function addQueryVars( array $vars ): array {
+		$vars[] = 'srly';
+		return $vars;
+	}
+
+	/**
+	 * Register post types.
+	 */
+	public function registerPostTypes(): void {
+		register_post_type(
+			'screenly_cast',
+			array(
+				'labels'      => array(
+					'name'          => esc_html__( 'Screenly Casts', 'screenly-cast' ),
+					'singular_name' => esc_html__( 'Screenly Cast', 'screenly-cast' ),
+				),
+				'public'      => true,
+				'has_archive' => true,
+				'supports'    => array( 'title', 'editor', 'thumbnail' ),
+				'menu_icon'   => 'dashicons-desktop',
+			)
+		);
+	}
+
+	/**
+	 * Register taxonomies.
+	 */
+	public function registerTaxonomies(): void {
+		register_taxonomy(
+			'screenly_cast_category',
+			'screenly_cast',
+			array(
+				'labels'            => array(
+					'name'          => esc_html__( 'Cast Categories', 'screenly-cast' ),
+					'singular_name' => esc_html__( 'Cast Category', 'screenly-cast' ),
+				),
+				'hierarchical'      => true,
+				'show_admin_column' => true,
+			)
+		);
 	}
 
 	/**
@@ -157,54 +207,6 @@ class Core {
 
 		delete_option( 'screenly_cast_enabled' );
 		flush_rewrite_rules();
-	}
-
-	/**
-	 * Add custom query variables.
-	 *
-	 * @param array $vars The existing query variables.
-	 * @return array The modified query variables.
-	 */
-	public function addQueryVars( array $vars ): array {
-		$vars[] = 'srly';
-		return $vars;
-	}
-
-	/**
-	 * Register custom post types.
-	 */
-	public function registerPostTypes(): void {
-		register_post_type(
-			'screenly_cast',
-			array(
-				'labels'      => array(
-					'name'          => esc_html__( 'Screenly Casts', 'screenly-cast' ),
-					'singular_name' => esc_html__( 'Screenly Cast', 'screenly-cast' ),
-				),
-				'public'      => true,
-				'has_archive' => true,
-				'supports'    => array( 'title', 'editor', 'thumbnail' ),
-				'menu_icon'   => 'dashicons-desktop',
-			)
-		);
-	}
-
-	/**
-	 * Register custom taxonomies.
-	 */
-	public function registerTaxonomies(): void {
-		register_taxonomy(
-			'screenly_cast_category',
-			'screenly_cast',
-			array(
-				'labels'            => array(
-					'name'          => esc_html__( 'Cast Categories', 'screenly-cast' ),
-					'singular_name' => esc_html__( 'Cast Category', 'screenly-cast' ),
-				),
-				'hierarchical'      => true,
-				'show_admin_column' => true,
-			)
-		);
 	}
 
 	/**
