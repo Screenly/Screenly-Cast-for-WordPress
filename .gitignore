@@ -50,7 +50,7 @@ coverage/css/
 phpstan.neon
 psalm.xml
 rector.php
-.stylelintrc.json
+!.stylelintrc.json
 
 # Logs
 *.log
