@@ -51,6 +51,8 @@ phpstan.neon
 psalm.xml
 rector.php
 !.stylelintrc.json
+!.eslintrc.js
+!.eslintrc.json
 
 # Logs
 *.log
