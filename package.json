@@ -29,8 +29,6 @@
     "@wordpress/eslint-plugin": "^17.3.0",
     "@wordpress/stylelint-config": "^23.6.0",
     "eslint": "^8.56.0",
-    "stylelint": "^13.13.1",
-    "stylelint-config-standard": "^22.0.0",
-    "stylelint-config-wordpress": "^17.0.0"
+    "stylelint": "^16.12.0"
   }
 }

@@ -16,7 +16,7 @@ jobs:
       - name: Run PHP CodeSniffer
         run: |
           docker compose build --build-arg PHP_VERSION=8.2 wordpress-test
-          docker compose run --rm wordpress-test sh -c "composer install && ./vendor/bin/phpcs --standard=.phpcs.xml.dist . --report=checkstyle" | cs2pr
+          docker compose run --rm wordpress-test ./vendor/bin/phpcs --standard=.phpcs.xml.dist . --report=checkstyle | cs2pr
 
   style-quality:
     name: CSS/JS
@@ -30,7 +30,7 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       - name: Run CSS linter
         run: npm run lint:css -- --formatter=github
