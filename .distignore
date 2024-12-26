@@ -1,0 +1,28 @@
+# Development files
+.git
+.github
+.gitignore
+.distignore
+.editorconfig
+.phpcs.xml.dist
+composer.json
+composer.lock
+phpunit.xml
+package.json
+package-lock.json
+webpack.config.js
+
+# Development directories
+/tests
+/node_modules
+/vendor
+/bin
+
+# IDE files
+.idea
+.vscode
+
+# Build files
+*.map
+.DS_Store
+Thumbs.db

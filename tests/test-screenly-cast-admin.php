@@ -72,7 +72,7 @@ class ScreenlyCastAdminTest extends WP_UnitTestCase {
         $output = ob_get_clean();
 
         $this->assertStringContainsString( 'error', $output );
-        $this->assertStringContainsString( 'WordPress version 6.3.0 or higher is required', $output );
+        $this->assertStringContainsString( 'Screenly Cast requires WordPress version 6.3 or higher', $output );
     }
 
     /**

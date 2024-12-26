@@ -36,7 +36,7 @@
         }
     },
     "scripts": {
-        "test": "phpunit",
+        "test": "vendor/bin/phpunit",
         "prepare-test": "bash bin/install-wp-tests.sh wordpress_test root '' localhost latest",
         "lint:php": "phpcs",
         "lint:php:fix": "phpcbf",

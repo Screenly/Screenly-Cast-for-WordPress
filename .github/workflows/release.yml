@@ -1,45 +1,32 @@
-name: Release to WordPress.org
+name: Deploy to WordPress.org
 on:
-  release:
-    types: [published]
-
+  push:
+    tags:
+    - "*"
 jobs:
-  test:
-    name: Run tests
+  release:
+    name: Release to WordPress.org
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        php: ['7.4', '8.0', '8.1', '8.2']
-        wordpress: ['6.4']
-
     steps:
-      - uses: actions/checkout@v4
+    - uses: actions/checkout@v3
 
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: ${{ matrix.php }}
-          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, mysql
-          coverage: none
-          tools: composer:v2
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
 
-      - name: Install dependencies
-        run: composer install --prefer-dist --no-progress --no-suggest
+    - name: Build release
+      run: |
+        # First run tests with dev dependencies
+        docker compose build wordpress-test
+        docker compose run --rm wordpress-test sh -c "composer install && composer test"
 
-      - name: Run tests
-        run: vendor/bin/phpunit
+        # Clean and build for release without dev dependencies
+        rm -rf vendor
+        docker compose run --rm wordpress-test sh -c "composer install --no-dev --optimize-autoloader"
+        ./bin/build.sh
 
-  deploy:
-    name: Deploy to WordPress.org
-    needs: test
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: WordPress Plugin Deploy
-        uses: 10up/action-wordpress-plugin-deploy@stable
-        env:
-          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
-          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
-          SLUG: screenly-cast
+    - name: WordPress Plugin Deploy
+      uses: 10up/action-wordpress-plugin-deploy@stable
+      env:
+        SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+        SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+        SLUG: screenly-cast

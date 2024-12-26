@@ -1,17 +1,9 @@
-name: Test
-
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
-
-permissions:
-  contents: read
-  packages: write
+name: Run Tests
+on: [push, pull_request]
 
 jobs:
   test:
+    name: PHP ${{ matrix.php }} / WP ${{ matrix.wordpress }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -24,19 +16,12 @@ jobs:
             php: '7.4'
 
     steps:
-      - uses: actions/checkout@v3
+    - uses: actions/checkout@v3
 
-      - name: Build and run tests
-        run: |
-          docker compose build \
-            --build-arg PHP_VERSION=${{ matrix.php }} \
-            wordpress-test
-          WP_VERSION=${{ matrix.wordpress }} docker compose up \
-            --exit-code-from wordpress-test \
-            wordpress-test
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
 
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3
-        with:
-          file: ./build/logs/clover.xml
-          fail_ci_if_error: true
+    - name: Build and run tests
+      run: |
+        docker compose build --build-arg PHP_VERSION=${{ matrix.php }} wordpress-test
+        WP_VERSION=${{ matrix.wordpress }} docker compose run --rm wordpress-test sh -c "composer install && ./vendor/bin/phpunit"

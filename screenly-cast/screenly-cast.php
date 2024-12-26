@@ -25,6 +25,23 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
+// Set up class autoloader
+spl_autoload_register( function ( $class ) {
+    // Only handle our own namespace
+    if ( strpos( $class, 'ScreenlyCast\\' ) !== 0 ) {
+        return;
+    }
+
+    // Convert namespace to file path
+    $class_path = str_replace( 'ScreenlyCast\\', '', $class );
+    $class_path = str_replace( '\\', DIRECTORY_SEPARATOR, $class_path );
+    $file = dirname( __FILE__ ) . '/inc/' . $class_path . '.php';
+
+    if ( file_exists( $file ) ) {
+        require_once $file;
+    }
+} );
+
 // Initialize the plugin.
 try {
 	$screenly_plugin = new Plugin();
