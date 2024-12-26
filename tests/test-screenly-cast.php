@@ -66,6 +66,7 @@ class ScreenlyCastTest extends WP_UnitTestCase {
      */
     public function test_init(): void {
         $this->core->init();
+        do_action('after_setup_theme');
         $this->assertTrue( current_theme_supports( 'post-thumbnails' ) );
     }
 

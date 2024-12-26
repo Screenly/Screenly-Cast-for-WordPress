@@ -51,11 +51,11 @@ class ScreenlyCastAdminTest extends WP_UnitTestCase {
         global $wp_version;
 
         // Test with compatible version
-        $wp_version = '6.4';
+        $wp_version = '6.3';
         $this->assertTrue( $this->version_checker->isWordPressVersionCompatible() );
 
         // Test with incompatible version
-        $wp_version = '6.3';
+        $wp_version = '6.2';
         $this->assertFalse( $this->version_checker->isWordPressVersionCompatible() );
     }
 
@@ -64,7 +64,7 @@ class ScreenlyCastAdminTest extends WP_UnitTestCase {
      */
     public function test_admin_init_with_incompatible_version(): void {
         global $wp_version;
-        $wp_version = '6.3';
+        $wp_version = '6.2';
 
         ob_start();
         $this->core->adminInit();
@@ -72,7 +72,7 @@ class ScreenlyCastAdminTest extends WP_UnitTestCase {
         $output = ob_get_clean();
 
         $this->assertStringContainsString( 'error', $output );
-        $this->assertStringContainsString( 'requires WordPress', $output );
+        $this->assertStringContainsString( 'WordPress version 6.3.0 or higher is required', $output );
     }
 
     /**

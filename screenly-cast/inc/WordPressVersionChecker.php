@@ -18,7 +18,7 @@ class WordPressVersionChecker implements Contracts\VersionChecker {
 	/**
 	 * The minimum required WordPress version.
 	 */
-	private const REQUIRED_VERSION = '6.4';
+	private const REQUIRED_VERSION = '6.3';
 
 	/**
 	 * Check if the current WordPress version meets the minimum requirement.

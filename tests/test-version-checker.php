@@ -29,19 +29,19 @@ class TestVersionChecker extends TestCase {
     }
 
     public function testGetRequiredWordPressVersion(): void {
-        $this->assertEquals('6.4', $this->checker->getRequiredWordPressVersion());
+        $this->assertEquals('6.3', $this->checker->getRequiredWordPressVersion());
     }
 
     public function testIsCompatibleWithCompatibleVersion(): void {
         global $wp_version;
-        $wp_version = '6.4';
+        $wp_version = '6.3';
         $this->checker = new WordPressVersionChecker();
         $this->assertTrue($this->checker->isWordPressVersionCompatible());
     }
 
     public function testIsCompatibleWithIncompatibleVersion(): void {
         global $wp_version;
-        $wp_version = '6.3';
+        $wp_version = '6.2';
         $this->checker = new WordPressVersionChecker();
         $this->assertFalse($this->checker->isWordPressVersionCompatible());
     }

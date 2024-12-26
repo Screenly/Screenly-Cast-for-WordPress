@@ -98,9 +98,9 @@ class Plugin {
 	 * @throws PluginInitializationException If requirements are not met.
 	 */
 	private function check_requirements(): void {
-		if ( ! $this->version_checker->check_wordpress_version( '6.4.0' ) ) {
+		if ( ! $this->version_checker->check_wordpress_version( '6.3.0' ) ) {
 			throw new PluginInitializationException(
-				esc_html__( 'WordPress version 6.4.0 or higher is required.', 'screenly-cast' )
+				esc_html__( 'WordPress version 6.3.0 or higher is required.', 'screenly-cast' )
 			);
 		}
 	}

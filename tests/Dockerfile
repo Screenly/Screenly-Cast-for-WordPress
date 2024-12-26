@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install -y \
     unzip \
     libzip-dev \
     default-mysql-client \
+    subversion \
     && docker-php-ext-install zip mysqli pdo_mysql
 
 # Install Composer
@@ -15,14 +16,11 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Set working directory
 WORKDIR /var/www/html/wp-content/plugins/screenly-cast
 
-# Copy composer files
-COPY composer.json composer.lock ./
+# Copy the entire plugin first
+COPY . .
 
 # Install dependencies
 RUN composer install --prefer-dist --no-interaction --no-progress
-
-# Copy the rest of the application
-COPY . .
 
 # Copy test files
 COPY tests/docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh

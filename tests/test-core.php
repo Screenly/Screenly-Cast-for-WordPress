@@ -57,6 +57,7 @@ class TestCore extends TestCase {
      */
     public function testInit(): void {
         $this->core->init();
+        do_action('after_setup_theme');
         $this->assertTrue( current_theme_supports( 'post-thumbnails' ) );
     }
 
