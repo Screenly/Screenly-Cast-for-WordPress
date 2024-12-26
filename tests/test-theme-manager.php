@@ -7,6 +7,7 @@ use WP_UnitTestCase;
 use ScreenlyCast\WordPressLogger;
 use ScreenlyCast\WordPressPaths;
 use ScreenlyCast\WordPressThemeManager;
+use ScreenlyCast\ThemeInstaller;
 
 class TestThemeManager extends WP_UnitTestCase {
     use TestFilesystemTrait;
@@ -45,11 +46,10 @@ class TestThemeManager extends WP_UnitTestCase {
     /**
      * Test switching to Screenly theme.
      */
-    public function testSwitchToScreenlyTheme() {
-        $paths = new WordPressPaths();
-        $theme_manager = new WordPressThemeManager( $paths );
-        $theme_manager->registerThemeDirectory( $paths->getThemePath() );
-        $theme_manager->switchToScreenlyTheme();
-        $this->assertEquals( 'screenly-cast', get_stylesheet() );
+    public function test_switch_to_screenly_theme(): void {
+        $installer = new ThemeInstaller($this->paths);
+        $installer->install_theme();
+        $this->manager->activate('screenly-cast');
+        $this->assertEquals('screenly-cast', get_stylesheet());
     }
 }

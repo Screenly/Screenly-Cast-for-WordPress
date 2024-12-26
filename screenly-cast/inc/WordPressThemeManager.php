@@ -76,7 +76,7 @@ class WordPressThemeManager implements Contracts\ThemeManager {
 		if ( ! $theme->exists() ) {
 			try {
 				$installer = new ThemeInstaller( $this->paths );
-				$installer->install();
+				$installer->install_theme();
 				wp_clean_themes_cache();
 				search_theme_directories( true );
 				$theme = wp_get_theme( 'screenly-cast' );

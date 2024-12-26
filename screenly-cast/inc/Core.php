@@ -46,9 +46,9 @@ class Core {
 	/**
 	 * Core constructor.
 	 *
-	 * @param Contracts\Logger $logger The logger instance.
-	 * @param Contracts\Paths $paths The paths instance.
-	 * @param Contracts\ThemeManager $theme_manager The theme manager instance.
+	 * @param Contracts\Logger         $logger The logger instance.
+	 * @param Contracts\Paths          $paths The paths instance.
+	 * @param Contracts\ThemeManager   $theme_manager The theme manager instance.
 	 * @param Contracts\VersionChecker $version_checker The version checker instance.
 	 */
 	public function __construct(
@@ -57,9 +57,9 @@ class Core {
 		Contracts\ThemeManager $theme_manager,
 		Contracts\VersionChecker $version_checker
 	) {
-		$this->logger = $logger;
-		$this->paths = $paths;
-		$this->theme_manager = $theme_manager;
+		$this->logger          = $logger;
+		$this->paths           = $paths;
+		$this->theme_manager   = $theme_manager;
 		$this->version_checker = $version_checker;
 	}
 
@@ -67,18 +67,19 @@ class Core {
 	 * Initialize the core functionality.
 	 */
 	public function init(): void {
-		add_filter('query_vars', array($this, 'addQueryVars'));
-		add_action('init', array($this, 'registerPostTypes'));
-		add_action('init', array($this, 'registerTaxonomies'));
+		add_filter( 'query_vars', array( $this, 'add_query_vars' ) );
+		add_filter( 'parse_query', array( $this, 'parse_query' ) );
+		add_action( 'init', array( $this, 'register_post_types' ) );
+		add_action( 'init', array( $this, 'register_taxonomies' ) );
 	}
 
 	/**
-	 * Add query vars.
+	 * Add query variables.
 	 *
-	 * @param array $vars The query vars.
-	 * @return array
+	 * @param array $vars The query variables.
+	 * @return array The modified query variables.
 	 */
-	public function addQueryVars( array $vars ): array {
+	public function add_query_vars( array $vars ): array {
 		$vars[] = 'srly';
 		return $vars;
 	}
@@ -86,7 +87,7 @@ class Core {
 	/**
 	 * Register post types.
 	 */
-	public function registerPostTypes(): void {
+	public function register_post_types(): void {
 		register_post_type(
 			'screenly_cast',
 			array(
@@ -105,7 +106,7 @@ class Core {
 	/**
 	 * Register taxonomies.
 	 */
-	public function registerTaxonomies(): void {
+	public function register_taxonomies(): void {
 		register_taxonomy(
 			'screenly_cast_category',
 			'screenly_cast',
@@ -190,7 +191,7 @@ class Core {
 	 */
 	public function deactivate(): void {
 		if ( get_stylesheet() === 'screenly-cast' ) {
-			$default_theme = get_option( 'theme_switched' ) ?: 'twentytwentyfour';
+			$default_theme = get_option( 'theme_switched' ) ? get_option( 'theme_switched' ) : 'twentytwentyfour';
 			switch_theme( $default_theme );
 		}
 
@@ -201,9 +202,9 @@ class Core {
 	/**
 	 * Initialize admin functionality.
 	 */
-	public function adminInit(): void {
-		if ( ! $this->version_checker->isWordPressVersionCompatible() ) {
-			add_action( 'admin_notices', array( $this, 'displayVersionError' ) );
+	public function admin_init(): void {
+		if ( ! $this->version_checker->is_wordpress_version_compatible() ) {
+			add_action( 'admin_notices', array( $this, 'display_version_error' ) );
 		}
 	}
 
@@ -212,7 +213,7 @@ class Core {
 	 *
 	 * @return Contracts\Logger The logger instance.
 	 */
-	public function getLogger(): Contracts\Logger {
+	public function get_logger(): Contracts\Logger {
 		return $this->logger;
 	}
 
@@ -221,8 +222,8 @@ class Core {
 	 *
 	 * @param \WP_Query $query The WordPress query object.
 	 */
-	public function parseQuery( \WP_Query $query ): void {
-		if ( ! is_admin() && $query->is_main_query() ) {
+	public function parse_query( \WP_Query $query ): void {
+		if ( ! $query->is_admin && $query->is_main_query ) {
 			$srly = $query->get( 'srly' );
 			if ( $srly ) {
 				$query->set( 'post_type', 'screenly_cast' );
@@ -234,11 +235,11 @@ class Core {
 	/**
 	 * Display version error notice.
 	 */
-	public function displayVersionError(): void {
+	public function display_version_error(): void {
 		$message = sprintf(
 			/* translators: %s: Required WordPress version */
 			esc_html__( 'Screenly Cast requires WordPress version %s or higher.', 'screenly-cast' ),
-			$this->version_checker->getRequiredWordPressVersion()
+			$this->version_checker->get_required_wordpress_version()
 		);
 		echo '<div class="notice notice-error"><p>' . esc_html( $message ) . '</p></div>';
 	}

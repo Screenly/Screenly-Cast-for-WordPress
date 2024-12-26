@@ -36,34 +36,26 @@ class ThemeInstaller {
 	/**
 	 * Install the theme.
 	 *
-	 * @throws \Exception If theme installation fails.
-	 */
-	public function install(): void {
-		$source      = $this->paths->get_theme_root();
-		$destination = get_theme_root() . '/screenly-cast';
-
-		if ( ! is_dir( $source ) ) {
-			throw new \Exception( 'Theme source directory does not exist.' );
-		}
-
-		if ( ! is_dir( $destination ) ) {
-			wp_mkdir_p( $destination );
-		}
-
-		$this->copy_directory( $source, $destination );
-		wp_clean_themes_cache();
-		search_theme_directories( true );
-		register_theme_directory( get_theme_root() );
-	}
-
-	/**
-	 * Install the theme files.
-	 *
 	 * @return bool True on success, false on failure.
+	 * @throws \Exception If theme source directory does not exist or if directory copying fails.
 	 */
-	public function installTheme(): bool {
+	public function install_theme(): bool {
 		try {
-			$this->install();
+			$source      = $this->paths->get_theme_root();
+			$destination = get_theme_root() . '/screenly-cast';
+
+			if ( ! is_dir( $source ) ) {
+				throw new \Exception( 'Theme source directory does not exist.' );
+			}
+
+			if ( ! is_dir( $destination ) ) {
+				wp_mkdir_p( $destination );
+			}
+
+			$this->copy_directory( $source, $destination );
+			wp_clean_themes_cache();
+			search_theme_directories( true );
+			register_theme_directory( get_theme_root() );
 			return true;
 		} catch ( \Exception $e ) {
 			return false;
@@ -112,10 +104,10 @@ class ThemeInstaller {
 	 * @param string $theme_name The name of the theme to switch to.
 	 * @return bool True on success, false on failure.
 	 */
-	public function switchToTheme( string $theme_name ): bool {
+	public function switch_to_theme( string $theme_name ): bool {
 		$theme = wp_get_theme( $theme_name );
 		if ( ! $theme->exists() ) {
-			$this->install();
+			$this->install_theme();
 			$theme = wp_get_theme( $theme_name );
 			if ( ! $theme->exists() ) {
 				return false;
@@ -133,9 +125,9 @@ class ThemeInstaller {
 	 * @param string $theme_name The name of the theme to remove.
 	 * @return bool True on success, false on failure.
 	 */
-	public function removeTheme( string $theme_name ): bool {
+	public function remove_theme( string $theme_name ): bool {
 		$theme_root = get_theme_root( $theme_name );
-		if ( ! $theme_root ) {
+		if ( null === $theme_root || false === $theme_root ) {
 			return false;
 		}
 
@@ -144,7 +136,8 @@ class ThemeInstaller {
 			return false;
 		}
 
-		return $this->remove_directory( $theme_dir );
+		$this->cleanup_theme_directory( $theme_dir );
+		return true;
 	}
 
 	/**
@@ -160,7 +153,7 @@ class ThemeInstaller {
 
 		$files = scandir( $dir );
 		foreach ( $files as $file ) {
-			if ( $file === '.' || $file === '..' ) {
+			if ( '.' === $file || '..' === $file ) {
 				continue;
 			}
 
@@ -168,10 +161,31 @@ class ThemeInstaller {
 			if ( is_dir( $path ) ) {
 				$this->remove_directory( $path );
 			} else {
-				unlink( $path );
+				wp_delete_file( $path );
 			}
 		}
 
-		return rmdir( $dir );
+		return wp_delete_file( $dir );
+	}
+
+	/**
+	 * Clean up a theme directory by removing all files and the directory itself.
+	 *
+	 * @param string $dir The directory path to clean up.
+	 */
+	private function cleanup_theme_directory( string $dir ): void {
+		require_once ABSPATH . 'wp-admin/includes/file.php';
+		global $wp_filesystem;
+		WP_Filesystem();
+
+		$files = glob( $dir . '/*' );
+		foreach ( $files as $file ) {
+			if ( is_file( $file ) ) {
+				$wp_filesystem->delete( $file );
+			}
+		}
+		if ( is_dir( $dir ) ) {
+			$wp_filesystem->rmdir( $dir );
+		}
 	}
 }

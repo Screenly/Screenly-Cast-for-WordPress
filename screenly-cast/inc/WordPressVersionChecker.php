@@ -36,7 +36,7 @@ class WordPressVersionChecker implements Contracts\VersionChecker {
 	 *
 	 * @return string The current WordPress version.
 	 */
-	public function getWordPressVersion(): string {
+	public function get_wordpress_version(): string {
 		global $wp_version;
 		return $wp_version;
 	}
@@ -46,7 +46,7 @@ class WordPressVersionChecker implements Contracts\VersionChecker {
 	 *
 	 * @return string The required WordPress version.
 	 */
-	public function getRequiredWordPressVersion(): string {
+	public function get_required_wordpress_version(): string {
 		return self::REQUIRED_VERSION;
 	}
 
@@ -55,7 +55,7 @@ class WordPressVersionChecker implements Contracts\VersionChecker {
 	 *
 	 * @return bool True if compatible, false otherwise.
 	 */
-	public function isWordPressVersionCompatible(): bool {
+	public function is_wordpress_version_compatible(): bool {
 		return $this->check_wordpress_version( self::REQUIRED_VERSION );
 	}
 }

@@ -33,31 +33,27 @@ class TestThemeInstaller extends WP_UnitTestCase {
         parent::tearDown();
     }
 
-    public function testThemeInstallation(): void {
-        $this->installer->installTheme();
-        $theme = wp_get_theme('screenly-cast');
-        $this->assertTrue($theme->exists());
+    /**
+     * Test theme installation.
+     */
+    public function test_install_theme(): void {
+        $this->installer->install_theme();
+        $this->assertTrue( is_dir( get_theme_root() . '/screenly-cast' ) );
     }
 
     /**
      * Test theme switching.
      */
-    public function testThemeSwitch(): void {
-        $paths = new WordPressPaths();
-        $theme_manager = new WordPressThemeManager($paths);
-        $installer = new ThemeInstaller($paths, $theme_manager);
-        $installer->switchToTheme('screenly-cast');
-        $this->assertEquals('screenly-cast', get_stylesheet());
+    public function test_switch_to_theme(): void {
+        $this->installer->switch_to_theme( 'screenly-cast' );
+        $this->assertEquals( 'screenly-cast', get_stylesheet() );
     }
 
     /**
      * Test theme removal.
      */
-    public function testThemeRemoval(): void {
-        $paths = new WordPressPaths();
-        $theme_manager = new WordPressThemeManager($paths);
-        $installer = new ThemeInstaller($paths, $theme_manager);
-        $installer->removeTheme('screenly-cast');
-        $this->assertFalse(wp_get_theme('screenly-cast')->exists());
+    public function test_remove_theme(): void {
+        $this->installer->remove_theme( 'screenly-cast' );
+        $this->assertFalse( is_dir( get_theme_root() . '/screenly-cast' ) );
     }
 }

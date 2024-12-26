@@ -46,25 +46,17 @@ class Settings implements SettingsInterface {
 	 * Initialize settings.
 	 */
 	public function init(): void {
-		// Register settings immediately
-		$this->registerSettings();
+		// Register settings immediately.
+		$this->register_settings();
 
 		// Add settings menu item.
-		add_action( 'admin_menu', array( $this, 'addSettingsPage' ) );
+		add_action( 'admin_menu', array( $this, 'add_settings_page' ) );
 
 		// Remove default theme menu items.
 		add_action(
-			'admin_menu', function (): void {
-				global $submenu;
-				// Remove 'Themes' submenu item.
-				if ( isset( $submenu['themes.php'] ) ) {
-					foreach ( $submenu['themes.php'] as $key => $item ) {
-						if ( 'themes.php' === $item[2] ) {
-							unset( $submenu['themes.php'][ $key ] );
-							break;
-						}
-					}
-				}
+			'admin_menu',
+			function (): void {
+				remove_submenu_page( 'themes.php', 'themes.php' );
 			}
 		);
 	}
@@ -72,35 +64,80 @@ class Settings implements SettingsInterface {
 	/**
 	 * Add settings menu item.
 	 */
-	private function add_settings_menu(): void {
-		add_options_page(
-			esc_html__( 'Screenly Cast Settings', 'screenly-cast' ),
-			esc_html__( 'Screenly Cast', 'screenly-cast' ),
+	public function add_settings_page(): void {
+		$page_title = esc_html__( 'Screenly Cast Settings', 'screenly-cast' );
+		$menu_title = esc_html__( 'Screenly Cast', 'screenly-cast' );
+
+		$hook = add_options_page(
+			$page_title,
+			$menu_title,
 			'manage_options',
 			'screenly-cast',
 			array( $this, 'render_settings_page' )
+		);
+
+		// Add the submenu item using add_submenu_page instead of directly modifying globals.
+		add_submenu_page(
+			'options-general.php',
+			$page_title,
+			$menu_title,
+			'manage_options',
+			'screenly-cast'
 		);
 	}
 
 	/**
 	 * Register plugin settings.
 	 */
-	private function register_settings(): void {
+	public function register_settings(): void {
 		register_setting(
-			'screenly-cast',
+			'screenly_cast_settings',
 			'screenly_cast_enabled',
 			array(
 				'type'              => 'boolean',
-				'default'           => false,
 				'sanitize_callback' => 'rest_sanitize_boolean',
+				'default'           => true,
+				'show_in_rest'      => true,
 			)
 		);
+
+		register_setting(
+			'screenly_cast_settings',
+			'screenly_cast_cache_duration',
+			array(
+				'type'              => 'integer',
+				'sanitize_callback' => array( $this, 'sanitize_cache_duration' ),
+				'default'           => 3600,
+				'show_in_rest'      => true,
+			)
+		);
+
+		// Set default values if not set.
+		if ( false === get_option( 'screenly_cast_enabled' ) ) {
+			update_option( 'screenly_cast_enabled', true );
+		}
+		if ( false === get_option( 'screenly_cast_cache_duration' ) ) {
+			update_option( 'screenly_cast_cache_duration', 3600 );
+		}
 	}
 
 	/**
-	 * Render settings page.
+	 * Sanitize cache duration value.
+	 *
+	 * @param mixed $value The value to sanitize.
+	 * @return int The sanitized value.
 	 */
-	private function render_settings_page(): void {
+	public function sanitize_cache_duration( $value ): int {
+		if ( 0 === (int) $value || ! is_numeric( $value ) || 0 >= (int) $value ) {
+			return 3600;
+		}
+		return (int) $value;
+	}
+
+	/**
+	 * Render the settings page.
+	 */
+	public function render_settings_page(): void {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
@@ -121,113 +158,6 @@ class Settings implements SettingsInterface {
 		}
 
 		// Show error messages.
-		settings_errors( 'screenly_cast_messages' );
-
-		?>
-		<div class="wrap">
-			<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
-			<form action="options.php" method="post">
-				<?php
-				settings_fields( 'screenly-cast' );
-				do_settings_sections( 'screenly-cast' );
-				submit_button( esc_html__( 'Save Changes', 'screenly-cast' ) );
-				?>
-			</form>
-		</div>
-		<?php
-	}
-
-	/**
-	 * Add settings page to the admin menu.
-	 */
-	public function addSettingsPage(): void {
-		global $submenu;
-		add_options_page(
-			__( 'Screenly Cast Settings', 'screenly-cast' ),
-			__( 'Screenly Cast', 'screenly-cast' ),
-			'manage_options',
-			'screenly-cast',
-			array( $this, 'renderSettingsPage' )
-		);
-		$submenu['options-general.php'][] = array(
-			__( 'Screenly Cast', 'screenly-cast' ),
-			'manage_options',
-			'screenly-cast',
-		);
-	}
-
-	/**
-	 * Register plugin settings.
-	 */
-	public function registerSettings(): void {
-		register_setting(
-			'screenly_cast_settings',
-			'screenly_cast_enabled',
-			array(
-				'type'              => 'boolean',
-				'sanitize_callback' => 'rest_sanitize_boolean',
-				'default'           => true,
-				'show_in_rest'      => true,
-			)
-		);
-
-		register_setting(
-			'screenly_cast_settings',
-			'screenly_cast_cache_duration',
-			array(
-				'type'              => 'integer',
-				'sanitize_callback' => array( $this, 'sanitizeCacheDuration' ),
-				'default'           => 3600,
-				'show_in_rest'      => true,
-			)
-		);
-
-		// Set default values if not set
-		if ( false === get_option( 'screenly_cast_enabled' ) ) {
-			update_option( 'screenly_cast_enabled', true );
-		}
-		if ( false === get_option( 'screenly_cast_cache_duration' ) ) {
-			update_option( 'screenly_cast_cache_duration', 3600 );
-		}
-	}
-
-	/**
-	 * Sanitize cache duration value.
-	 *
-	 * @param mixed $value The value to sanitize.
-	 * @return int The sanitized value.
-	 */
-	public function sanitizeCacheDuration( $value ): int {
-		if ( $value === 0 || $value === '0' || !is_numeric($value) || (int)$value <= 0 ) {
-			return 3600;
-		}
-		return (int)$value;
-	}
-
-	/**
-	 * Render the settings page.
-	 */
-	public function renderSettingsPage(): void {
-		if ( ! current_user_can( 'manage_options' ) ) {
-			return;
-		}
-
-		// Check nonce
-		if ( isset( $_POST['_wpnonce'] ) && ! wp_verify_nonce( sanitize_key( $_POST['_wpnonce'] ), 'screenly-cast-options' ) ) {
-			wp_die( esc_html__( 'Invalid nonce.', 'screenly-cast' ) );
-		}
-
-		// Show success message if settings were updated
-		if ( isset( $_GET['settings-updated'] ) ) {
-			add_settings_error(
-				'screenly_cast_messages',
-				'screenly_cast_message',
-				esc_html__( 'Settings Saved', 'screenly-cast' ),
-				'updated'
-			);
-		}
-
-		// Show error messages
 		settings_errors( 'screenly_cast_messages' );
 
 		echo '<div class="wrap">';

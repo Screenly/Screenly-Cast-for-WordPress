@@ -23,26 +23,26 @@ class TestVersionChecker extends TestCase {
         parent::tearDown();
     }
 
-    public function testGetWordPressVersion(): void {
+    public function test_get_wordpress_version(): void {
         global $wp_version;
-        $this->assertEquals($wp_version, $this->checker->getWordPressVersion());
+        $this->assertEquals($wp_version, $this->checker->get_wordpress_version());
     }
 
-    public function testGetRequiredWordPressVersion(): void {
-        $this->assertEquals('6.3', $this->checker->getRequiredWordPressVersion());
+    public function test_get_required_wordpress_version(): void {
+        $this->assertEquals('6.3', $this->checker->get_required_wordpress_version());
     }
 
-    public function testIsCompatibleWithCompatibleVersion(): void {
+    public function test_is_compatible_with_compatible_version(): void {
         global $wp_version;
         $wp_version = '6.3';
         $this->checker = new WordPressVersionChecker();
-        $this->assertTrue($this->checker->isWordPressVersionCompatible());
+        $this->assertTrue($this->checker->is_wordpress_version_compatible());
     }
 
-    public function testIsCompatibleWithIncompatibleVersion(): void {
+    public function test_is_compatible_with_incompatible_version(): void {
         global $wp_version;
         $wp_version = '6.2';
         $this->checker = new WordPressVersionChecker();
-        $this->assertFalse($this->checker->isWordPressVersionCompatible());
+        $this->assertFalse($this->checker->is_wordpress_version_compatible());
     }
 }

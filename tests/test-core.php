@@ -55,19 +55,19 @@ class TestCore extends WP_UnitTestCase {
     /**
      * Test plugin initialization.
      */
-    public function testInit(): void {
+    public function test_init(): void {
         $this->core->init();
-        $this->assertGreaterThan(0, has_filter('query_vars', array($this->core, 'addQueryVars')));
-        $this->assertGreaterThan(0, has_action('init', array($this->core, 'registerPostTypes')));
-        $this->assertGreaterThan(0, has_action('init', array($this->core, 'registerTaxonomies')));
+        $this->assertGreaterThan(0, has_filter('query_vars', array($this->core, 'add_query_vars')));
+        $this->assertGreaterThan(0, has_action('init', array($this->core, 'register_post_types')));
+        $this->assertGreaterThan(0, has_action('init', array($this->core, 'register_taxonomies')));
     }
 
     /**
      * Test query variables.
      */
-    public function testAddQueryVars(): void {
+    public function test_add_query_vars(): void {
         $vars = array();
-        $result = $this->core->addQueryVars( $vars );
+        $result = $this->core->add_query_vars( $vars );
         $this->assertContains( 'srly', $result );
     }
 }

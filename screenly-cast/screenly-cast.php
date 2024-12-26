@@ -25,22 +25,24 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-// Set up class autoloader
-spl_autoload_register( function ( $class ) {
-    // Only handle our own namespace
-    if ( strpos( $class, 'ScreenlyCast\\' ) !== 0 ) {
-        return;
-    }
+// Set up class autoloader.
+spl_autoload_register(
+	function ( $class_name ) {
+		// Only handle our own namespace.
+		if ( strpos( $class_name, 'ScreenlyCast\\' ) !== 0 ) {
+				return;
+		}
 
-    // Convert namespace to file path
-    $class_path = str_replace( 'ScreenlyCast\\', '', $class );
-    $class_path = str_replace( '\\', DIRECTORY_SEPARATOR, $class_path );
-    $file = dirname( __FILE__ ) . '/inc/' . $class_path . '.php';
+		// Convert namespace to file path.
+		$class_path = str_replace( 'ScreenlyCast\\', '', $class_name );
+		$class_path = str_replace( '\\', DIRECTORY_SEPARATOR, $class_path );
+		$file       = __DIR__ . '/inc/' . $class_path . '.php';
 
-    if ( file_exists( $file ) ) {
-        require_once $file;
-    }
-} );
+		if ( file_exists( $file ) ) {
+			require_once $file;
+		}
+	}
+);
 
 // Initialize the plugin.
 try {

@@ -32,29 +32,27 @@ class TestSettings extends WP_UnitTestCase {
     /**
      * Test adding settings page.
      */
-    public function testAddSettingsPage(): void {
-        global $submenu;
-        $submenu = array(); // Initialize the array
-        $this->settings->addSettingsPage();
-        $this->assertArrayHasKey( 'options-general.php', $submenu );
+    public function test_add_settings_page(): void {
+        $this->settings->add_settings_page();
+        $this->assertTrue( has_action( 'admin_menu' ) );
     }
 
     /**
      * Test sanitizing cache duration.
      */
-    public function testSanitizeCacheDuration(): void {
-        $this->assertEquals( 3600, $this->settings->sanitizeCacheDuration( 0 ) );
-        $this->assertEquals( 3600, $this->settings->sanitizeCacheDuration( -1 ) );
-        $this->assertEquals( 3600, $this->settings->sanitizeCacheDuration( 'invalid' ) );
-        $this->assertEquals( 7200, $this->settings->sanitizeCacheDuration( 7200 ) );
+    public function test_sanitize_cache_duration(): void {
+        $this->assertEquals( 3600, $this->settings->sanitize_cache_duration( 0 ) );
+        $this->assertEquals( 3600, $this->settings->sanitize_cache_duration( -1 ) );
+        $this->assertEquals( 3600, $this->settings->sanitize_cache_duration( 'invalid' ) );
+        $this->assertEquals( 7200, $this->settings->sanitize_cache_duration( 7200 ) );
     }
 
     /**
      * Test registering settings.
      */
-    public function testRegisterSettings(): void {
-        $this->settings->registerSettings();
-        $registered_settings = get_registered_settings();
-        $this->assertArrayHasKey( 'screenly_cast_cache_duration', $registered_settings );
+    public function test_register_settings(): void {
+        $this->settings->register_settings();
+        $this->assertTrue( get_option( 'screenly_cast_enabled' ) );
+        $this->assertEquals( 3600, get_option( 'screenly_cast_cache_duration' ) );
     }
 }

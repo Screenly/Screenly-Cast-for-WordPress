@@ -52,9 +52,8 @@ class ScreenlyCastTest extends WP_UnitTestCase {
      * Test plugin hooks.
      */
     public function test_plugin_hooks(): void {
-        $query = new WP_Query();
-        $this->core->parseQuery( $query );
-        $this->assertTrue( true ); // If we got here without errors, the test passed.
+        $this->core->init();
+        $this->assertGreaterThan(0, has_filter('parse_query', array($this->core, 'parse_query')));
     }
 
     /**
@@ -70,9 +69,9 @@ class ScreenlyCastTest extends WP_UnitTestCase {
      */
     public function test_init(): void {
         $this->core->init();
-        $this->assertGreaterThan(0, has_filter('query_vars', array($this->core, 'addQueryVars')));
-        $this->assertGreaterThan(0, has_action('init', array($this->core, 'registerPostTypes')));
-        $this->assertGreaterThan(0, has_action('init', array($this->core, 'registerTaxonomies')));
+        $this->assertGreaterThan(0, has_filter('query_vars', array($this->core, 'add_query_vars')));
+        $this->assertGreaterThan(0, has_action('init', array($this->core, 'register_post_types')));
+        $this->assertGreaterThan(0, has_action('init', array($this->core, 'register_taxonomies')));
     }
 
     /**
@@ -84,11 +83,15 @@ class ScreenlyCastTest extends WP_UnitTestCase {
     }
 
     /**
-     * Test query parsing.
+     * Test parse query.
      */
     public function test_parse_query(): void {
-        $query = new WP_Query();
-        $this->core->parseQuery( $query );
-        $this->assertTrue( true ); // If we got here without errors, the test passed.
+        $query = new \WP_Query();
+        $query->is_main_query = true;
+        $query->is_admin = false;
+        $query->set('srly', '1');
+        $this->core->parse_query($query);
+        $this->assertEquals('screenly_cast', $query->get('post_type'));
+        $this->assertEquals(1, $query->get('posts_per_page'));
     }
 }

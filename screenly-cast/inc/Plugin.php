@@ -58,6 +58,13 @@ class Plugin {
 	private SettingsInterface $settings;
 
 	/**
+	 * The core functionality instance.
+	 *
+	 * @var Core
+	 */
+	private Core $core;
+
+	/**
 	 * Constructor.
 	 */
 	public function __construct() {
@@ -66,6 +73,12 @@ class Plugin {
 		$this->version_checker = new WordPressVersionChecker();
 		$this->logger          = new WordPressLogger();
 		$this->settings        = new Settings( $this->paths, $this->logger );
+		$this->core           = new Core(
+			$this->logger,
+			$this->paths,
+			$this->theme_manager,
+			$this->version_checker
+		);
 	}
 
 	/**
@@ -79,6 +92,9 @@ class Plugin {
 			$this->install_theme();
 			$this->activate_theme();
 			$this->settings->init();
+			$this->core->init();
+			$this->core->admin_init();
+			add_action( 'parse_query', array( $this->core, 'parse_query' ) );
 		} catch ( ThemeInstallationException $e ) {
 			$this->logger->error( esc_html( $e->getMessage() ) );
 			throw new PluginInitializationException(
@@ -113,7 +129,7 @@ class Plugin {
 	private function install_theme(): void {
 		try {
 			$installer = new ThemeInstaller( $this->paths );
-			$installer->install();
+			$installer->install_theme();
 		} catch ( \Exception $e ) {
 			throw new ThemeInstallationException(
 				esc_html__( 'Failed to install theme files.', 'screenly-cast' )

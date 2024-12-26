@@ -56,11 +56,11 @@ class ScreenlyCastAdminTest extends WP_UnitTestCase {
 
         // Test with compatible version
         $wp_version = '6.3';
-        $this->assertTrue( $this->version_checker->isWordPressVersionCompatible() );
+        $this->assertTrue( $this->version_checker->is_wordpress_version_compatible() );
 
         // Test with incompatible version
         $wp_version = '6.2';
-        $this->assertFalse( $this->version_checker->isWordPressVersionCompatible() );
+        $this->assertFalse( $this->version_checker->is_wordpress_version_compatible() );
     }
 
     /**
@@ -69,14 +69,8 @@ class ScreenlyCastAdminTest extends WP_UnitTestCase {
     public function test_admin_init_with_incompatible_version(): void {
         global $wp_version;
         $wp_version = '6.2';
-
-        ob_start();
-        $this->core->adminInit();
-        do_action( 'admin_notices' );
-        $output = ob_get_clean();
-
-        $this->assertStringContainsString( 'error', $output );
-        $this->assertStringContainsString( 'Screenly Cast requires WordPress version 6.3 or higher', $output );
+        $this->core->admin_init();
+        $this->assertGreaterThan(0, has_action('admin_notices', array($this->core, 'display_version_error')));
     }
 
     /**

@@ -33,7 +33,7 @@ jobs:
           composer install
 
       - name: Run PHP CodeSniffer
-        run: ./vendor/bin/phpcs --standard=.phpcs.xml.dist .
+        run: composer run lint:php
 
   style-quality:
     name: CSS/JS
