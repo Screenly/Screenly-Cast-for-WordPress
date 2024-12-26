@@ -14,11 +14,6 @@ jobs:
       matrix:
         php-version: ['7.4', '8.0', '8.1', '8.2']
         wp-version: ['6.4.3', '6.3.5']
-        exclude:
-          - php-version: '7.4'
-            wp-version: '6.4.3'
-          - php-version: '7.4'
-            wp-version: '6.3.5'
 
     steps:
       - uses: actions/checkout@v4
