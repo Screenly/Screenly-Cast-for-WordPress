@@ -1,180 +1,125 @@
 <?php
 /**
- * Make sure we don't expose any info if called directly.
- *
- * PHP version 5
- *
- * @category PHP
- * @package  ScreenlyCast
- * @author   Peter Monte <pmonte@screenly.io>
- * @license  https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html  GPLv2
- * @link     https://github.com/Screenly/Screenly-Cast-for-WordPress
- * @since    0.0.1
- */
-
-
-
-
-/**
- * Custom option and settings
+ * Settings page functionality for Screenly Cast.
  *
  * @package ScreenlyCast
- * @since   0.0.1
- * @return  void
  */
-function srlySettingsInit()
-{
-    // register a new setting for "wporg" page
-    register_setting('screenly', 'screenly_options_logo');
 
-    // register a new section in the "wporg" page
-    add_settings_section(
-        'screenly_section',
-        __('Settings', SRLY_THEME),
-        'srlySectionInput',
-        'screenly'
-    );
+declare(strict_types=1);
 
-    // register a new field in the "screenly_section" section, inside the "wporg" page
-    add_settings_field(
-        'screenly_logo_field',
-        __('Brand logo', SRLY_THEME),
-        'srlyLogoField',
-        'screenly',
-        'screenly_section',
-        array(
-            'label_for' => 'screenly_options_logo',
-            'class' => 'screenly-row',
-            'screenly_custom_data' => 'custom'
-        )
-    );
+namespace ScreenlyCast;
+
+/**
+ * Initialize settings.
+ */
+function srly_settings_init(): void {
+	// Register settings section.
+	add_settings_section(
+		'screenly_cast_general',
+		esc_html__( 'General Settings', 'screenly-cast' ),
+		null,
+		'screenly-cast-settings'
+	);
+
+	// Register settings field.
+	add_settings_field(
+		'screenly_cast_logo',
+		esc_html__( 'Logo', 'screenly-cast' ),
+		'srly_logo_field',
+		'screenly-cast-settings',
+		'screenly_cast_general'
+	);
+
+	// Register setting.
+	register_setting(
+		'screenly_cast_settings',
+		'screenly_cast_logo',
+		array(
+			'type'              => 'string',
+			'description'       => esc_html__( 'Logo URL', 'screenly-cast' ),
+			'sanitize_callback' => 'esc_url_raw',
+		)
+	);
+}
+add_action( 'admin_init', 'srly_settings_init' );
+
+/**
+ * Render the settings section input.
+ */
+function srly_section_input(): void {
+	printf(
+		'<p>%s</p>',
+		esc_html__( 'Configure your Screenly Cast settings.', 'screenly-cast' )
+	);
 }
 
-
-
-
 /**
- * Register our srlySettingsInit to the admin_init action hook
- *
- * @package ScreenlyCast
- * @since   0.0.1
+ * Render the logo field.
  */
-add_action('admin_init', 'srlySettingsInit');
-
-
-
-/**
- * Custom option and settings: callback functions section callbacks can accept an
- * $args parameter, which is an array. $args have the following keys defined:
- * title, id, callback. the values are defined at the add_settings_section()
- * function.
- *
- * @param $args section callbacks can accept an $args parameter, which is an array
- *        that has the following keys defined: title, id, callback. the values are
- *        defined at the add_settings_section() function - srlySettingsInit.
- *
- * @package ScreenlyCast
- * @since   0.0.1
- * @return  void
- */
-function srlySectionInput($args)
-{
-?>
-    <p id="<?php echo esc_attr($args['id']); ?>">
-        <?php esc_html_e('Use this page to change your settings.', SRLY_THEME); ?>
-    </p>
-<?php
+function srly_logo_field(): void {
+	$value = get_option( 'screenly_cast_logo', '' );
+	$var   = esc_attr( $value );
+	$path  = esc_url( $value );
+	printf(
+		'<input type="text" id="screenly_cast_logo" name="screenly_cast_logo" value="%s" class="regular-text" />',
+		esc_attr( $value )
+	);
+	esc_html_e( 'Enter the URL of your logo.', 'screenly-cast' );
 }
 
-
-
 /**
- * Print logo input
- *
- * @param $args srlyLogoField can accept an $args parameter, which is an array
- *        defined at the add_settings_field() function - srlySettingsInit.
- *        Wordpress has magic interaction with the following keys: label_for,
- *        class. the "label_for" key value is used for the "for" attribute of the
- *        <label>. the "class" key value is used for the "class" attribute of the
- *        <tr> containing the field. you can add custom key value pairs to be used
- *        inside your callbacks.
- *
- * @package ScreenlyCast
- * @since   0.0.1
- * @return  void
+ * Add the options page.
  */
-function srlyLogoField($args)
-{
-    $path = get_option('screenly_options_logo');
-    $var = esc_attr($args['label_for']);
-?>
-    <input type="url" id="<?php echo $var?>" name="<?php echo $var?>" value="<?php echo $path;?>" class="large-text">
-    <p class="description"><?php esc_html_e('Upload an image to you media library. Check it\'s url and copy paste to the input above.', SRLY_THEME); ?></p>
-    <p class="description"><?php _e('We recomend an image with the proportion of <b>314 x 98 px</b>.', SRLY_THEME); ?></p>
-<?php
+function srly_options_page(): void {
+	// Add the options page to the Settings menu.
+	add_options_page(
+		esc_html__( 'Screenly Cast Settings', 'screenly-cast' ),
+		esc_html__( 'Screenly Cast', 'screenly-cast' ),
+		'manage_options',
+		'screenly-cast-settings',
+		'srly_options_page_html'
+	);
 }
-
-
-
-/**
- * Add the sub-menu item to main menu under Settings. Creates a dedicated page for
- * the plugin.
- *
- * @package ScreenlyCast
- * @since   0.0.1
- * @return  void
- */
-function srlyOptionsPage()
-{
-    // add top level menu page
-    add_submenu_page(
-        'options-general.php',
-        'Screenly Cast',
-        'Screenly',
-        'manage_options',
-        'screenly',
-        'srlyOptionsPageHTML'
-    );
-}
-
-
+add_action( 'admin_menu', 'srly_options_page' );
 
 /**
- * Register our srlyOptionsPage to the admin_menu action hook
- *
- * @package ScreenlyCast
- * @since   0.0.1
+ * Render the options page HTML.
  */
-add_action('admin_menu', 'srlyOptionsPage');
+function srly_options_page_html(): void {
+	// Check user capabilities.
+	if ( ! current_user_can( 'manage_options' ) ) {
+		return;
+	}
 
+	// Check nonce.
+	if ( isset( $_POST['_wpnonce'] ) && ! wp_verify_nonce( sanitize_key( $_POST['_wpnonce'] ), 'screenly_cast_settings-options' ) ) {
+		wp_die( esc_html__( 'Invalid nonce.', 'screenly-cast' ) );
+	}
 
+	// Show success message if settings were updated.
+	if ( isset( $_GET['settings-updated'] ) ) {
+		add_settings_error(
+			'screenly_cast_messages',
+			'screenly_cast_message',
+			esc_html__( 'Settings Saved', 'screenly-cast' ),
+			'updated'
+		);
+	}
 
-/**
- * Prints out the form and also any succes message.
- *
- * @package ScreenlyCast
- * @since   0.0.1
- * @return  void
- */
-function srlyOptionsPageHTML()
-{
-    /**
-     * Check user capabilities
-     */
-    if (!current_user_can('manage_options')) {
-        return;
-    }
-?>
-<div class="wrap">
-    <h1><?php echo esc_html(get_admin_page_title()); ?></h1>
-    <form action="options.php" method="post">
-        <?php
-        settings_fields('screenly');
-        do_settings_sections('screenly');
-        submit_button('Save Settings');
-        ?>
-    </form>
-</div>
-<?php
+	// Show error messages.
+	settings_errors( 'screenly_cast_messages' );
+
+	?>
+	<div class="wrap">
+		<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
+		<form action="options.php" method="post">
+			<?php
+			settings_fields( 'screenly-cast-settings' );
+			do_settings_sections( 'screenly-cast-settings' );
+			submit_button( esc_html__( 'Save Changes', 'screenly-cast' ) );
+			?>
+		</form>
+	</div>
+	<?php
 }
 ?>

@@ -11,4 +11,3 @@
  * @link     https://github.com/Screenly/Screenly-Cast-for-WordPress
  * @since    0.0.1
  */
-?>

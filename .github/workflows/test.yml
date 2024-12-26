@@ -13,23 +13,30 @@ permissions:
 jobs:
   test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: ['7.4', '8.0', '8.1', '8.2']
+        wordpress: ['6.4', '6.3', '6.2']
+        exclude:
+          - wordpress: '6.4'
+            php: '7.4'
+          - wordpress: '6.3'
+            php: '7.4'
 
     steps:
       - uses: actions/checkout@v3
 
-      - name: Log in to GitHub Container Registry
-        uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Run tests
-        run: docker compose up --build --abort-on-container-exit --exit-code-from wordpress-test
-
-      - name: Add coverage to job summary
+      - name: Build and run tests
         run: |
-          echo "# PHP Test Coverage" >> $GITHUB_STEP_SUMMARY
-          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
-          cat coverage.txt >> $GITHUB_STEP_SUMMARY
-          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          docker compose build \
+            --build-arg PHP_VERSION=${{ matrix.php }} \
+            wordpress-test
+          WP_VERSION=${{ matrix.wordpress }} docker compose up \
+            --exit-code-from wordpress-test \
+            wordpress-test
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          file: ./build/logs/clover.xml
+          fail_ci_if_error: true

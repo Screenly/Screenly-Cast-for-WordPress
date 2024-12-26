@@ -10,16 +10,46 @@
         }
     ],
     "require": {
-        "php": ">=5.3.0"
+        "php": "^7.4"
     },
     "require-dev": {
-        "phpunit/phpunit": "4.8.*",
-        "squizlabs/php_codesniffer": "2.*",
-        "wp-coding-standards/wpcs": "0.14.*"
+        "phpunit/phpunit": "^9.0",
+        "yoast/phpunit-polyfills": "^2.0",
+        "squizlabs/php_codesniffer": "^3.7",
+        "wp-coding-standards/wpcs": "^3.0",
+        "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+        "slevomat/coding-standard": "^8.15",
+        "phpcompatibility/php-compatibility": "^9.3",
+        "phpcompatibility/phpcompatibility-wp": "^2.1"
+    },
+    "autoload": {
+        "classmap": [
+            "screenly-cast/inc/"
+        ],
+        "psr-4": {
+            "ScreenlyCast\\": "screenly-cast/inc/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ScreenlyCast\\Tests\\": "tests/"
+        }
     },
     "scripts": {
         "test": "phpunit",
-        "phpcs": "phpcs --standard=WordPress ./screenly-cast",
-        "phpcbf": "phpcbf --standard=WordPress ./screenly-cast"
+        "prepare-test": "bash bin/install-wp-tests.sh wordpress_test root '' localhost latest",
+        "lint:php": "phpcs",
+        "lint:php:fix": "phpcbf",
+        "lint": [
+            "@lint:php"
+        ]
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        },
+        "platform": {
+            "php": "7.4"
+        }
     }
 }

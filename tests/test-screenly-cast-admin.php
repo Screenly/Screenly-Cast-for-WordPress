@@ -1,96 +1,97 @@
 <?php
-/**
- * Class ScreenlyCastAdminTest
- *
- * @package ScreenlyCast
- */
+declare(strict_types=1);
+
+namespace ScreenlyCast\Tests;
+
+use WP_UnitTestCase;
+use ScreenlyCast\WordPressVersionChecker;
+use ScreenlyCast\Core;
+use ScreenlyCast\WordPressLogger;
+use ScreenlyCast\WordPressPaths;
+use ScreenlyCast\WordPressThemeManager;
+use Exception;
 
 class ScreenlyCastAdminTest extends WP_UnitTestCase {
+    use TestFilesystemTrait;
+
+    private Core $core;
+    private WordPressVersionChecker $versionChecker;
+    private string $originalVersion;
+
     /**
-     * Test WordPress version compatibility check
+     * Set up test environment.
      */
-    public function test_wp_version_compatibility() {
+    protected function setUp(): void {
+        parent::setUp();
         global $wp_version;
-        $original_version = $wp_version;
+        $this->originalVersion = $wp_version;
+        $this->paths = new WordPressPaths();
+        $this->logger = new WordPressLogger();
+        $this->theme_manager = new WordPressThemeManager( $this->paths );
+        $this->version_checker = new WordPressVersionChecker();
+        $this->core = new Core(
+            $this->logger,
+            $this->paths,
+            $this->theme_manager,
+            $this->version_checker
+        );
+    }
+
+    protected function tearDown(): void {
+        global $wp_version;
+        $wp_version = $this->originalVersion;
+        $this->cleanupTestTheme();
+        parent::tearDown();
+    }
+
+    /**
+     * Test WordPress version compatibility.
+     */
+    public function test_wp_version_compatibility(): void {
+        global $wp_version;
 
         // Test with compatible version
-        $wp_version = '4.4.0'; // Same as SRLY_WP_VERSION
-        $this->assertTrue(ScreenlyCast::checkWPVersion());
+        $wp_version = '6.4';
+        $this->assertTrue( $this->version_checker->isWordPressVersionCompatible() );
 
-        // Test with lower version
-        $wp_version = '4.3.0'; // Lower than SRLY_WP_VERSION
-        $this->assertFalse(ScreenlyCast::checkWPVersion());
-
-        // Restore original version
-        $wp_version = $original_version;
+        // Test with incompatible version
+        $wp_version = '6.3';
+        $this->assertFalse( $this->version_checker->isWordPressVersionCompatible() );
     }
 
     /**
-     * Test admin initialization with incompatible WP version
+     * Test admin initialization with incompatible version.
      */
-    public function test_admin_init_with_incompatible_version() {
+    public function test_admin_init_with_incompatible_version(): void {
         global $wp_version;
-        $original_version = $wp_version;
-        $wp_version = '4.3.0';
+        $wp_version = '6.3';
 
-        // Should return false and add notice actions
-        $this->assertFalse(ScreenlyCast::adminInit());
-        $this->assertNotFalse(has_action('admin_notices', array('ScreenlyCast', 'notifyWPVersion')));
-        $this->assertNotFalse(has_action('network_admin_notices', array('ScreenlyCast', 'notifyWPVersion')));
-
-        $wp_version = $original_version;
-    }
-
-    /**
-     * Test version notification markup
-     */
-    public function test_version_notification_markup() {
         ob_start();
-        ScreenlyCast::notifyWPVersion();
+        $this->core->adminInit();
+        do_action( 'admin_notices' );
         $output = ob_get_clean();
 
-        $this->assertRegExp('/notice notice-success/', $output);
-        $this->assertRegExp('/notice notice-error/', $output);
-        $this->assertRegExp('/deactivated/', $output);
-        $this->assertRegExp('/requires WordPress/', $output);
+        $this->assertStringContainsString( 'error', $output );
+        $this->assertStringContainsString( 'requires WordPress', $output );
     }
 
     /**
-     * Test debug logging
+     * Test debug logging.
      */
-    public function test_debug_logging() {
-        // Enable debug logging
-        if (!defined('WP_DEBUG')) {
-            define('WP_DEBUG', true);
+    public function test_debug_logging(): void {
+        $temp_log = tempnam( sys_get_temp_dir(), 'wp_test_log' );
+        $original_error_log = ini_get( 'error_log' );
+        ini_set( 'error_log', $temp_log );
+
+        try {
+            $this->logger->debug( 'Test debug message' );
+            $log_content = file_get_contents( $temp_log );
+
+            $this->assertStringContainsString( '[Screenly Cast Debug]', $log_content );
+            $this->assertStringContainsString( 'Test debug message', $log_content );
+        } finally {
+            ini_set( 'error_log', $original_error_log );
+            unlink( $temp_log );
         }
-        if (!defined('WP_DEBUG_LOG')) {
-            define('WP_DEBUG_LOG', true);
-        }
-
-        // Add filter to enable debug logging
-        add_filter('screenly_cast_debug_log', '__return_true');
-
-        // Capture error log output
-        $temp_log = tempnam(sys_get_temp_dir(), 'wp_');
-        $original_log = ini_get('error_log');
-        ini_set('error_log', $temp_log);
-
-        // Use reflection to access private method
-        $class = new ReflectionClass('ScreenlyCast');
-        $method = $class->getMethod('_log');
-        $method->setAccessible(true);
-
-        // Test logging
-        $test_message = 'Test log message';
-        $method->invoke(null, $test_message);
-
-        // Read log file
-        $log_content = file_get_contents($temp_log);
-        $this->assertContains($test_message, $log_content);
-
-        // Clean up
-        ini_set('error_log', $original_log);
-        unlink($temp_log);
-        remove_filter('screenly_cast_debug_log', '__return_true');
     }
 }

@@ -1,8 +1,9 @@
 === Screenly Cast ===
 Tags: digital signage, screenly
-Requires at least: 3.7
+Requires at least: 6.4
+Requires PHP: 7.4
 License: GPLv2
-Stable tag: trunk
+Stable tag: 1.0.0
 
 A WordPress plugin to enable easy and beautiful casting of pages, posts and image media on [Screenly](https://www.screenly.io) digital signage devices.
 
@@ -41,19 +42,12 @@ In most cases, you only need to use "?srly". However, if you already got an exis
 
 == Changelog ==
 
-= 0.1.18 =
-* Minor: PHP Version 5.2.4
-* - Replaces [] with array() to comply with WP minimum requirement of PHP Version 5.2.4
-* - Removes trailing comma in `screenly-cast-settings.php line 48
-* - Code formating
+= 1.0.0 =
+* Major: Complete rewrite of the plugin
+* - Modern PHP 7.4+ features and type safety
+* - Improved code organization and maintainability
+* - Updated minimum WordPress version to 6.4
+* - Better error handling and version compatibility checks
 
-= 0.1.17 =
-* Core: Raised WP min version to 4.4.0 due to methods being used
-* - Fixed bug in duplicated message on settings saved
-* - Corrected `text-domain` in settings
-
-= 0.1.13 =
-* Core: Replaced plugin name and text-domain to "screenly-cast"
-
-= 0.1.19
-* Added PHPUnit test files for wordpress. 
+= 0.1.19 =
+* Added PHPUnit test files for wordpress.

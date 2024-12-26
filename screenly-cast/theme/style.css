@@ -1,0 +1,32 @@
+/*
+Theme Name: Screenly Cast
+Theme URI: https://github.com/Screenly/Screenly-Cast-for-WordPress
+Author: Screenly
+Author URI: https://www.screenly.io
+Description: A minimal theme for displaying Screenly Cast content
+Version: 1.0.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: screenly-cast
+*/
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #000;
+  color: #fff;
+}
+
+.screenly-content {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.screenly-content iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}

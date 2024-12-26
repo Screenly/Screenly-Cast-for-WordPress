@@ -1,11 +1,79 @@
-wp_org
-.swp
+# Operating System files
 .DS_Store
+Thumbs.db
 
-# Coverage files
+# Editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+.editorconfig
+
+# Composer
+/vendor/
+composer.lock
+
+# Node
+/node_modules/
+package-lock.json
+
+# PHP
+.phpcs-cache
+.phpunit.result.cache
+.php_cs.cache
+.php-cs-fixer.cache
+
+# WordPress
+wp-config.php
+wp-content/
+!wp-content/plugins/
+!wp-content/themes/
+
+# Testing
+/coverage/
+/tests/coverage/
 clover.xml
-coverage.php
+.phpunit.cache/
 coverage.json
 coverage.txt
-/coverage/
-*.cov
+coverage.php
+coverage/css/
+
+# Build files
+/build/
+/dist/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Tool configuration
+phpstan.neon
+psalm.xml
+rector.php
+.stylelintrc.json
+
+# Logs
+*.log
+/logs/
+
+# Cache
+*.cache
+
+# Temporary files
+*.tmp
+*.temp
+.temp/
+tmp/
+
+# Docker
+docker-compose.override.yml
+
+# WordPress CLI
+wp-cli.phar
+wp-cli.local.yml
+
+# Project specific
+screenly-cast/languages/*.mo
+screenly-cast/languages/*.po~
