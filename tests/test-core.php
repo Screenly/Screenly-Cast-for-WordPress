@@ -57,8 +57,9 @@ class TestCore extends WP_UnitTestCase {
      */
     public function testInit(): void {
         $this->core->init();
-        do_action('after_setup_theme');
-        $this->assertTrue( current_theme_supports( 'post-thumbnails' ) );
+        $this->assertGreaterThan(0, has_filter('query_vars', array($this->core, 'addQueryVars')));
+        $this->assertGreaterThan(0, has_action('init', array($this->core, 'registerPostTypes')));
+        $this->assertGreaterThan(0, has_action('init', array($this->core, 'registerTaxonomies')));
     }
 
     /**

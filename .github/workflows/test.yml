@@ -1,5 +1,10 @@
-name: Run Tests
-on: [push, pull_request]
+name: Test
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
   init-summary:
@@ -15,58 +20,60 @@ jobs:
 
   test:
     needs: init-summary
-    name: PHP ${{ matrix.php }} / WP ${{ matrix.wordpress }}
+    name: PHP ${{ matrix.php-version }} / WP ${{ matrix.wp-version }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php: ['7.4', '8.0', '8.1', '8.2']
-        wordpress: ['6.4', '6.3']
+        php-version: ['7.4', '8.0', '8.1', '8.2']
+        wp-version: ['6.4', '6.3']
         exclude:
-          - wordpress: '6.4'
-            php: '7.4'
-          - wordpress: '6.3'
-            php: '7.4'
+          - php-version: '7.4'
+            wp-version: '6.4'
+          - php-version: '7.4'
+            wp-version: '6.3'
 
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v3
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libxml2-utils
 
-    - name: Build and run tests
-      id: phpunit
-      run: |
-        docker compose build --build-arg PHP_VERSION=${{ matrix.php }} wordpress-test
-        WP_VERSION=${{ matrix.wordpress }} docker compose run --rm wordpress-test sh -c "composer install && ./vendor/bin/phpunit --log-junit=test-results.xml" || true
+      - name: Build and run tests
+        id: phpunit
+        run: |
+          docker compose build --build-arg PHP_VERSION=${{ matrix.php-version }} wordpress-test
+          WP_VERSION=${{ matrix.wp-version }} docker compose run --rm wordpress-test sh -c "composer install && ./vendor/bin/phpunit --log-junit=test-results.xml" || true
 
-        # Extract test numbers using xmllint
-        TESTS=$(xmllint --xpath "string(/testsuites/@tests)" test-results.xml)
-        FAILURES=$(xmllint --xpath "string(/testsuites/@failures)" test-results.xml)
-        ERRORS=$(xmllint --xpath "string(/testsuites/@errors)" test-results.xml)
-        TIME=$(xmllint --xpath "string(/testsuites/@time)" test-results.xml)
-
-        # Add row to summary
-        echo "| ${{ matrix.php }} | ${{ matrix.wordpress }} | $TESTS | $FAILURES | $ERRORS | $TIME |" >> $GITHUB_STEP_SUMMARY
-
-        # If there are failures or errors, add details
-        if [ "$FAILURES" -gt 0 ] || [ "$ERRORS" -gt 0 ]; then
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### Failures for PHP ${{ matrix.php }} / WordPress ${{ matrix.wordpress }}" >> $GITHUB_STEP_SUMMARY
-          echo '```' >> $GITHUB_STEP_SUMMARY
-          xmllint --xpath "//testcase[failure or error]" test-results.xml | sed 's/<testcase/\n<testcase/g' >> $GITHUB_STEP_SUMMARY
-          echo '```' >> $GITHUB_STEP_SUMMARY
-        fi
-
-    - name: Check Test Results
-      if: always()
-      run: |
-        if [ -f test-results.xml ]; then
+          # Extract test numbers using xmllint
+          TESTS=$(xmllint --xpath "string(/testsuites/@tests)" test-results.xml)
           FAILURES=$(xmllint --xpath "string(/testsuites/@failures)" test-results.xml)
           ERRORS=$(xmllint --xpath "string(/testsuites/@errors)" test-results.xml)
+          TIME=$(xmllint --xpath "string(/testsuites/@time)" test-results.xml)
+
+          # Add row to summary
+          echo "| ${{ matrix.php-version }} | ${{ matrix.wp-version }} | $TESTS | $FAILURES | $ERRORS | $TIME |" >> $GITHUB_STEP_SUMMARY
+
+          # If there are failures or errors, add details
           if [ "$FAILURES" -gt 0 ] || [ "$ERRORS" -gt 0 ]; then
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "### Failures for PHP ${{ matrix.php-version }} / WordPress ${{ matrix.wp-version }}" >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+            xmllint --xpath "//testcase[failure or error]" test-results.xml | sed 's/<testcase/\n<testcase/g' >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: Check Test Results
+        if: always()
+        run: |
+          if [ -f test-results.xml ]; then
+            FAILURES=$(xmllint --xpath "string(/testsuites/@failures)" test-results.xml)
+            ERRORS=$(xmllint --xpath "string(/testsuites/@errors)" test-results.xml)
+            if [ "$FAILURES" -gt 0 ] || [ "$ERRORS" -gt 0 ]; then
+              exit 1
+            fi
+          else
+            echo "No test results found"
             exit 1
           fi
-        else
-          echo "No test results found"
-          exit 1
-        fi
