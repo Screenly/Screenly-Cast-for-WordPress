@@ -10,13 +10,18 @@ jobs:
   php-quality:
     name: PHP
     runs-on: ubuntu-latest
+    container: php:8.2-cli
     steps:
       - uses: actions/checkout@v4
 
-      - name: Run PHP CodeSniffer
+      - name: Install dependencies
         run: |
-          docker compose build --build-arg PHP_VERSION=8.2 wordpress-test
-          docker compose run --rm wordpress-test ./vendor/bin/phpcs --standard=.phpcs.xml.dist . --report=checkstyle | cs2pr
+          apt-get update && apt-get install -y git unzip
+          curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+          composer install
+
+      - name: Run PHP CodeSniffer
+        run: ./vendor/bin/phpcs --standard=.phpcs.xml.dist . --report=checkstyle | cs2pr
 
   style-quality:
     name: CSS/JS
@@ -36,4 +41,4 @@ jobs:
         run: npm run lint:css -- --formatter=github
 
       - name: Run JS linter
-        run: npm run lint:js -- --format=github
+        run: npm run lint:js -- --format=stylish
