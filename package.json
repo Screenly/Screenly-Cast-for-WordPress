@@ -8,8 +8,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint:css": "stylelint \"**/*.css\"",
-    "lint:css:fix": "stylelint \"**/*.css\" --fix",
+    "lint:css": "stylelint \"screenly-cast/**/*.css\" \"screenly-cast/theme/**/*.css\"",
+    "lint:css:fix": "stylelint \"screenly-cast/**/*.css\" \"screenly-cast/theme/**/*.css\" --fix",
     "lint:js": "eslint \"screenly-cast/**/*.js\"",
     "lint:js:fix": "eslint \"screenly-cast/**/*.js\" --fix",
     "lint": "npm run lint:css && npm run lint:js"
