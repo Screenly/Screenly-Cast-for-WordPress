@@ -61,17 +61,6 @@ class Core {
 		$this->paths = $paths;
 		$this->theme_manager = $theme_manager;
 		$this->version_checker = $version_checker;
-
-		// Add theme support immediately
-		add_theme_support('title-tag');
-		add_theme_support('post-thumbnails');
-		add_theme_support('html5', array(
-			'search-form',
-			'gallery',
-			'caption',
-			'style',
-			'script',
-		));
 	}
 
 	/**

@@ -76,3 +76,5 @@ wp-cli.local.yml
 # Project specific
 screenly-cast/languages/*.mo
 screenly-cast/languages/*.po~
+phpunit-output.txt
+test-results.xml
