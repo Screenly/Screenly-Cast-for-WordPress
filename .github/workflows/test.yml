@@ -25,11 +25,18 @@ jobs:
 
       - name: Build and run tests
         id: phpunit
+        shell: bash
         run: |
-          echo "### PHP ${{ matrix.php-version }} / WordPress ${{ matrix.wp-version }}" >> $GITHUB_STEP_SUMMARY
-          echo '```' >> $GITHUB_STEP_SUMMARY
-          docker compose build --build-arg PHP_VERSION=${{ matrix.php-version }} wordpress-test
-          WP_VERSION=${{ matrix.wp-version }} docker compose run --rm wordpress-test sh -c "composer install && ./vendor/bin/phpunit" | tee >(cat >> $GITHUB_STEP_SUMMARY)
-          test ${PIPESTATUS[0]} -eq 0
+          {
+            echo "### PHP ${{ matrix.php-version }} / WordPress ${{ matrix.wp-version }}" >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+            docker compose build --build-arg PHP_VERSION=${{ matrix.php-version }} wordpress-test
+            WP_VERSION=${{ matrix.wp-version }} docker compose run --rm wordpress-test sh -c "composer install && ./vendor/bin/phpunit" | tee >(cat >> $GITHUB_STEP_SUMMARY)
+            exit ${PIPESTATUS[0]}
+          } || {
+            echo '```' >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            exit 1
+          }
           echo '```' >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
