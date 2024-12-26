@@ -19,12 +19,12 @@ WORKDIR /var/www/html/wp-content/plugins/screenly-cast
 COPY composer.json composer.lock ./
 
 # Install dependencies
-RUN composer install --prefer-dist --no-progress
+RUN composer install --prefer-dist --no-interaction --no-progress
 
 # Copy the rest of the application
 COPY . .
 
-# Set up entrypoint
+# Copy test files
 COPY tests/docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
