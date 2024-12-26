@@ -8,66 +8,32 @@ on:
 
 jobs:
   php-quality:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        php-version: ['7.4', '8.1']
-
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: ${{ matrix.php-version }}
-          coverage: none
-          tools: composer:v2, cs2pr
-
-      - name: Get Composer cache directory
-        id: composer-cache
-        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
-
-      - name: Cache Composer dependencies
-        uses: actions/cache@v3
-        with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: ${{ runner.os }}-composer-
-
-      - name: Install dependencies
-        run: composer install --prefer-dist --no-progress
-
-      - name: Run PHP_CodeSniffer
-        run: composer phpcs -- --report=checkstyle | cs2pr
-
-      - name: Run PHPStan
-        run: composer phpstan -- --error-format=github
-
-      - name: Run Psalm
-        run: composer psalm -- --output-format=github
-
-  assets-quality:
+    name: PHP
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+
+      - name: Run PHP CodeSniffer
+        run: |
+          docker compose build --build-arg PHP_VERSION=8.2 wordpress-test
+          docker compose run --rm wordpress-test sh -c "composer install && ./vendor/bin/phpcs --standard=.phpcs.xml.dist . --report=checkstyle" | cs2pr
+
+  style-quality:
+    name: CSS/JS
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '18'
-          cache: 'npm'
+          node-version: '20'
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Check CSS
-        run: npm run lint:css -- --format github
+      - name: Run CSS linter
+        run: npm run lint:css -- --formatter=github
 
-      - name: Check JavaScript
-        run: npm run lint:js -- --format github
-
-      - name: Check HTML
-        run: npm run lint:html -- --format github
-
-      - name: Check image sizes
-        run: npm run lint:images
+      - name: Run JS linter
+        run: npm run lint:js -- --format=github

@@ -8,9 +8,11 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint:css": "stylelint \"**/*.css\"",
-    "lint:css:fix": "stylelint \"**/*.css\" --fix",
-    "lint": "npm run lint:css"
+    "lint:css": "stylelint \"screenly-cast/**/*.css\"",
+    "lint:css:fix": "stylelint \"screenly-cast/**/*.css\" --fix",
+    "lint:js": "eslint \"screenly-cast/**/*.js\"",
+    "lint:js:fix": "eslint \"screenly-cast/**/*.js\" --fix",
+    "lint": "npm run lint:css && npm run lint:js"
   },
   "repository": {
     "type": "git",
@@ -24,7 +26,9 @@
   },
   "homepage": "https://github.com/Screenly/Screenly-Cast-for-WordPress#readme",
   "devDependencies": {
+    "@wordpress/eslint-plugin": "^17.3.0",
     "@wordpress/stylelint-config": "^23.6.0",
+    "eslint": "^8.56.0",
     "stylelint": "^13.13.1",
     "stylelint-config-standard": "^22.0.0",
     "stylelint-config-wordpress": "^17.0.0"
