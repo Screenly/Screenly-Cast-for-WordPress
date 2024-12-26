@@ -33,7 +33,7 @@ jobs:
         run: npm install
 
       - name: Run CSS linter
-        run: npm run lint:css -- --formatter=github
+        run: npm run lint:css -- --formatter=string
 
       - name: Run JS linter
         run: npm run lint:js -- --format=github
