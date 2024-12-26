@@ -21,7 +21,7 @@ jobs:
           composer install
 
       - name: Run PHP CodeSniffer
-        run: ./vendor/bin/phpcs --standard=.phpcs.xml.dist . --report=checkstyle | cs2pr
+        run: ./vendor/bin/phpcs --standard=.phpcs.xml.dist .
 
   style-quality:
     name: CSS/JS
