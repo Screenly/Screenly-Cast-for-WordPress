@@ -19,7 +19,7 @@
     "url": "git+https://github.com/Screenly/Screenly-Cast-for-WordPress.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Screenly, Inc <hello@screenly.io>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Screenly/Screenly-Cast-for-WordPress/issues"

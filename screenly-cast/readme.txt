@@ -48,6 +48,10 @@ In most cases, you only need to use "?srly". However, if you already got an exis
 * - Improved code organization and maintainability
 * - Updated minimum WordPress version to 6.4
 * - Better error handling and version compatibility checks
+* - Added comprehensive test suite with unit and integration tests
+* - Added theme installation and management functionality
+* - Added proper WordPress coding standards compliance
+* - Added proper query handling for Screenly Cast content
 
 = 0.1.19 =
 * Added PHPUnit test files for wordpress.

@@ -11,6 +11,11 @@ use ScreenlyCast\WordPressPaths;
 use ScreenlyCast\WordPressThemeManager;
 use Exception;
 
+/**
+ * @package ScreenlyCast
+ * @author  Screenly, Inc <hello@screenly.io>
+ * @uses    PHPunit A testing framework
+ */
 class ScreenlyCastAdminTest extends WP_UnitTestCase {
     use TestFilesystemTrait;
 
