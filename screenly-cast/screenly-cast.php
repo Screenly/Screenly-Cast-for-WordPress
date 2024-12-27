@@ -26,7 +26,7 @@ if ( ! defined( 'WPINC' ) ) {
 
 // Set up class autoloader.
 spl_autoload_register(
-	function ($class_name) {
+	function ( $class_name ) {
 		// Only handle our own namespace.
 		if ( strpos( $class_name, 'ScreenlyCast\\' ) !== 0 ) {
 			return;
@@ -47,13 +47,15 @@ try {
 	$screenly_plugin = new Plugin();
 	$screenly_plugin->init();
 } catch ( \Exception $e ) {
-	add_action( 'admin_notices', function() use ( $e ) {
-		$class = 'notice notice-error';
-		$message = $e->getMessage();
-		printf(
-			'<div class="%1$s"><p>%2$s</p></div>',
-			esc_attr( $class ),
-			esc_html( $message )
-		);
-	} );
+	add_action(
+		'admin_notices', function () use ( $e ) {
+			$class = 'notice notice-error';
+			$message = $e->getMessage();
+			printf(
+				'<div class="%1$s"><p>%2$s</p></div>',
+				esc_attr( $class ),
+				esc_html( $message )
+			);
+		}
+	);
 }
