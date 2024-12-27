@@ -26,7 +26,7 @@ if ( ! defined( 'WPINC' ) ) {
 
 // Set up class autoloader.
 spl_autoload_register(
-	function ( $class_name ) {
+	function ($class_name) {
 		// Only handle our own namespace.
 		if ( strpos( $class_name, 'ScreenlyCast\\' ) !== 0 ) {
 			return;
