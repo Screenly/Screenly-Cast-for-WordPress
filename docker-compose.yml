@@ -18,7 +18,7 @@ services:
         condition: service_healthy
 
   db:
-    image: mysql:8.0
+    image: mysql:8.0.32
     environment:
       MYSQL_ROOT_PASSWORD: somewordpress
       MYSQL_DATABASE: wordpress
@@ -54,7 +54,7 @@ services:
         condition: service_healthy
 
   db-test:
-    image: mysql:8.0
+    image: mysql:8.0.32
     environment:
       MYSQL_ROOT_PASSWORD: wordpress
       MYSQL_DATABASE: wordpress_test
