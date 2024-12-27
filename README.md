@@ -174,6 +174,7 @@ We use [Semantic Versioning](https://semver.org/):
 ### Creating a WordPress Plugin ZIP
 
 Running the build script will:
+
 * Create a clean build in the `build/` directory for WordPress.org deployment
 * Generate an installable ZIP file in the `dist/` directory
 
