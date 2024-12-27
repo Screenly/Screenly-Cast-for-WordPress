@@ -1,0 +1,109 @@
+# Copyright (C) 2024 Screenly, Inc
+# This file is distributed under the GPLv2.
+msgid ""
+msgstr ""
+"Project-Id-Version: Screenly Cast for WordPress 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/screenly-cast\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2024-12-26T09:38:13+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.11.0\n"
+"X-Domain: screenly-cast\n"
+
+#. Plugin Name of the plugin
+#: screenly-cast.php
+msgid "Screenly Cast for WordPress"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: screenly-cast.php
+msgid "https://github.com/Screenly/Screenly-Cast-for-WordPress"
+msgstr ""
+
+#. Description of the plugin
+#: screenly-cast.php
+msgid "WordPress plugin to enable casting of content on Screenly devices."
+msgstr ""
+
+#. Author of the plugin
+#: screenly-cast.php
+msgid "Screenly, Inc"
+msgstr ""
+
+#. Author URI of the plugin
+#: screenly-cast.php
+msgid "https://www.screenly.io/"
+msgstr ""
+
+#. translators: %s: minimum WordPress version
+#: inc/Core.php:153
+msgid "Screenly Cast requires WordPress version %s or higher. Please upgrade WordPress to use this plugin."
+msgstr ""
+
+#. translators: %s: minimum WordPress version
+#: inc/Core.php:195
+msgid "Screenly Cast requires WordPress version %s or higher."
+msgstr ""
+
+#. translators: Logs when plugin is activated
+#: inc/Core.php:204
+msgid "Plugin activated successfully"
+msgstr ""
+
+#. translators: Logs when plugin activation fails
+#: inc/Core.php:209
+msgid "Plugin activation failed"
+msgstr ""
+
+#. translators: Logs when plugin is deactivated
+#: inc/Core.php:224
+msgid "Plugin deactivated successfully"
+msgstr ""
+
+#. translators: Logs when plugin deactivation fails
+#: inc/Core.php:229
+msgid "Plugin deactivation failed"
+msgstr ""
+
+#. translators: Logs when WordPress version is incompatible
+#: inc/Core.php:244
+msgid "WordPress version incompatible during admin init"
+msgstr ""
+
+#. translators: Logs when admin is initialized
+#: inc/Core.php:255
+msgid "Admin initialized successfully"
+msgstr ""
+
+#. translators: Logs when admin initialization fails
+#: inc/Core.php:260
+msgid "Admin initialization failed"
+msgstr ""
+
+#. translators: Logs when plugin is initialized
+#: inc/Core.php:290
+msgid "Plugin initialized successfully"
+msgstr ""
+
+#. translators: Logs when plugin initialization fails
+#: inc/Core.php:295
+msgid "Plugin initialization failed"
+msgstr ""
+
+#. translators: Logs when theme is switched
+#: inc/Core.php:318
+msgid "Switched theme for Screenly query"
+msgstr ""
+
+#. translators: Logs when query parsing fails
+#: inc/Core.php:329
+msgid "Query parsing failed"
+msgstr ""
+
+#: screenly-cast.php:22
+msgid "No direct script access allowed."
+msgstr ""

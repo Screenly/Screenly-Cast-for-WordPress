@@ -1,14 +1,21 @@
 <?php
 /**
- * Silence is golden.
+ * The main template file
  *
- * PHP version 5
- *
- * @category PHP
- * @package  ScreenlyCast
- * @author   Peter Monte <pmonte@screenly.io>
- * @license  https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html  GPLv2
- * @link     https://github.com/Screenly/Screenly-Cast-for-WordPress
- * @since    0.0.1
+ * @package ScreenlyCast
  */
-?>
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+get_header();
+
+if ( have_posts() ) :
+	while ( have_posts() ) :
+		the_post();
+		the_content();
+	endwhile;
+endif;
+
+get_footer();

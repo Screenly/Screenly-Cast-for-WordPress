@@ -1,39 +1,37 @@
 <?php
 /**
- * Header
+ * The header for our theme.
  *
- * PHP version 5
- *
- * @category PHP
- * @package  ScreenlyCast
- * @author   Peter Monte <pmonte@screenly.io>
- * @license  https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html  GPLv2
- * @link     https://github.com/Screenly/Screenly-Cast-for-WordPress
- * @since    0.0.1
+ * @package ScreenlyCast
  */
-defined('ABSPATH') or die("No script kiddies please!");
-?>
-<!doctype html>
-<html>
-    <head>
-        <!--
-            META CONFIG
-        -->
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 
-        <!--
-            CSS
-        -->
-        <link href="https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500" rel="stylesheet">
-        <?php wp_head(); ?>
-    </head>
-    <body <?php body_class()?>>
+?><!DOCTYPE html>
+<html <?php language_attributes(); ?>>
+<head>
+	<meta charset="<?php bloginfo( 'charset' ); ?>">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<?php wp_head(); ?>
+</head>
 
-        <?php
-        $logo = get_option('screenly_options_logo');
-        if (!empty($logo)) {
-            echo '<img src="'.$logo.'" id="brand-logo" width="314" height="98">';
-        }
-        ?>
+<body <?php body_class(); ?>>
+<?php wp_body_open(); ?>
+<div id="page" class="site">
+	<header class="site-header">
+		<div class="site-branding">
+			<?php
+			if ( has_custom_logo() ) {
+				the_custom_logo();
+			} else {
+				?>
+				<h1 class="site-title">
+					<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
+						<?php bloginfo( 'name' ); ?>
+					</a>
+				</h1>
+				<?php
+			}
+			?>
+		</div>
+	</header>
+
+	<div id="content" class="site-content">

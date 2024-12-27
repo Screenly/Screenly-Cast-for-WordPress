@@ -1,0 +1,34 @@
+{
+  "name": "screenly-cast-for-wordpress",
+  "version": "1.0.0",
+  "description": "A WordPress plugin to enable easy and beautiful casting of pages, posts and image media on [Screenly](https://www.screenly.io) digital signage devices.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint:css": "stylelint \"screenly-cast/**/*.css\" \"screenly-cast/theme/**/*.css\"",
+    "lint:css:fix": "stylelint \"screenly-cast/**/*.css\" \"screenly-cast/theme/**/*.css\" --fix",
+    "lint:js": "eslint \"screenly-cast/**/*.js\"",
+    "lint:js:fix": "eslint \"screenly-cast/**/*.js\" --fix",
+    "lint": "npm run lint:css && npm run lint:js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Screenly/Screenly-Cast-for-WordPress.git"
+  },
+  "keywords": [],
+  "author": "Screenly, Inc <hello@screenly.io>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Screenly/Screenly-Cast-for-WordPress/issues"
+  },
+  "homepage": "https://github.com/Screenly/Screenly-Cast-for-WordPress#readme",
+  "devDependencies": {
+    "@wordpress/eslint-plugin": "^17.3.0",
+    "@wordpress/stylelint-config": "^23.6.0",
+    "eslint": "^8.56.0",
+    "stylelint": "^16.12.0"
+  }
+}

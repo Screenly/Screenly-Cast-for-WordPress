@@ -1,10 +1,8 @@
 # Screenly Cast for WordPress
 
-[![Build Status](https://travis-ci.org/Screenly/Screenly-Cast-for-WordPress.svg?branch=master)](https://travis-ci.org/Screenly/Screenly-Cast-for-WordPress)
-
 A WordPress plugin to enable easy and beautiful casting of pages, posts and image media on [Screenly](https://www.screenly.io) digital signage devices.
 
-The Screenly Cast plugin optimizes your website content for beautiful, easy to read display on TVs and other non-interactive devices.
+The Screenly Cast plugin optimizes your website content for beautiful, easy-to-read display on TVs and other non-interactive devices.
 
 Without Screenly Cast for WordPress:
 ![Without Screenly Cast for WordPress](/assets/screenshot-1.png)
@@ -14,10 +12,10 @@ With Screenly Cast for WordPress:
 
 ## Installing
 
- * Search for *Screenly Cast* in the WordPress plugin directory
- * Activate the plugin
+* Search for *Screenly Cast* in the WordPress plugin directory
+* Activate the plugin
 
-## Usage with Screenly Pro
+## Usage with [Screenly](https://www.screenly.io)
 
 Check out our video introduction to Screenly Cast for WordPress:
 
@@ -25,28 +23,27 @@ Check out our video introduction to Screenly Cast for WordPress:
 
 To make use of the plugin on your **Screenly Screen** you just need to follow these simple steps:
 
-  1. Make sure the **plugin is activated**.
-  2. **Copy and Paste** the URL of your website, post, page or attachment.
-  3. Change the URL, adding a parameter called `srly`, like this:
-    - `https://www.mydomain.com/?srly`
-    - `https://www.mydomain.com/my-post-url?srly`
-    - `https://www.mydomain.com/my-page-url?srly`
-    - `https://www.mydomain.com/my-attachment-url?srly`
-    - `https://www.mydomain.com/?somevar=1&anothervar=2&srly` - In case your using more than one parameter
-    - **Note:** There is no need to apply any value to the parameter. It just needs to exist on the query.
-  4. [Login to Screenly](https://login.screenlyapp.com) and navigate to **Assets** on the top menu.
-  5. Click on the button **+ Add Asset**.
-  6. Select the tab **URL**.
-  7. **Paste** the edited URL (from step 3).
-  8. Hit **Save**.
-  9. On the asset detail page, make sure to set a **recognizable title** since this is what you will see in Screenly later.
-  10. Go to the **Playlists** section and **add the new asset**. Make sure to pick an appropriate **Duration** for a good reading experience.
-  11. Hit **Save**.
-  12. Profit.
+1. Make sure the **plugin is activated**.
+2. **Copy and Paste** the URL of your website, post, page or attachment.
+3. Change the URL, adding a parameter called `srly`, like this:
+   - `https://www.mydomain.com/?srly`
+   - `https://www.mydomain.com/my-post-url?srly`
+   - `https://www.mydomain.com/my-page-url?srly`
+   - `https://www.mydomain.com/my-attachment-url?srly`
+   - `https://www.mydomain.com/?somevar=1&anothervar=2&srly` - In case you're using more than one parameter
+   - **Note:** There is no need to apply any value to the parameter. It just needs to exist in the query.
+4. [Login to Screenly](https://login.screenlyapp.com) and navigate to **Assets** on the top menu.
+5. Click on the button **+ Add Asset**.
+6. Select the tab **URL**.
+7. **Paste** the edited URL (from step 3).
+8. Hit **Save**.
+9. On the asset detail page, make sure to set a **recognizable title** since this is what you will see in Screenly later.
+10. Go to the **Playlists** section and **add the new asset**. Make sure to pick an appropriate **Duration** for a good reading experience.
+11. Hit **Save**.
 
-For detailed instructions, check out this [Medium post](https://news.screenly.io/introducing-screenly-cast-for-wordpress-a27ff26667b7).
+For detailed instructions, check out this [blog post](https://news.screenly.io/introducing-screenly-cast-for-wordpress-a27ff26667b7).
 
-Screenly Cast for WordPress should also work just fine with most other digital signage solutions, but the usage will vary.
+Screenly Cast for WordPress works with both [Screenly](https://www.screenly.io) and [Anthias](https://anthias.screenly.io/), and should also work just fine with most other digital signage solutions, but the usage will vary.
 
 ## How it works
 
@@ -58,9 +55,81 @@ For the best experience for your reader you should assume that no more than 250 
 
 ## Development
 
-To setup a local development, simply install Docker and:
- * Run `docker-compose up` from the root of the repository.
- * Navigate to https://localhost:8000.
- * Create your account and activate the plugin.
+### Requirements
 
-Please note that you do not need to install the plugin from the plugin directory. The code plugin folder is automatically added to the WordPress installation. All you need to do is to activate the plugin.
+- Docker
+- Docker Compose
+- PHP 7.4 or higher (for local development without Docker)
+- WordPress 6.2.4 or higher
+- Composer for dependency management
+
+### Setup
+
+1. Clone this repository
+2. For local development:
+   ```bash
+   composer install
+   ```
+3. For running tests:
+   ```bash
+   docker compose up wordpress-test
+   ```
+
+### Release Process
+
+1. Update version and changelog:
+   - Update version information in plugin header (`screenly-cast.php`):
+     - `Version`
+     - `Requires at least`
+     - `Requires PHP`
+   - Add detailed changelog entry in `readme.txt` under the `== Changelog ==` section
+     - Follow the existing format (e.g., `= 1.0.0 =`)
+     - List all changes with proper categorization (Major/Feature/Fix)
+     - Include any breaking changes, new features, and bug fixes
+
+2. Test the changes locally:
+   ```bash
+   # Run the test suite
+   docker compose run --rm wordpress-test composer test
+   ```
+
+3. Build and verify the release locally:
+   ```bash
+   # Clean install dependencies without dev packages
+   composer install --no-dev --optimize-autoloader
+
+   # Build the release
+   ./bin/build.sh
+
+   # Verify the build output in build/screenly-cast/
+   ```
+
+4. Commit changes and push to GitHub:
+   ```bash
+   git add .
+   git commit -m "Prepare release vX.Y.Z"
+   git push origin master
+   ```
+
+5. Create a new GitHub Release:
+   - Create a new tag following semantic versioning (e.g., `v1.0.0`)
+   - Set release title (e.g., "Version 1.0.0")
+   - Copy the changelog entry from readme.txt to the release description
+   - Publish release
+
+6. The GitHub Actions workflow will automatically:
+   - Run tests across supported PHP versions
+   - Build the release package without dev dependencies
+   - If tests pass, deploy to WordPress.org plugin repository
+   - The plugin will be available in the WordPress.org plugin directory after deployment
+
+### Version Numbers
+
+We use [Semantic Versioning](https://semver.org/):
+- MAJOR version for incompatible API changes
+- MINOR version for backwards-compatible functionality additions
+- PATCH version for backwards-compatible bug fixes
+
+## License
+
+GPLv2

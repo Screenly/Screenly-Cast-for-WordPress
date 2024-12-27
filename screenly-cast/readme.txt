@@ -1,59 +1,65 @@
 === Screenly Cast ===
+Contributors: vpetersson
 Tags: digital signage, screenly
-Requires at least: 3.7
+Requires at least: 6.2.4
+Tested up to: 6.4.3
+Stable tag: 1.0.0
+Requires PHP: 7.4
 License: GPLv2
-Stable tag: trunk
+License URI: https://github.com/Screenly/Screenly-Cast-for-WordPress/blob/master/LICENSE
 
-A WordPress plugin to enable easy and beautiful casting of pages, posts and image media on [Screenly](https://www.screenly.io) digital signage devices.
-
-The Screenly Cast plugin optimizes your website content for beautiful, easy to read display on TVs and other non-interactive devices.
-
-To after installing and activated the plugin, simply append `?srly` to the end of page, posts and media URLs.
+A WordPress plugin to enable easy and beautiful casting of pages, posts and image media on Screenly digital signage devices.
 
 == Description ==
 
 The goal with Screenly Cast for WordPress is to turn WordPress into a simple content creation tool for digital signage (and for [Screenly](https://www.screenly.io) in particular).
 
-Contrary to some other WordPress plugins or themes out there, the goal is not to convert WordPress into a full-fledged digital signage CMS. Instead, the plugin is designed for simple content creation that can be used assets in your digital signage CMS.
-Also, instead of trying to add support for zones, feeds and all kind of other features, we’ve focused on ensuring a good end-user viewing experience.
+Contrary to some other WordPress plugins or themes, we don't aim to convert WordPress into a full-fledged digital signage CMS. Instead, the plugin is designed for simple content creation that can be used as assets in your digital signage CMS.
+Rather than adding support for zones, feeds, and other complex features, we've focused on ensuring a great end-user viewing experience.
 
-For more information, check out Screenly Cast for WordPress' home on [Github](https://github.com/Screenly/Screenly-Cast-for-WordPress/) and this [blog post](https://news.screenly.io/introducing-screenly-cast-for-wordpress-a27ff26667b7?source=collection_home---4------0-----------).
+The Screenly Cast plugin optimizes your website content for beautiful, easy-to-read display on TVs and other non-interactive devices.
 
-https://www.youtube.com/watch?v=rX6b9ZAYi34
+After installing and activating the plugin, simply append `?srly` to the end of your page, post, or media URLs to view them in digital signage format.
+
+The source code for this plugin is available on [GitHub](https://github.com/Screenly/Screenly-Cast-for-WordPress/). We welcome contributions and feedback from the community.
 
 == Installation ==
 
-* Install and activate the plugin
-* Navigate to a blog post or media attachment page and append "?srly" to the URL
+1. Install and activate the plugin through the WordPress plugin directory
+2. Navigate to any page, post, or media attachment
+3. Append "?srly" to the URL to view it in digital signage format
 
 == Frequently Asked Questions ==
 
 = When should I use "?srly" and when should I use "&srly" in the URL? =
 
-In most cases, you only need to use "?srly". However, if you already got an existing parameter or variable in your URL string, you need to use "&srly" to chain it. For instance, if you "https://www.mydomain.com/?somevar=1&anothervar=2", you need to add "&srly". In most cases, your URL will look like "https://www.mydomain.com/some-page", in which case you just need to add "?srly"
+Use "?srly" when there are no other URL parameters. For example:
+* `https://www.mydomain.com/some-page?srly`
+
+Use "&srly" when the URL already contains other parameters. For example:
+* `https://www.mydomain.com/?somevar=1&anothervar=2&srly`
+
+== Support ==
+
+For support, feature requests, and bug reports, please visit our [GitHub Issues page](https://github.com/Screenly/Screenly-Cast-for-WordPress/issues).
 
 == Screenshots ==
 
 1. An example post in WordPress page without Screenly Cast.
 2. The same page with Screenly Cast enabled.
 
-
-
 == Changelog ==
 
-= 0.1.18 =
-* Minor: PHP Version 5.2.4
-* - Replaces [] with array() to comply with WP minimum requirement of PHP Version 5.2.4
-* - Removes trailing comma in `screenly-cast-settings.php line 48
-* - Code formating
+= 1.0.0 =
+* Major: Complete rewrite of the plugin
+* Modern PHP 7.4+ features and type safety
+* Improved code organization and maintainability
+* Updated minimum WordPress version to 6.2.4
+* Better error handling and version compatibility checks
+* Added comprehensive test suite with unit and integration tests
+* Added theme installation and management functionality
+* Added proper WordPress coding standards compliance
+* Added proper query handling for Screenly Cast content
 
-= 0.1.17 =
-* Core: Raised WP min version to 4.4.0 due to methods being used
-* - Fixed bug in duplicated message on settings saved
-* - Corrected `text-domain` in settings
-
-= 0.1.13 =
-* Core: Replaced plugin name and text-domain to "screenly-cast"
-
-= 0.1.19
-* Added PHPUnit test files for wordpress. 
+= 0.1.19 =
+* Added PHPUnit test files for WordPress

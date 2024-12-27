@@ -1,25 +1,23 @@
 <?php
 /**
- * Page 404
+ * The template for displaying 404 pages (not found).
  *
- * PHP version 5
- *
- * @category PHP
- * @package  ScreenlyCast
- * @author   Peter Monte <pmonte@screenly.io>
- * @license  https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html  GPLv2
- * @link     https://github.com/Screenly/Screenly-Cast-for-WordPress
- * @since    0.0.1
+ * @package ScreenlyCast
  */
-defined('ABSPATH') or die("No script kiddies please!");
-require_once 'header.php';
+
+get_header();
+
 ?>
-    <main>
-        <section>
-            <article>
-                <h1>404</h1>
-                <h2>Page not found</h2>
-            </article>
-        </section>
-    </main>
-<?php require_once 'footer.php'; ?>
+
+<div class="content-area">
+	<main class="site-main">
+		<?php
+		if ( ! have_posts() || ! is_404() ) {
+			get_template_part( 'template-parts/content', 'none' );
+		}
+		?>
+	</main>
+</div>
+
+<?php
+get_footer();
