@@ -1,7 +1,7 @@
 === Screenly Cast ===
 Contributors: vpetersson
 Tags: digital signage, screenly
-Requires at least: 6.3.5
+Requires at least: 6.2.4
 Tested up to: 6.4.3
 Stable tag: 1.0.0
 Requires PHP: 7.4
@@ -54,7 +54,7 @@ For support, feature requests, and bug reports, please visit our [GitHub Issues 
 * Major: Complete rewrite of the plugin
 * Modern PHP 7.4+ features and type safety
 * Improved code organization and maintainability
-* Updated minimum WordPress version to 6.3.5
+* Updated minimum WordPress version to 6.2.4
 * Better error handling and version compatibility checks
 * Added comprehensive test suite with unit and integration tests
 * Added theme installation and management functionality
