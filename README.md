@@ -77,23 +77,51 @@ For the best experience for your reader you should assume that no more than 250 
 
 ### Release Process
 
-1. Update version numbers in:
-   - Plugin header in `screenly-cast.php`
-   - `Configuration::VERSION` constant
-   - `Stable tag` in `readme.txt`
-   - Add entry to changelog in `readme.txt`
+1. Update version and changelog:
+   - Update version information in plugin header (`screenly-cast.php`):
+     - `Version`
+     - `Requires at least`
+     - `Requires PHP`
+   - Add detailed changelog entry in `readme.txt` under the `== Changelog ==` section
+     - Follow the existing format (e.g., `= 1.0.0 =`)
+     - List all changes with proper categorization (Major/Feature/Fix)
+     - Include any breaking changes, new features, and bug fixes
 
-2. Commit changes and push to GitHub
+2. Test the changes locally:
+   ```bash
+   # Run the test suite
+   docker compose run --rm wordpress-test composer test
+   ```
 
-3. Create a new GitHub Release:
+3. Build and verify the release locally:
+   ```bash
+   # Clean install dependencies without dev packages
+   composer install --no-dev --optimize-autoloader
+
+   # Build the release
+   ./bin/build.sh
+
+   # Verify the build output in build/screenly-cast/
+   ```
+
+4. Commit changes and push to GitHub:
+   ```bash
+   git add .
+   git commit -m "Prepare release vX.Y.Z"
+   git push origin master
+   ```
+
+5. Create a new GitHub Release:
    - Create a new tag following semantic versioning (e.g., `v1.0.0`)
    - Set release title (e.g., "Version 1.0.0")
-   - Add changelog entry to release description
+   - Copy the changelog entry from readme.txt to the release description
    - Publish release
 
-4. GitHub Actions will automatically:
+6. The GitHub Actions workflow will automatically:
    - Run tests across supported PHP versions
+   - Build the release package without dev dependencies
    - If tests pass, deploy to WordPress.org plugin repository
+   - The plugin will be available in the WordPress.org plugin directory after deployment
 
 ### Version Numbers
 

@@ -29,7 +29,7 @@ class TestVersionChecker extends TestCase {
     }
 
     public function test_get_required_wordpress_version(): void {
-        $this->assertEquals('6.3', $this->checker->get_required_wordpress_version());
+        $this->assertEquals('6.2.4', $this->checker->get_required_wordpress_version());
     }
 
     public function test_is_compatible_with_compatible_version(): void {

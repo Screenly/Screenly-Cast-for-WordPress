@@ -109,15 +109,47 @@ class Plugin {
 	}
 
 	/**
+	 * Get plugin data from header.
+	 *
+	 * @return array Plugin data.
+	 */
+	private function get_plugin_data(): array {
+		if ( ! function_exists( 'get_file_data' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/plugin.php';
+		}
+		return get_file_data(
+			dirname( __DIR__ ) . '/screenly-cast.php',
+			array(
+				'requires_php' => 'Requires PHP',
+			)
+		);
+	}
+
+	/**
 	 * Check WordPress version requirements.
 	 *
-	 * @throws PluginInitializationException If requirements are not met.
+	 * @throws PluginInitializationException If WordPress or PHP version requirements are not met.
 	 */
 	private function check_requirements(): void {
-		if ( ! $this->version_checker->check_wordpress_version( '6.3.0' ) ) {
-			throw new PluginInitializationException(
-				esc_html__( 'WordPress version 6.3.0 or higher is required.', 'screenly-cast' )
+		if ( ! $this->version_checker->check_wordpress_version( $this->version_checker->get_required_wordpress_version() ) ) {
+			$wp_version = esc_html( $this->version_checker->get_required_wordpress_version() );
+			$message = sprintf(
+				/* translators: %s: Required WordPress version number */
+				esc_html__( 'Screenly Cast requires WordPress version %s or higher.', 'screenly-cast' ),
+				$wp_version
 			);
+			throw new PluginInitializationException( esc_html( $message ) );
+		}
+
+		$plugin_data = $this->get_plugin_data();
+		if ( version_compare( PHP_VERSION, $plugin_data['requires_php'], '<' ) ) {
+			$php_version = esc_html( $plugin_data['requires_php'] );
+			$message = sprintf(
+				/* translators: %s: Required PHP version number */
+				esc_html__( 'Screenly Cast requires PHP version %s or higher.', 'screenly-cast' ),
+				$php_version
+			);
+			throw new PluginInitializationException( esc_html( $message ) );
 		}
 	}
 

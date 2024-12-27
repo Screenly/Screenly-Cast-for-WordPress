@@ -9,16 +9,30 @@ declare(strict_types=1);
 
 namespace ScreenlyCast;
 
+use ScreenlyCast\Contracts\VersionChecker;
+
 /**
- * Class WordPressVersionChecker
+ * WordPress version checker class.
  *
  * Checks WordPress version compatibility.
  */
-class WordPressVersionChecker implements Contracts\VersionChecker {
+class WordPressVersionChecker implements VersionChecker {
 	/**
-	 * The minimum required WordPress version.
+	 * Get plugin data from header.
+	 *
+	 * @return array Plugin data.
 	 */
-	private const REQUIRED_VERSION = '6.3';
+	private function get_plugin_data(): array {
+		if ( ! function_exists( 'get_file_data' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/plugin.php';
+		}
+		return get_file_data(
+			dirname( __DIR__ ) . '/screenly-cast.php',
+			array(
+				'requires' => 'Requires at least',
+			)
+		);
+	}
 
 	/**
 	 * Check if the current WordPress version meets the minimum requirement.
@@ -47,15 +61,16 @@ class WordPressVersionChecker implements Contracts\VersionChecker {
 	 * @return string The required WordPress version.
 	 */
 	public function get_required_wordpress_version(): string {
-		return self::REQUIRED_VERSION;
+		$plugin_data = $this->get_plugin_data();
+		return $plugin_data['requires'];
 	}
 
 	/**
 	 * Check if WordPress version is compatible.
 	 *
-	 * @return bool True if compatible, false otherwise.
+	 * @return bool True if WordPress version is compatible, false otherwise.
 	 */
 	public function is_wordpress_version_compatible(): bool {
-		return $this->check_wordpress_version( self::REQUIRED_VERSION );
+		return $this->check_wordpress_version( $this->get_required_wordpress_version() );
 	}
 }
