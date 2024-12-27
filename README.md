@@ -108,6 +108,7 @@ docker compose up wordpress-test
      * `Version`
      * `Requires at least`
      * `Requires PHP`
+   * Run `npm run version:sync` to sync package.json version with the plugin
    * Add detailed changelog entry in `readme.txt` under the `== Changelog ==`
      section
      * Follow the existing format (e.g., `= 1.0.0 =`)
