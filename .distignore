@@ -17,6 +17,7 @@ webpack.config.js
 /node_modules
 /vendor
 /bin
+/coverage
 
 # IDE files
 .idea
