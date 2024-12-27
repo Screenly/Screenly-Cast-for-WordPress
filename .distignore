@@ -5,12 +5,22 @@
 .distignore
 .editorconfig
 .phpcs.xml.dist
+.eslintrc.js
+.prompt
+.stylelintrc.json
 composer.json
 composer.lock
 phpunit.xml
+phpunit.xml.dist
 package.json
 package-lock.json
 webpack.config.js
+wp-cli.phar
+go-pear.phar
+docker-compose.yml
+VERSION
+LICENSE
+README.md
 
 # Development directories
 /tests
@@ -18,6 +28,9 @@ webpack.config.js
 /vendor
 /bin
 /coverage
+/build
+/screenly-cast/tests
+/screenly-cast/bin
 
 # IDE files
 .idea
@@ -27,3 +40,13 @@ webpack.config.js
 *.map
 .DS_Store
 Thumbs.db
+
+# Ensure these don't get included in the root
+/*.php
+/*.txt
+/*.json
+/*.js
+/*.yml
+/*.xml
+/*.phar
+/*.md
