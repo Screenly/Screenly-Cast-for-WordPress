@@ -42,10 +42,13 @@ jobs:
         id: phpunit
         shell: bash
         run: |
-          docker compose build --build-arg PHP_VERSION=${{ matrix.php-version }} \
+          docker buildx build \
+            --file tests/Dockerfile \
+            --build-arg PHP_VERSION=${{ matrix.php-version }} \
             --cache-from type=local,src=/tmp/.buildx-cache \
             --cache-to type=local,dest=/tmp/.buildx-cache-new,mode=max \
-            wordpress-test
+            --load \
+            -t wordpress-test .
           WP_VERSION=${{ matrix.wp-version }} docker compose run --rm wordpress-test sh -c "composer install && ./vendor/bin/phpunit"
 
       # Temp fix for https://github.com/docker/build-push-action/issues/252
