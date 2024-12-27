@@ -32,7 +32,8 @@ jobs:
           git clone https://github.com/WordPress/plugin-check.git wp-plugin-check
           cd wp-plugin-check
           composer install
+          composer build
 
       - name: Run Plugin Check
         working-directory: ${{ github.workspace }}/wp-plugin-check
-        run: ./vendor/bin/plugin-check check ../build/screenly-cast/
+        run: php plugin-check.phar check ../build/screenly-cast/
