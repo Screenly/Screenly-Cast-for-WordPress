@@ -3,7 +3,7 @@
  * Plugin Name: Screenly Cast
  * Plugin URI: https://www.screenly.io
  * Description: A WordPress plugin to enable easy and beautiful casting of pages, posts and image media on Screenly digital signage devices.
- * Version: 1.0.2
+ * Version: 1.0.3
  * Requires at least: 6.2.4
  * Requires PHP: 7.4
  * Author: Screenly, Inc
