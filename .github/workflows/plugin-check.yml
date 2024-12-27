@@ -20,18 +20,19 @@ jobs:
           php-version: '8.0'
           tools: composer
 
-      - name: Install WordPress Plugin Check
-        run: |
-          git clone https://github.com/WordPress/plugin-check.git
-          cd plugin-check
-          composer install
+      - name: Install dependencies
+        run: composer install --no-dev --optimize-autoloader
 
       - name: Build plugin
+        run: ./bin/build.sh
+
+      - name: Install WordPress Plugin Check
+        working-directory: ${{ github.workspace }}
         run: |
-          composer install --no-dev --optimize-autoloader
-          ./bin/build.sh
+          git clone https://github.com/WordPress/plugin-check.git wp-plugin-check
+          cd wp-plugin-check
+          composer install
 
       - name: Run Plugin Check
-        run: |
-          cd plugin-check
-          ./bin/plugin-check check ../build/screenly-cast/
+        working-directory: ${{ github.workspace }}/wp-plugin-check
+        run: php bin/plugin-check check ../build/screenly-cast/
