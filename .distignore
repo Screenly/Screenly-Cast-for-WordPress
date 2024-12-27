@@ -41,6 +41,7 @@ README.md
 *.map
 .DS_Store
 Thumbs.db
+*.zip
 
 # Ensure these don't get included in the root
 /*.php

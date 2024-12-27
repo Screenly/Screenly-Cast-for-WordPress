@@ -1,81 +1,17 @@
-# Operating System files
-.DS_Store
-Thumbs.db
+# IDE files
+.idea
+.vscode
 
-# Editor files
-.idea/
-.vscode/
-*.swp
-*.swo
-.editorconfig
-
-# Composer
-/vendor/
-
-# Node
-/node_modules/
-
-# PHP
-.phpcs-cache
-.phpunit.result.cache
-.php_cs.cache
-.php-cs-fixer.cache
-
-# WordPress
-wp-config.php
-wp-content/
-!wp-content/plugins/
-!wp-content/themes/
-
-# Testing
-/coverage/
-/tests/coverage/
-clover.xml
-.phpunit.cache/
-coverage.json
-coverage.txt
-coverage.php
-coverage/css/
+# Dependencies
+/vendor
+/node_modules
 
 # Build files
-/build/
-/dist/
+/build
+/dist
+/coverage
+.phpunit.result.cache
 
-# Environment files
-.env
-.env.*
-!.env.example
-
-# Tool configuration
-phpstan.neon
-psalm.xml
-rector.php
-!.stylelintrc.json
-!.eslintrc.js
-!.eslintrc.json
-
-# Logs
-*.log
-/logs/
-
-# Cache
-*.cache
-
-# Temporary files
-*.tmp
-*.temp
-.temp/
-tmp/
-
-# Docker
-docker-compose.override.yml
-
-# WordPress CLI
-wp-cli.phar
-wp-cli.local.yml
-
-# Project specific
-screenly-cast/languages/*.mo
-screenly-cast/languages/*.po~
-phpunit-output.txt
-test-results.xml
+# OS files
+.DS_Store
+Thumbs.db
