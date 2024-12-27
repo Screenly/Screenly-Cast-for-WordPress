@@ -111,11 +111,18 @@ For the best experience for your reader you should assume that no more than 250 
    git push origin master
    ```
 
-5. Create a new GitHub Release:
-   - Create a new tag following semantic versioning (e.g., `v1.0.0`)
-   - Set release title (e.g., "Version 1.0.0")
-   - Copy the changelog entry from readme.txt to the release description
-   - Publish release
+5. Create and push a new tag:
+   ```bash
+   # Create a new tag
+   git tag -a vX.Y.Z -m "Version X.Y.Z"
+
+   # Push the tag
+   git push origin vX.Y.Z
+
+   # If you need to delete a tag locally and remotely (e.g., if made a mistake):
+   git tag -d vX.Y.Z               # Delete local tag
+   git push --delete origin vX.Y.Z # Delete remote tag
+   ```
 
 6. The GitHub Actions workflow will automatically:
    - Run tests across supported PHP versions
