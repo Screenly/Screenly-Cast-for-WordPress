@@ -10,10 +10,14 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Build release
+    - name: Install dependencies
       run: |
-        docker compose run --rm wordpress-test sh -c "composer install --no-dev --optimize-autoloader"
-        ./bin/build.sh
+        sudo apt-get update && sudo apt-get install -y git unzip subversion
+        curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
+        composer install --no-dev --optimize-autoloader
+
+    - name: Build release
+      run: ./bin/build.sh
 
     - name: WordPress Plugin Deploy
       uses: 10up/action-wordpress-plugin-deploy@stable
