@@ -8,6 +8,7 @@
 .eslintrc.js
 .prompt
 .stylelintrc.json
+.markdownlint.json
 composer.json
 composer.lock
 phpunit.xml

@@ -9,7 +9,7 @@ on:
 jobs:
   test:
     name: PHP ${{ matrix.php-version }} / WP ${{ matrix.wp-version }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       matrix:
         php-version: ['7.4', '8.0', '8.1', '8.2']
