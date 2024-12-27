@@ -35,4 +35,4 @@ jobs:
 
       - name: Run Plugin Check
         working-directory: ${{ github.workspace }}/wp-plugin-check
-        run: php bin/plugin-check check ../build/screenly-cast/
+        run: ./vendor/bin/plugin-check check ../build/screenly-cast/
