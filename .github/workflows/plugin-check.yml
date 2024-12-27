@@ -1,0 +1,37 @@
+name: Plugin Check
+on:
+  pull_request:
+  push:
+    tags:
+      - "*"
+    branches:
+      - master
+
+jobs:
+  plugin-check:
+    name: WordPress.org Plugin Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.0'
+          tools: composer
+
+      - name: Install WordPress Plugin Check
+        run: |
+          git clone https://github.com/WordPress/plugin-check.git
+          cd plugin-check
+          composer install
+
+      - name: Build plugin
+        run: |
+          composer install --no-dev --optimize-autoloader
+          ./bin/build.sh
+
+      - name: Run Plugin Check
+        run: |
+          cd plugin-check
+          ./bin/plugin-check check ../build/screenly-cast/
