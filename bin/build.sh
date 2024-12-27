@@ -10,11 +10,11 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 PLUGIN_DIR="$(dirname "$SCRIPT_DIR")"
 
 # Build directory
-BUILD_DIR="$PLUGIN_DIR/build"
+BUILD_DIR="$PLUGIN_DIR/build/screenly-cast"
 DIST_DIR="$PLUGIN_DIR/dist"
 
 # Clean up any existing build
-rm -rf "$BUILD_DIR" "$DIST_DIR"
+rm -rf "$PLUGIN_DIR/build" "$DIST_DIR"
 mkdir -p "$BUILD_DIR" "$DIST_DIR"
 
 # Ensure vendor directory exists (Docker might create it as root)
