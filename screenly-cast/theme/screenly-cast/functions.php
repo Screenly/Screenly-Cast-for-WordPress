@@ -1,6 +1,6 @@
 <?php
 /**
- * Screenly Cast theme functions and definitions
+ * Theme functions and definitions
  *
  * @package ScreenlyCast
  */
@@ -37,3 +37,16 @@ if ( ! function_exists( 'screenly_cast_setup' ) ) :
 	}
 endif;
 add_action( 'after_setup_theme', 'screenly_cast_setup' );
+
+/**
+ * Enqueue scripts and styles.
+ */
+function screenly_cast_scripts() {
+	wp_enqueue_style(
+		'screenly-cast-style',
+		get_stylesheet_uri(),
+		array(),
+		wp_get_theme()->get( 'Version' )
+	);
+}
+add_action( 'wp_enqueue_scripts', 'screenly_cast_scripts' );
