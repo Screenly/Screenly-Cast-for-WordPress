@@ -15,23 +15,12 @@
 
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
-<div id="page" class="site">
-	<header class="site-header">
-		<div class="site-branding">
-			<?php
-			if ( has_custom_logo() ) {
-				the_custom_logo();
-			} else {
-				?>
-				<h1 class="site-title">
-					<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
-						<?php bloginfo( 'name' ); ?>
-					</a>
-				</h1>
-				<?php
-			}
-			?>
-		</div>
-	</header>
 
+<header class="site-header">
+	<h1 class="site-title">
+		<?php bloginfo('name'); ?>
+	</h1>
+</header>
+
+<div id="page" class="site">
 	<div id="content" class="site-content">
