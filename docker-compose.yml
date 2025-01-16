@@ -14,7 +14,6 @@ services:
       WORDPRESS_DEBUG: 1
     volumes:
       - wordpress_data:/var/www/html
-      - .:/var/www/html/wp-content/plugins/screenly-cast
     depends_on:
       db:
         condition: service_healthy
