@@ -1,7 +1,9 @@
 services:
   # Modern development environment
   wordpress:
-    image: wordpress:latest
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.wordpress
     ports:
       - "8000:80"
     environment:
