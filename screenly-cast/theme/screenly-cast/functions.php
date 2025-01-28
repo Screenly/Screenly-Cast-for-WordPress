@@ -226,4 +226,16 @@ remove_action('wp_head', '_admin_bar_bump_cb');
  */
 remove_action('wp_head', 'print_emoji_detection_script', 7);
 remove_action('wp_print_styles', 'print_emoji_styles');
-?>
+
+/**
+ * Enqueue scripts and styles.
+ */
+function screenly_cast_scripts() {
+	wp_enqueue_style(
+		'screenly-cast-style',
+		get_stylesheet_uri(),
+		array(),
+		wp_get_theme()->get( 'Version' )
+	);
+}
+add_action( 'wp_enqueue_scripts', 'screenly_cast_scripts' );
