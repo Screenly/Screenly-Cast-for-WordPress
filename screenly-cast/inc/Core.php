@@ -191,11 +191,17 @@ class Core {
 	 */
 	public function deactivate(): void {
 		if ( get_stylesheet() === 'screenly-cast' ) {
-			$default_theme = get_option( 'theme_switched' ) ? get_option( 'theme_switched' ) : 'twentytwentyfour';
-			switch_theme( $default_theme );
+			$previous_theme = get_option('screenly_previous_theme', 'twentytwentyfive');
+			switch_theme($previous_theme);
+
+			if (!is_admin()) {
+				wp_redirect(remove_query_arg('srly'));
+				exit;
+			}
 		}
 
-		delete_option( 'screenly_cast_enabled' );
+		delete_option('screenly_previous_theme');
+		delete_option('screenly_cast_enabled');
 		flush_rewrite_rules();
 	}
 
@@ -233,14 +239,8 @@ class Core {
 					exit;
 				}
 				$query->set( 'posts_per_page', 1 );
-			} else {
-				$previous_theme = get_option('screenly_previous_theme', 'twentytwentyfive');
-
-				if (get_stylesheet() === 'screenly-cast') {
-					switch_theme($previous_theme);
-					wp_redirect(remove_query_arg('srly'));
-					exit;
-				}
+			} else if (get_stylesheet() === 'screenly-cast') {
+				$this->deactivate();
 			}
 		}
 	}
