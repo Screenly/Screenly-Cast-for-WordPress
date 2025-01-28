@@ -1,25 +1,47 @@
 <?php
 /**
- * The main template file
+ * Main file for archive, page and single posts
  *
- * @package ScreenlyCast
+ * PHP version 5
+ *
+ * @category PHP
+ * @package  ScreenlyCast
+ * @author   Peter Monte <pmonte@screenly.io>
+ * @license  https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html  GPLv2
+ * @link     https://github.com/Screenly/Screenly-Cast-for-WordPress
+ * @since    0.0.1
  */
+defined('ABSPATH') or die("No script kiddies please!");
 
-get_header(); ?>
+/**
+  Template Name: Homepage
+*/
+require_once 'header.php';
+?>
 
-<div id="primary" class="content-area">
-	<main id="main" class="site-main">
-		<?php
-		if ( have_posts() ) :
-			while ( have_posts() ) :
-				the_post();
-				get_template_part( 'template-parts/content', get_post_type() );
-			endwhile;
-		else :
-			get_template_part( 'template-parts/content', 'none' );
-		endif;
-		?>
-	</main>
-</div>
+<main>
+    <?php if (have_posts()) : the_post(); ?>
+    <section>
 
-<?php get_footer(); ?>
+        <?php if (srlyHasTheFeaturedImage()) : ?>
+        <div class="figure"<?php srlyTheFeaturedImage();?>></div>
+        <?php endif; ?>
+
+        <article>
+            <h1><?php the_title();?></h1>
+            <time datetime="<?php echo get_the_date('T Y-m-d H:i'); ?>">
+                <?php the_date('M d Y'); ?>
+            </time>
+            <?php the_content();?>
+        </article>
+
+    </section>
+    <?php endif; ?>
+</main>
+
+<?php
+/**
+ * Require footer
+ */
+require_once 'footer.php';
+?>
