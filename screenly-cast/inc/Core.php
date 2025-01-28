@@ -224,13 +224,23 @@ class Core {
 	 */
 	public function parse_query( \WP_Query $query ): void {
 		if ( ! $query->is_admin() && $query->is_main_query() ) {
-			$srly = $query->get( 'srly' );
-
 			if ( array_key_exists( 'srly', $query->query_vars ) ) {
+				$current_theme = get_stylesheet();
+				if ($current_theme !== 'screenly-cast') {
+					update_option('screenly_previous_theme', $current_theme);
+					$this->theme_manager->activate( 'screenly-cast' );
+					wp_redirect(add_query_arg('srly', ''));
+					exit;
+				}
 				$query->set( 'posts_per_page', 1 );
-				$this->theme_manager->activate( 'screenly-cast' );
 			} else {
-				$this->deactivate();
+				$previous_theme = get_option('screenly_previous_theme', 'twentytwentyfive');
+
+				if (get_stylesheet() === 'screenly-cast') {
+					switch_theme($previous_theme);
+					wp_redirect(remove_query_arg('srly'));
+					exit;
+				}
 			}
 		}
 	}
