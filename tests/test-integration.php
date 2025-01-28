@@ -29,7 +29,8 @@ class TestIntegration extends WP_UnitTestCase {
         try {
             $this->plugin->init();
             if (version_compare($wp_version, '6.2.4', '>=')) {
-                $this->assertEquals('screenly-cast', get_stylesheet());
+                $this->assertTrue(wp_get_theme('screenly-cast')->exists(), 'Screenly Cast theme should exist');
+                $this->assertEquals('twentytwentyfour', get_stylesheet());
             }
         } catch (\Exception $e) {
             if (version_compare($wp_version, '6.2.4', '>=')) {

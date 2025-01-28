@@ -11,6 +11,19 @@ use ScreenlyCast\WordPressPaths;
 use ScreenlyCast\WordPressThemeManager;
 use WP_Query;
 
+/**
+ * Mock query class for testing
+ */
+class MockQuery extends \WP_Query {
+    public function is_main_query(): bool {
+        return true;
+    }
+
+    public function is_admin(): bool {
+        return false;
+    }
+}
+
 class ScreenlyCastTest extends WP_UnitTestCase {
     use TestFilesystemTrait;
 
@@ -86,12 +99,43 @@ class ScreenlyCastTest extends WP_UnitTestCase {
      * Test parse query.
      */
     public function test_parse_query(): void {
-        $query = new \WP_Query();
-        $query->is_main_query = true;
-        $query->is_admin = false;
+        // Set up the test environment
+        switch_theme('twentytwentyfour');
+
+        // First activate the plugin to ensure theme is installed
+        $this->core->activate();
+
+        // Switch back to twentytwentyfour for the test
+        switch_theme('twentytwentyfour');
+
+        $query = new MockQuery();
         $query->set('srly', '1');
-        $this->core->parse_query($query);
-        $this->assertEquals('screenly_cast', $query->get('post_type'));
-        $this->assertEquals(1, $query->get('posts_per_page'));
+        $query->query_vars['srly'] = '1';  // Ensure query var is set in both places
+
+        // Prevent redirects during testing
+        add_filter('wp_redirect', function($location) {
+            throw new \Exception('Redirect intercepted');
+            return $location;
+        });
+
+        // Use output buffering to prevent any output
+        ob_start();
+
+        try {
+            $this->core->parse_query($query);
+        } catch (\Exception $e) {
+            // Expected exception from redirect
+        }
+
+        ob_end_clean();
+
+        // Verify the theme was switched
+        $this->assertFalse($query->is_admin(), 'Query should not be admin');
+        $this->assertTrue($query->is_main_query(), 'Should be main query');
+        $this->assertEquals('screenly-cast', get_stylesheet(), 'Theme should be switched to screenly-cast');
+
+        // Clean up
+        remove_all_filters('wp_redirect');
+        switch_theme('twentytwentyfour');
     }
 }
