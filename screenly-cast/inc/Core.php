@@ -223,11 +223,14 @@ class Core {
 	 * @param \WP_Query $query The WordPress query object.
 	 */
 	public function parse_query( \WP_Query $query ): void {
-		if ( ! $query->is_admin && $query->is_main_query ) {
+		if ( ! $query->is_admin() && $query->is_main_query() ) {
 			$srly = $query->get( 'srly' );
-			if ( $srly ) {
-				$query->set( 'post_type', 'screenly_cast' );
+
+			if ( array_key_exists( 'srly', $query->query_vars ) ) {
 				$query->set( 'posts_per_page', 1 );
+				$this->theme_manager->activate( 'screenly-cast' );
+			} else {
+				$this->deactivate();
 			}
 		}
 	}
