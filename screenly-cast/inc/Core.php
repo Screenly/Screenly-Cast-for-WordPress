@@ -265,9 +265,9 @@ class Core {
 		if ( array_key_exists( 'srly', $GLOBALS['wp']->query_vars ) ) {
 			wp_enqueue_script(
 				'screenly-cast-scripts',
-				plugin_dir_url( dirname( __FILE__ ) ) . 'theme/screenly-cast/assets/js/scripts.js',
+				plugin_dir_url( __DIR__ ) . 'theme/screenly-cast/assets/js/scripts.js',
 				array(),
-				filemtime( plugin_dir_path( dirname( __FILE__ ) ) . 'theme/screenly-cast/assets/js/scripts.js' ),
+				filemtime( plugin_dir_path( __DIR__ ) . 'theme/screenly-cast/assets/js/scripts.js' ),
 				true
 			);
 		}

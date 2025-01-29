@@ -1,11 +1,11 @@
 <?php
  /**
- * The template for displaying attachment pages.
- *
- * @package ScreenlyCast
- */
+  * The template for displaying attachment pages.
+  *
+  * @package ScreenlyCast
+  */
 
-defined( 'ABSPATH' ) or die( "No script kiddies please!" );
+defined( 'ABSPATH' ) || die( 'No script kiddies please!' );
 
 /**
  * Require header
@@ -13,7 +13,10 @@ defined( 'ABSPATH' ) or die( "No script kiddies please!" );
 require_once 'header.php';
 ?>
 	<main>
-		<?php if ( have_posts() ) : the_post(); ?>
+	<?php
+	if ( have_posts() ) :
+		the_post();
+		?>
 		<section>
 
 			<div class="figure"<?php srlyTheFeaturedImage(); ?>></div>

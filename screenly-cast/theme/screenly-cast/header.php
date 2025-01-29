@@ -4,7 +4,8 @@
  *
  * @package ScreenlyCast
  */
-defined( 'ABSPATH' ) or die( "No script kiddies please!" );
+
+defined( 'ABSPATH' ) || die( 'No script kiddies please!' );
 ?>
 <!doctype html>
 <html>
@@ -22,11 +23,11 @@ defined( 'ABSPATH' ) or die( "No script kiddies please!" );
 		<link href="https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500" rel="stylesheet">
 		<?php wp_head(); ?>
 	</head>
-	<body <?php body_class() ?>>
+	<body <?php body_class(); ?>>
 
 		<?php
 		$logo = get_option( 'screenly_options_logo' );
-		if ( !empty( $logo ) ) {
+		if ( ! empty( $logo ) ) {
 			echo '<img src="' . $logo . '" id="brand-logo" width="314" height="98">';
 		}
 		?>
