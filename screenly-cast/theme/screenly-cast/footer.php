@@ -8,5 +8,5 @@ defined( 'ABSPATH' ) or die( "No script kiddies please!" );
 
 wp_footer();
 ?>
-    </body>
+	</body>
 </html>

@@ -15,9 +15,9 @@ defined( 'ABSPATH' ) or die( "No script kiddies please!" );
  */
 function srlyAllowedContentTags()
 {
-    $tags = '<h1>,<h2>,<h3>,<h4>,<h5>,<h6>,<br>,<em>,<i>,<strong>,<b>,<ul>,<ol>,';
-    $tags .= '<li>,<blockquote>,<ins>,<code>,<pre>,<del>,<p>';
-    return $tags;
+	$tags = '<h1>,<h2>,<h3>,<h4>,<h5>,<h6>,<br>,<em>,<i>,<strong>,<b>,<ul>,<ol>,';
+	$tags .= '<li>,<blockquote>,<ins>,<code>,<pre>,<del>,<p>';
+	return $tags;
 }
 add_filter( 'get_the_content_limit_custom_allowedtags', 'srlyAllowedContentTags' );
 add_filter( 'get_the_content_limit_allowedtags', 'srlyAllowedContentTags' );
@@ -33,8 +33,8 @@ add_filter( 'get_the_content_limit_allowedtags', 'srlyAllowedContentTags' );
  */
 function srlyThePostContent( $content )
 {
-    $content = strip_tags( $content, srlyAllowedContentTags() );
-    return '<div class="content">' . $content . '</div>';
+	$content = strip_tags( $content, srlyAllowedContentTags() );
+	return '<div class="content">' . $content . '</div>';
 }
 add_filter( 'the_content', 'srlyThePostContent' );
 
@@ -51,10 +51,10 @@ add_filter( 'the_content', 'srlyThePostContent' );
  */
 function srlyHasTheFeaturedImage( $post=null )
 {
-    if ( empty( $post ) ) {
-        global $post;
-    }
-    return is_attachment( $post->ID ) || has_post_thumbnail( $post->ID );
+	if ( empty( $post ) ) {
+		global $post;
+	}
+	return is_attachment( $post->ID ) || has_post_thumbnail( $post->ID );
 }
 
 
@@ -68,23 +68,23 @@ function srlyHasTheFeaturedImage( $post=null )
  */
 function srlyGetFeaturedImage( $post=null )
 {
-    if ( empty( $post ) ) {
-        global $post;
-    }
+	if ( empty( $post ) ) {
+		global $post;
+	}
 
-    if ( is_attachment( $post->ID ) ) {
-        $featured = wp_get_attachment_image_src( $post->ID, 'full' );
-        if ( !empty( $featured ) ) {
-            $featured = $featured[0];
-        }
-    } else if ( has_post_thumbnail( $post->ID ) ) {
-        $featured = get_the_post_thumbnail_url( $post->ID, 'full' );
-    }
+	if ( is_attachment( $post->ID ) ) {
+		$featured = wp_get_attachment_image_src( $post->ID, 'full' );
+		if ( !empty( $featured ) ) {
+			$featured = $featured[0];
+		}
+	} else if ( has_post_thumbnail( $post->ID ) ) {
+		$featured = get_the_post_thumbnail_url( $post->ID, 'full' );
+	}
 
-    if ( !empty( $featured ) ) {
-        echo ' style="background-image:url(' . $featured . ');"';
-    }
-    return '';
+	if ( !empty( $featured ) ) {
+		echo ' style="background-image:url(' . $featured . ');"';
+	}
+	return '';
 }
 
 
@@ -98,8 +98,8 @@ function srlyGetFeaturedImage( $post=null )
  */
 function srlyTheFeaturedImage( $post=null )
 {
-    echo srlyGetFeaturedImage( $post );
-    return true;
+	echo srlyGetFeaturedImage( $post );
+	return true;
 }
 
 
@@ -113,12 +113,12 @@ function srlyTheFeaturedImage( $post=null )
  */
 function srlyGetShortLink( $url )
 {
-    $link = parse_url( $url );
-    if ( !empty( $link['host'] ) ) {
-        $link = str_replace( 'www.', '', $link['host'] ) . $link['path'] . '?' . $link['query'];
-        return $link;
-    }
-    return '';
+	$link = parse_url( $url );
+	if ( !empty( $link['host'] ) ) {
+		$link = str_replace( 'www.', '', $link['host'] ) . $link['path'] . '?' . $link['query'];
+		return $link;
+	}
+	return '';
 }
 
 
@@ -132,8 +132,8 @@ function srlyGetShortLink( $url )
  */
 function srlyTheShortLink( $url )
 {
-    echo srlyGetShortLink( $url );
-    return true;
+	echo srlyGetShortLink( $url );
+	return true;
 }
 
 
@@ -150,15 +150,15 @@ function srlyTheShortLink( $url )
  */
 function srlyGetQrcodeLink( $data, $w=200, $h=200, $m=0 )
 {
-    $str = "https://api.qrserver.com/v1/create-qr-code/?qzone=";
-    $str .= $m;
-    $str .= "&size=";
-    $str .= $w;
-    $str .= "x";
-    $str .= $h;
-    $str .= "&data=";
-    $str .= $data;
-    return $str;
+	$str = "https://api.qrserver.com/v1/create-qr-code/?qzone=";
+	$str .= $m;
+	$str .= "&size=";
+	$str .= $w;
+	$str .= "x";
+	$str .= $h;
+	$str .= "&data=";
+	$str .= $data;
+	return $str;
 }
 
 
@@ -175,8 +175,8 @@ function srlyGetQrcodeLink( $data, $w=200, $h=200, $m=0 )
  */
 function srlyTheQrcodeLink( $data, $w=200, $h=200, $m=0 )
 {
-    echo srlyGetQrcodeLink( $data, $w, $h, $m );
-    return true;
+	echo srlyGetQrcodeLink( $data, $w, $h, $m );
+	return true;
 }
 
 
@@ -189,13 +189,13 @@ function srlyTheQrcodeLink( $data, $w=200, $h=200, $m=0 )
  */
 function srlyEnqueueThemeAssets()
 {
-    $path = plugin_dir_url( __FILE__ );
-    // CSS
-    wp_enqueue_style( SRLY_THEME, $path . 'style.css', array(), SRLY_VERSION, 'all' );
-    // JS
-    wp_enqueue_script( SRLY_THEME, $path . 'assets/js/scripts.js', array(), SRLY_VERSION, true );
+	$path = plugin_dir_url( __FILE__ );
+	// CSS
+	wp_enqueue_style( SRLY_THEME, $path . 'style.css', array(), SRLY_VERSION, 'all' );
+	// JS
+	wp_enqueue_script( SRLY_THEME, $path . 'assets/js/scripts.js', array(), SRLY_VERSION, true );
 
-    return true;
+	return true;
 }
 add_action( 'wp_enqueue_scripts', 'srlyEnqueueThemeAssets', 9999 );
 
