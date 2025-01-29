@@ -4,7 +4,7 @@
  *
  * @package ScreenlyCast
  */
-defined('ABSPATH') or die("No script kiddies please!");
+defined( 'ABSPATH' ) or die( "No script kiddies please!" );
 
 
 /**
@@ -19,8 +19,8 @@ function srlyAllowedContentTags()
     $tags .= '<li>,<blockquote>,<ins>,<code>,<pre>,<del>,<p>';
     return $tags;
 }
-add_filter('get_the_content_limit_custom_allowedtags', 'srlyAllowedContentTags');
-add_filter('get_the_content_limit_allowedtags', 'srlyAllowedContentTags');
+add_filter( 'get_the_content_limit_custom_allowedtags', 'srlyAllowedContentTags' );
+add_filter( 'get_the_content_limit_allowedtags', 'srlyAllowedContentTags' );
 
 
 /**
@@ -31,12 +31,12 @@ add_filter('get_the_content_limit_allowedtags', 'srlyAllowedContentTags');
  * @package ScreenlyCast
  * @return  string
  */
-function srlyThePostContent($content)
+function srlyThePostContent( $content )
 {
-    $content = strip_tags($content, srlyAllowedContentTags());
-    return '<div class="content">'.$content.'</div>';
+    $content = strip_tags( $content, srlyAllowedContentTags() );
+    return '<div class="content">' . $content . '</div>';
 }
-add_filter('the_content', 'srlyThePostContent');
+add_filter( 'the_content', 'srlyThePostContent' );
 
 
 /**
@@ -49,12 +49,12 @@ add_filter('the_content', 'srlyThePostContent');
  * @package ScreenlyCast
  * @return  boolean
  */
-function srlyHasTheFeaturedImage($post=null)
+function srlyHasTheFeaturedImage( $post=null )
 {
-    if (empty($post)) {
+    if ( empty( $post ) ) {
         global $post;
     }
-    return is_attachment($post->ID) || has_post_thumbnail($post->ID);
+    return is_attachment( $post->ID ) || has_post_thumbnail( $post->ID );
 }
 
 
@@ -66,23 +66,23 @@ function srlyHasTheFeaturedImage($post=null)
  * @package ScreenlyCast
  * @return  string
  */
-function srlyGetFeaturedImage($post=null)
+function srlyGetFeaturedImage( $post=null )
 {
-    if (empty($post)) {
+    if ( empty( $post ) ) {
         global $post;
     }
 
-    if (is_attachment($post->ID)) {
-        $featured = wp_get_attachment_image_src($post->ID, 'full');
-        if (!empty($featured)) {
+    if ( is_attachment( $post->ID ) ) {
+        $featured = wp_get_attachment_image_src( $post->ID, 'full' );
+        if ( !empty( $featured ) ) {
             $featured = $featured[0];
         }
-    } else if (has_post_thumbnail($post->ID)) {
-        $featured = get_the_post_thumbnail_url($post->ID, 'full');
+    } else if ( has_post_thumbnail( $post->ID ) ) {
+        $featured = get_the_post_thumbnail_url( $post->ID, 'full' );
     }
 
-    if (!empty($featured)) {
-        echo ' style="background-image:url('.$featured.');"';
+    if ( !empty( $featured ) ) {
+        echo ' style="background-image:url(' . $featured . ');"';
     }
     return '';
 }
@@ -96,9 +96,9 @@ function srlyGetFeaturedImage($post=null)
  * @package ScreenlyCast
  * @return  boolean
  */
-function srlyTheFeaturedImage($post=null)
+function srlyTheFeaturedImage( $post=null )
 {
-    echo srlyGetFeaturedImage($post);
+    echo srlyGetFeaturedImage( $post );
     return true;
 }
 
@@ -111,11 +111,11 @@ function srlyTheFeaturedImage($post=null)
  * @package ScreenlyCast
  * @return  string
  */
-function srlyGetShortLink($url)
+function srlyGetShortLink( $url )
 {
-    $link = parse_url($url);
-    if (!empty($link['host'])) {
-        $link = str_replace('www.', '', $link['host']) . $link['path'] . '?' . $link['query'];
+    $link = parse_url( $url );
+    if ( !empty( $link['host'] ) ) {
+        $link = str_replace( 'www.', '', $link['host'] ) . $link['path'] . '?' . $link['query'];
         return $link;
     }
     return '';
@@ -130,9 +130,9 @@ function srlyGetShortLink($url)
  * @package ScreenlyCast
  * @return  boolean
  */
-function srlyTheShortLink($url)
+function srlyTheShortLink( $url )
 {
-    echo srlyGetShortLink($url);
+    echo srlyGetShortLink( $url );
     return true;
 }
 
@@ -148,7 +148,7 @@ function srlyTheShortLink($url)
  * @package ScreenlyCast
  * @return  string
  */
-function srlyGetQrcodeLink($data, $w=200, $h=200, $m=0)
+function srlyGetQrcodeLink( $data, $w=200, $h=200, $m=0 )
 {
     $str = "https://api.qrserver.com/v1/create-qr-code/?qzone=";
     $str .= $m;
@@ -173,9 +173,9 @@ function srlyGetQrcodeLink($data, $w=200, $h=200, $m=0)
  * @package ScreenlyCast
  * @return  boolean
  */
-function srlyTheQrcodeLink($data, $w=200, $h=200, $m=0)
+function srlyTheQrcodeLink( $data, $w=200, $h=200, $m=0 )
 {
-    echo srlyGetQrcodeLink($data, $w, $h, $m);
+    echo srlyGetQrcodeLink( $data, $w, $h, $m );
     return true;
 }
 
@@ -189,15 +189,15 @@ function srlyTheQrcodeLink($data, $w=200, $h=200, $m=0)
  */
 function srlyEnqueueThemeAssets()
 {
-    $path = plugin_dir_url(__FILE__);
+    $path = plugin_dir_url( __FILE__ );
     // CSS
-    wp_enqueue_style(SRLY_THEME, $path.'style.css', array(), SRLY_VERSION, 'all');
+    wp_enqueue_style( SRLY_THEME, $path . 'style.css', array(), SRLY_VERSION, 'all' );
     // JS
-    wp_enqueue_script(SRLY_THEME, $path.'assets/js/scripts.js', array(), SRLY_VERSION, true);
+    wp_enqueue_script( SRLY_THEME, $path . 'assets/js/scripts.js', array(), SRLY_VERSION, true );
 
     return true;
 }
-add_action('wp_enqueue_scripts', 'srlyEnqueueThemeAssets', 9999);
+add_action( 'wp_enqueue_scripts', 'srlyEnqueueThemeAssets', 9999 );
 
 
 /**
@@ -207,8 +207,8 @@ add_action('wp_enqueue_scripts', 'srlyEnqueueThemeAssets', 9999);
  * @package ScreenlyCast
  * @return  boolean
  */
-show_admin_bar(false);
-remove_action('wp_head', '_admin_bar_bump_cb');
+show_admin_bar( false );
+remove_action( 'wp_head', '_admin_bar_bump_cb' );
 
 
 /**
@@ -217,8 +217,8 @@ remove_action('wp_head', '_admin_bar_bump_cb');
  * @package ScreenlyCast
  * @return  boolean
  */
-remove_action('wp_head', 'print_emoji_detection_script', 7);
-remove_action('wp_print_styles', 'print_emoji_styles');
+remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+remove_action( 'wp_print_styles', 'print_emoji_styles' );
 
 /**
  * Enqueue scripts and styles.

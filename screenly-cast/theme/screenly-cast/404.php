@@ -5,7 +5,7 @@
  * @package ScreenlyCast
  */
 
-defined('ABSPATH') or die("No script kiddies please!");
+defined( 'ABSPATH' ) or die( "No script kiddies please!" );
 require_once 'header.php';
 ?>
     <main>

@@ -4,7 +4,7 @@
  *
  * @package ScreenlyCast
  */
-defined('ABSPATH') or die("No script kiddies please!");
+defined( 'ABSPATH' ) or die( "No script kiddies please!" );
 
 wp_footer();
 ?>

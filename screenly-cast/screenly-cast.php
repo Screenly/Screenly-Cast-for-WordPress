@@ -24,16 +24,16 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-define('SRLY_VERSION', 'VERSION_PLACEHOLDER');
-define('SRLY_WP_VERSION', '4.4.0');
-define('SRLY_PLUGIN_URI', plugin_dir_url(__FILE__));
-define('SRLY_PLUGIN_DIR', plugin_dir_path(__FILE__));
-define('SRLY_PLUGIN_NAME', plugin_basename(__FILE__));
-define('SRLY_INC_DIR', SRLY_PLUGIN_DIR . 'inc');
-define('SRLY_THEME', 'screenly-cast');
-define('SRLY_THEME_URI', SRLY_PLUGIN_URI . 'theme/screenly-cast');
-define('SRLY_THEME_DIR', SRLY_PLUGIN_DIR . 'theme/screenly-cast');
-define('SRLY_PREFIX', 'srly_');
+define( 'SRLY_VERSION', 'VERSION_PLACEHOLDER' );
+define( 'SRLY_WP_VERSION', '4.4.0' );
+define( 'SRLY_PLUGIN_URI', plugin_dir_url( __FILE__ ) );
+define( 'SRLY_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+define( 'SRLY_PLUGIN_NAME', plugin_basename( __FILE__ ) );
+define( 'SRLY_INC_DIR', SRLY_PLUGIN_DIR . 'inc' );
+define( 'SRLY_THEME', 'screenly-cast' );
+define( 'SRLY_THEME_URI', SRLY_PLUGIN_URI . 'theme/screenly-cast' );
+define( 'SRLY_THEME_DIR', SRLY_PLUGIN_DIR . 'theme/screenly-cast' );
+define( 'SRLY_PREFIX', 'srly_' );
 
 // Set up class autoloader.
 spl_autoload_register(
