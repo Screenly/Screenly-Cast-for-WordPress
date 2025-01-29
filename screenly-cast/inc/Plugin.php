@@ -90,7 +90,6 @@ class Plugin {
 		try {
 			$this->check_requirements();
 			$this->install_theme();
-			$this->activate_theme();
 			$this->settings->init();
 			$this->core->init();
 			$this->core->admin_init();

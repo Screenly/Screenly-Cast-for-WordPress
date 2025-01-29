@@ -5,21 +5,40 @@
  * @package ScreenlyCast
  */
 
-get_header(); ?>
+defined( 'ABSPATH' ) || die( 'No script kiddies please!' );
 
-<div id="primary" class="content-area">
-	<main id="main" class="site-main">
-		<?php
-		if ( have_posts() ) :
-			while ( have_posts() ) :
-				the_post();
-				get_template_part( 'template-parts/content', get_post_type() );
-			endwhile;
-		else :
-			get_template_part( 'template-parts/content', 'none' );
-		endif;
+/**
+  Template Name: Homepage
+*/
+require_once 'header.php';
+?>
+
+<main>
+	<?php
+	if ( have_posts() ) :
+		the_post();
 		?>
-	</main>
-</div>
+	<section>
 
-<?php get_footer(); ?>
+		<?php if ( srly_has_the_featured_image() ) : ?>
+		<div class="figure"<?php srly_the_featured_image(); ?>></div>
+		<?php endif; ?>
+
+		<article>
+			<h1><?php the_title(); ?></h1>
+			<time datetime="<?php echo get_the_date( 'T Y-m-d H:i' ); ?>">
+				<?php the_date( 'M d Y' ); ?>
+			</time>
+			<?php the_content(); ?>
+		</article>
+
+	</section>
+	<?php endif; ?>
+</main>
+
+<?php
+/**
+ * Require footer
+ */
+require_once 'footer.php';
+?>

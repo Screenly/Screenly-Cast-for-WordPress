@@ -71,6 +71,7 @@ class Core {
 		add_filter( 'parse_query', array( $this, 'parse_query' ) );
 		add_action( 'init', array( $this, 'register_post_types' ) );
 		add_action( 'init', array( $this, 'register_taxonomies' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 	}
 
 	/**
@@ -191,10 +192,16 @@ class Core {
 	 */
 	public function deactivate(): void {
 		if ( get_stylesheet() === 'screenly-cast' ) {
-			$default_theme = get_option( 'theme_switched' ) ? get_option( 'theme_switched' ) : 'twentytwentyfour';
-			switch_theme( $default_theme );
+			$previous_theme = get_option( 'screenly_previous_theme', 'twentytwentyfive' );
+			switch_theme( $previous_theme );
+
+			if ( ! is_admin() ) {
+				wp_redirect( remove_query_arg( 'srly' ) );
+				exit;
+			}
 		}
 
+		delete_option( 'screenly_previous_theme' );
 		delete_option( 'screenly_cast_enabled' );
 		flush_rewrite_rules();
 	}
@@ -223,11 +230,18 @@ class Core {
 	 * @param \WP_Query $query The WordPress query object.
 	 */
 	public function parse_query( \WP_Query $query ): void {
-		if ( ! $query->is_admin && $query->is_main_query ) {
-			$srly = $query->get( 'srly' );
-			if ( $srly ) {
-				$query->set( 'post_type', 'screenly_cast' );
+		if ( ! $query->is_admin() && $query->is_main_query() ) {
+			if ( array_key_exists( 'srly', $query->query_vars ) ) {
+				$current_theme = get_stylesheet();
+				if ( 'screenly-cast' !== $current_theme ) {
+					update_option( 'screenly_previous_theme', $current_theme );
+					$this->theme_manager->activate( 'screenly-cast' );
+					wp_redirect( add_query_arg( 'srly', '' ) );
+					exit;
+				}
 				$query->set( 'posts_per_page', 1 );
+			} else if ( 'screenly-cast' === get_stylesheet() ) {
+				$this->deactivate();
 			}
 		}
 	}
@@ -242,5 +256,20 @@ class Core {
 			$this->version_checker->get_required_wordpress_version()
 		);
 		echo '<div class="notice notice-error"><p>' . esc_html( $message ) . '</p></div>';
+	}
+
+	/**
+	 * Enqueue scripts and styles.
+	 */
+	public function enqueue_scripts(): void {
+		if ( array_key_exists( 'srly', $GLOBALS['wp']->query_vars ) ) {
+			wp_enqueue_script(
+				'screenly-cast-scripts',
+				plugin_dir_url( __DIR__ ) . 'theme/screenly-cast/assets/js/scripts.js',
+				array(),
+				filemtime( plugin_dir_path( __DIR__ ) . 'theme/screenly-cast/assets/js/scripts.js' ),
+				true
+			);
+		}
 	}
 }

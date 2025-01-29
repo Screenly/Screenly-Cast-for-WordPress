@@ -5,33 +5,28 @@
  * @package ScreenlyCast
  */
 
-?><!DOCTYPE html>
-<html <?php language_attributes(); ?>>
-<head>
-	<meta charset="<?php bloginfo( 'charset' ); ?>">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<?php wp_head(); ?>
-</head>
+defined( 'ABSPATH' ) || die( 'No script kiddies please!' );
+?>
+<!doctype html>
+<html>
+	<head>
+		<!--
+			META CONFIG
+		-->
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 
-<body <?php body_class(); ?>>
-<?php wp_body_open(); ?>
-<div id="page" class="site">
-	<header class="site-header">
-		<div class="site-branding">
-			<?php
-			if ( has_custom_logo() ) {
-				the_custom_logo();
-			} else {
-				?>
-				<h1 class="site-title">
-					<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
-						<?php bloginfo( 'name' ); ?>
-					</a>
-				</h1>
-				<?php
-			}
-			?>
-		</div>
-	</header>
+		<!--
+			CSS
+		-->
+		<?php wp_head(); ?>
+	</head>
+	<body <?php body_class(); ?>>
 
-	<div id="content" class="site-content">
+		<?php
+		$logo = get_option( 'screenly_options_logo' );
+		if ( ! empty( $logo ) ) {
+			echo '<img src="' . esc_url( $logo ) . '" id="brand-logo" width="314" height="98">';
+		}
+		?>
