@@ -20,7 +20,6 @@ defined( 'ABSPATH' ) || die( 'No script kiddies please!' );
 		<!--
 			CSS
 		-->
-		<link href="https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500" rel="stylesheet">
 		<?php wp_head(); ?>
 	</head>
 	<body <?php body_class(); ?>>
@@ -28,6 +27,6 @@ defined( 'ABSPATH' ) || die( 'No script kiddies please!' );
 		<?php
 		$logo = get_option( 'screenly_options_logo' );
 		if ( ! empty( $logo ) ) {
-			echo '<img src="' . $logo . '" id="brand-logo" width="314" height="98">';
+			echo '<img src="' . esc_url( $logo ) . '" id="brand-logo" width="314" height="98">';
 		}
 		?>

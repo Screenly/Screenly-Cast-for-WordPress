@@ -20,8 +20,8 @@ require_once 'header.php';
 		?>
 	<section>
 
-		<?php if ( srlyHasTheFeaturedImage() ) : ?>
-		<div class="figure"<?php srlyTheFeaturedImage(); ?>></div>
+		<?php if ( srly_has_the_featured_image() ) : ?>
+		<div class="figure"<?php srly_the_featured_image(); ?>></div>
 		<?php endif; ?>
 
 		<article>

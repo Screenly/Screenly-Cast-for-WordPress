@@ -19,7 +19,7 @@ require_once 'header.php';
 		?>
 		<section>
 
-			<div class="figure"<?php srlyTheFeaturedImage(); ?>></div>
+			<div class="figure"<?php srly_the_featured_image(); ?>></div>
 
 			<article>
 				<h1><?php the_title(); ?></h1>

@@ -4,7 +4,8 @@
  *
  * @package ScreenlyCast
  */
-defined( 'ABSPATH' ) or die( "No script kiddies please!" );
+
+defined( 'ABSPATH' ) || die( 'No script kiddies please!' );
 
 
 /**
@@ -13,14 +14,13 @@ defined( 'ABSPATH' ) or die( "No script kiddies please!" );
  * @package ScreenlyCast
  * @return  string
  */
-function srlyAllowedContentTags()
-{
+function srly_allowed_content_tags() {
 	$tags = '<h1>,<h2>,<h3>,<h4>,<h5>,<h6>,<br>,<em>,<i>,<strong>,<b>,<ul>,<ol>,';
 	$tags .= '<li>,<blockquote>,<ins>,<code>,<pre>,<del>,<p>';
 	return $tags;
 }
-add_filter( 'get_the_content_limit_custom_allowedtags', 'srlyAllowedContentTags' );
-add_filter( 'get_the_content_limit_allowedtags', 'srlyAllowedContentTags' );
+add_filter( 'get_the_content_limit_custom_allowedtags', 'srly_allowed_content_tags' );
+add_filter( 'get_the_content_limit_allowedtags', 'srly_allowed_content_tags' );
 
 
 /**
@@ -31,12 +31,11 @@ add_filter( 'get_the_content_limit_allowedtags', 'srlyAllowedContentTags' );
  * @package ScreenlyCast
  * @return  string
  */
-function srlyThePostContent( $content )
-{
-	$content = strip_tags( $content, srlyAllowedContentTags() );
+function srly_the_post_content( $content ) {
+	$content = strip_tags( $content, srly_allowed_content_tags() );
 	return '<div class="content">' . $content . '</div>';
 }
-add_filter( 'the_content', 'srlyThePostContent' );
+add_filter( 'the_content', 'srly_the_post_content' );
 
 
 /**
@@ -49,8 +48,7 @@ add_filter( 'the_content', 'srlyThePostContent' );
  * @package ScreenlyCast
  * @return  boolean
  */
-function srlyHasTheFeaturedImage( $post=null )
-{
+function srly_has_the_featured_image( $post = null ) {
 	if ( empty( $post ) ) {
 		global $post;
 	}
@@ -66,39 +64,37 @@ function srlyHasTheFeaturedImage( $post=null )
  * @package ScreenlyCast
  * @return  string
  */
-function srlyGetFeaturedImage( $post=null )
-{
+function srly_get_featured_image( $post = null ) {
 	if ( empty( $post ) ) {
 		global $post;
 	}
 
 	if ( is_attachment( $post->ID ) ) {
 		$featured = wp_get_attachment_image_src( $post->ID, 'full' );
-		if ( !empty( $featured ) ) {
+		if ( ! empty( $featured ) ) {
 			$featured = $featured[0];
 		}
 	} else if ( has_post_thumbnail( $post->ID ) ) {
 		$featured = get_the_post_thumbnail_url( $post->ID, 'full' );
 	}
 
-	if ( !empty( $featured ) ) {
-		echo ' style="background-image:url(' . $featured . ');"';
+	if ( ! empty( $featured ) ) {
+		echo ' style="background-image:url(' . esc_url( $featured ) . ');"';
 	}
 	return '';
 }
 
 
 /**
- * Function prints out {srlyGetFeaturedImage}.
+ * Function prints out {srly_get_featured_image}.
  *
  * @param stdClass $post The post to focus on.
  *
  * @package ScreenlyCast
  * @return  boolean
  */
-function srlyTheFeaturedImage( $post=null )
-{
-	echo srlyGetFeaturedImage( $post );
+function srly_the_featured_image( $post = null ) {
+	echo wp_kses_post( srly_get_featured_image( $post ) );
 	return true;
 }
 
@@ -111,10 +107,9 @@ function srlyTheFeaturedImage( $post=null )
  * @package ScreenlyCast
  * @return  string
  */
-function srlyGetShortLink( $url )
-{
+function srly_get_short_link( $url ) {
 	$link = parse_url( $url );
-	if ( !empty( $link['host'] ) ) {
+	if ( ! empty( $link['host'] ) ) {
 		$link = str_replace( 'www.', '', $link['host'] ) . $link['path'] . '?' . $link['query'];
 		return $link;
 	}
@@ -123,16 +118,15 @@ function srlyGetShortLink( $url )
 
 
 /**
- * Function prints out {srlyGetShortLink}.
+ * Function prints out {srly_get_short_link}.
  *
  * @param string $url Full url string.
  *
  * @package ScreenlyCast
  * @return  boolean
  */
-function srlyTheShortLink( $url )
-{
-	echo srlyGetShortLink( $url );
+function srly_the_short_link( $url ) {
+	echo esc_html( srly_get_short_link( $url ) );
 	return true;
 }
 
@@ -141,41 +135,39 @@ function srlyTheShortLink( $url )
  * We use this function to create a simple QRCODE.
  *
  * @param string  $data Full url string.
- * @param integer $w    Width of image
- * @param integer $h    Height of image
- * @param integer $m    Image padding size
+ * @param integer $w    Width of image.
+ * @param integer $h    Height of image.
+ * @param integer $m    Image padding size.
  *
  * @package ScreenlyCast
  * @return  string
  */
-function srlyGetQrcodeLink( $data, $w=200, $h=200, $m=0 )
-{
-	$str = "https://api.qrserver.com/v1/create-qr-code/?qzone=";
+function srly_get_qrcode_link( $data, $w = 200, $h = 200, $m = 0 ) {
+	$str = 'https://api.qrserver.com/v1/create-qr-code/?qzone=';
 	$str .= $m;
-	$str .= "&size=";
+	$str .= '&size=';
 	$str .= $w;
-	$str .= "x";
+	$str .= 'x';
 	$str .= $h;
-	$str .= "&data=";
+	$str .= '&data=';
 	$str .= $data;
 	return $str;
 }
 
 
 /**
- * Function prints out {srlyGetQrcodeLink}.
+ * Function prints out {srly_get_qrcode_link}.
  *
  * @param string  $data Full url string.
- * @param integer $w    Width of image
- * @param integer $h    Height of image
- * @param integer $m    Image padding size
+ * @param integer $w    Width of image.
+ * @param integer $h    Height of image.
+ * @param integer $m    Image padding size.
  *
  * @package ScreenlyCast
  * @return  boolean
  */
-function srlyTheQrcodeLink( $data, $w=200, $h=200, $m=0 )
-{
-	echo srlyGetQrcodeLink( $data, $w, $h, $m );
+function srly_the_qrcode_link( $data, $w = 200, $h = 200, $m = 0 ) {
+	echo esc_url( srly_get_qrcode_link( $data, $w, $h, $m ) );
 	return true;
 }
 
@@ -187,17 +179,15 @@ function srlyTheQrcodeLink( $data, $w=200, $h=200, $m=0 )
  * @package ScreenlyCast
  * @return  boolean
  */
-function srlyEnqueueThemeAssets()
-{
+function srly_enqueue_theme_assets() {
 	$path = plugin_dir_url( __FILE__ );
-	// CSS
+	wp_enqueue_style( 'work-sans', 'https://fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500', array(), null );
 	wp_enqueue_style( SRLY_THEME, $path . 'style.css', array(), SRLY_VERSION, 'all' );
-	// JS
 	wp_enqueue_script( SRLY_THEME, $path . 'assets/js/scripts.js', array(), SRLY_VERSION, true );
 
 	return true;
 }
-add_action( 'wp_enqueue_scripts', 'srlyEnqueueThemeAssets', 9999 );
+add_action( 'wp_enqueue_scripts', 'srly_enqueue_theme_assets', 9999 );
 
 
 /**
@@ -226,7 +216,7 @@ remove_action( 'wp_print_styles', 'print_emoji_styles' );
 function screenly_cast_scripts() {
 	wp_enqueue_style(
 		'screenly-cast-style',
-		get_stylesheet_uri(),
+		esc_url( get_stylesheet_uri() ),
 		array(),
 		wp_get_theme()->get( 'Version' )
 	);
