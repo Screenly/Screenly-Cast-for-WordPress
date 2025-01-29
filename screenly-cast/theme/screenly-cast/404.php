@@ -5,19 +5,15 @@
  * @package ScreenlyCast
  */
 
-get_header();
-
+defined( 'ABSPATH' ) || die( 'No script kiddies please!' );
+require_once 'header.php';
 ?>
-
-<div class="content-area">
-	<main class="site-main">
-		<?php
-		if ( ! have_posts() || ! is_404() ) {
-			get_template_part( 'template-parts/content', 'none' );
-		}
-		?>
+	<main>
+		<section>
+			<article>
+				<h1>404</h1>
+				<h2>Page not found</h2>
+			</article>
+		</section>
 	</main>
-</div>
-
-<?php
-get_footer();
+<?php require_once 'footer.php'; ?>

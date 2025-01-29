@@ -1,29 +1,42 @@
 <?php
+ /**
+  * The template for displaying attachment pages.
+  *
+  * @package ScreenlyCast
+  */
+
+defined( 'ABSPATH' ) || die( 'No script kiddies please!' );
+
 /**
- * The template for displaying attachment pages.
- *
- * @package ScreenlyCast
+ * Require header
  */
-
-get_header();
-
+require_once 'header.php';
 ?>
-
-<div class="content-area">
-	<main class="site-main">
-		<?php
-		if ( ! have_posts() || ! is_attachment() ) {
-			get_template_part( 'template-parts/content', 'none' );
-		} else {
-			while ( have_posts() ) {
-				the_post();
-				get_template_part( 'template-parts/content', get_post_type() );
-			}
-		}
+	<main>
+	<?php
+	if ( have_posts() ) :
+		the_post();
 		?>
+		<section>
+
+			<div class="figure"<?php srly_the_featured_image(); ?>></div>
+
+			<article>
+				<h1><?php the_title(); ?></h1>
+				<time datetime="<?php echo get_the_date( 'T Y-m-d H:i' ); ?>">
+					<?php the_date( 'M d Y' ); ?>
+				</time>
+				<h3><?php the_excerpt(); ?></h3>
+				<?php the_content(); ?>
+			</article>
+
+		</section>
+		<?php endif; ?>
 	</main>
-</div>
 
 <?php
-get_footer();
+/**
+ * Require footer
+ */
+require_once 'footer.php';
 ?>
