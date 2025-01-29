@@ -3,7 +3,7 @@ Contributors: vpetersson
 Tags: digital signage, screenly
 Requires at least: 6.2.4
 Tested up to: 6.4.3
-Stable tag: 1.0.4
+Stable tag: 1.0.5
 Requires PHP: 7.4
 License: GPLv2
 License URI: https://github.com/Screenly/Screenly-Cast-for-WordPress/blob/master/LICENSE
@@ -49,6 +49,11 @@ For support, feature requests, and bug reports, please visit our [GitHub Issues 
 2. The same page with Screenly Cast enabled.
 
 == Changelog ==
+
+= 1.0.5 =
+* Fix: Make failing unit tests pass
+* Fix: Update handling of the `?srly` query parameter
+* Fix: Screenly Cast theme not being applied when using the `srly` query parameter
 
 = 1.0.4 =
 * Fix: Move build artifacts to separate dist/ directory
