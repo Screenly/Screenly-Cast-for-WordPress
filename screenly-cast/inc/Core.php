@@ -71,6 +71,7 @@ class Core {
 		add_filter( 'parse_query', array( $this, 'parse_query' ) );
 		add_action( 'init', array( $this, 'register_post_types' ) );
 		add_action( 'init', array( $this, 'register_taxonomies' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 	}
 
 	/**
@@ -255,5 +256,20 @@ class Core {
 			$this->version_checker->get_required_wordpress_version()
 		);
 		echo '<div class="notice notice-error"><p>' . esc_html( $message ) . '</p></div>';
+	}
+
+	/**
+	 * Enqueue scripts and styles.
+	 */
+	public function enqueue_scripts(): void {
+		if ( array_key_exists( 'srly', $GLOBALS['wp']->query_vars ) ) {
+			wp_enqueue_script(
+				'screenly-cast-scripts',
+				plugin_dir_url( dirname( __FILE__ ) ) . 'theme/screenly-cast/assets/js/scripts.js',
+				array(),
+				filemtime( plugin_dir_path( dirname( __FILE__ ) ) . 'theme/screenly-cast/assets/js/scripts.js' ),
+				true
+			);
+		}
 	}
 }
