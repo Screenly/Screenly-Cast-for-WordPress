@@ -1,5 +1,5 @@
-document.addEventListener('DOMContentLoaded', function() {
-	"use strict";
+document.addEventListener('DOMContentLoaded', function () {
+	'use strict';
 
 	const article = document.querySelector('article');
 	if (article) {
@@ -18,7 +18,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
 					if (childRect.top > article.clientHeight) {
 						child.remove();
-					} else if (childRect.top + child.offsetHeight > article.clientHeight) {
+					} else if (
+						childRect.top + child.offsetHeight >
+						article.clientHeight
+					) {
 						/*
 						 * NOW WE NEED TO WORK WORD BY WORD UNTIL NO SCROLL IS NEEDED
 						 */
@@ -26,9 +29,13 @@ document.addEventListener('DOMContentLoaded', function() {
 						const tlength = words.length;
 						let a = tlength;
 						while (a > 0) {
-							child.innerText = words.slice(0, a).join(' ') + ' [...]';
+							child.innerText =
+								words.slice(0, a).join(' ') + ' [...]';
 
-							if (childRect.top + child.offsetHeight < article.clientHeight) {
+							if (
+								childRect.top + child.offsetHeight <
+								article.clientHeight
+							) {
 								break;
 							}
 							a--;
