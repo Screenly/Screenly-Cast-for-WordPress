@@ -26,3 +26,9 @@ jobs:
         SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
         SLUG: screenly-cast
         BUILD_DIR: build/screenly-cast
+
+    - name: Create GitHub Release
+      uses: softprops/action-gh-release@v2
+      with:
+        files: |
+          dist/screenly-cast.zip
