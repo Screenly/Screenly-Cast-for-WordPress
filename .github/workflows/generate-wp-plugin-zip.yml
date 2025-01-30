@@ -1,8 +1,12 @@
 name: Generate WordPress Plugin Package
 
 on:
+  push:
+    branches:
+      - master
   pull_request:
-    types: [opened, synchronize]
+    branches:
+      - master
 
 jobs:
   build-and-upload:
@@ -19,5 +23,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: screenly-cast-plugin
-          path: artifact/screenly-cast.zip
-          retention-days: 5
+          path: dist/screenly-cast.zip
+          compression-level: 0
