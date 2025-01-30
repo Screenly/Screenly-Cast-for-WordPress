@@ -51,14 +51,6 @@ class Settings implements SettingsInterface {
 
 		// Add settings menu item.
 		add_action( 'admin_menu', array( $this, 'add_settings_page' ) );
-
-		// Remove default theme menu items.
-		add_action(
-			'admin_menu',
-			function (): void {
-				remove_submenu_page( 'themes.php', 'themes.php' );
-			}
-		);
 	}
 
 	/**
