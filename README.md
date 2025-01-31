@@ -104,7 +104,7 @@ docker compose --profile dev up --build
 # The development site will be available at http://localhost:8000
 ```
 
-4. For running tests:
+1. For running tests:
 
 ```bash
 # Start test environment
