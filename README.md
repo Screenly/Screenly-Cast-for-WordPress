@@ -89,7 +89,7 @@ fixed unmoving content usually looks and reads the best.
 ### Setup
 
 1. Clone this repository
-2. For local development:
+1. For local development:
 
 ```bash
 composer install
