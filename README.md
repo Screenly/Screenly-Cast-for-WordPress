@@ -95,10 +95,20 @@ fixed unmoving content usually looks and reads the best.
 composer install
 ```
 
+1. Start the development environment:
+
+```bash
+# Start development environment (WordPress + MySQL)
+docker compose --profile dev up --build
+
+# The development site will be available at http://localhost:8000
+```
+
 1. For running tests:
 
 ```bash
-docker compose up wordpress-test
+# Start test environment
+docker compose --profile test up wordpress-test
 ```
 
 ### Release Process
