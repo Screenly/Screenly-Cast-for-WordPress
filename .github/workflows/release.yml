@@ -30,5 +30,6 @@ jobs:
     - name: Create GitHub Release
       uses: softprops/action-gh-release@v2
       with:
+        prerelease: true
         files: |
           dist/screenly-cast.zip
