@@ -99,7 +99,7 @@ composer install
 
 ```bash
 # Start development environment (WordPress + MySQL)
-docker compose --profile dev up
+docker compose --profile dev up --build
 
 # The development site will be available at http://localhost:8000
 ```
