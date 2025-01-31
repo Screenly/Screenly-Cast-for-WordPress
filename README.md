@@ -89,13 +89,13 @@ fixed unmoving content usually looks and reads the best.
 ### Setup
 
 1. Clone this repository
-1. For local development:
+2. For local development:
 
 ```bash
 composer install
 ```
 
-3. Start the development environment:
+1. Start the development environment:
 
 ```bash
 # Start development environment (WordPress + MySQL)
@@ -125,14 +125,14 @@ docker compose --profile test up wordpress-test
      * List all changes with proper categorization (Major/Feature/Fix)
      * Include any breaking changes, new features, and bug fixes
 
-2. Test the changes locally:
+1. Test the changes locally:
 
 ```bash
 # Run the test suite
 docker compose run --rm wordpress-test composer test
 ```
 
-3. Build and verify the release locally:
+1. Build and verify the release locally:
 
 ```bash
 # Clean install dependencies without dev packages
@@ -144,7 +144,7 @@ composer install --no-dev --optimize-autoloader
 # Verify the build output in build/screenly-cast/
 ```
 
-4. Commit changes and push to GitHub:
+1. Commit changes and push to GitHub:
 
 ```bash
 git add .
@@ -152,7 +152,7 @@ git commit -m "Prepare release vX.Y.Z"
 git push origin master
 ```
 
-5. Create and push a new tag:
+1. Create and push a new tag:
 
 ```bash
 # Create a new tag
@@ -166,7 +166,7 @@ git tag -d vX.Y.Z               # Delete local tag
 git push --delete origin vX.Y.Z # Delete remote tag
 ```
 
-6. The GitHub Actions workflow will automatically:
+1. The GitHub Actions workflow will automatically:
    * Run tests across supported PHP versions
    * Build the release package without dev dependencies
    * If tests pass, deploy to WordPress.org plugin repository
