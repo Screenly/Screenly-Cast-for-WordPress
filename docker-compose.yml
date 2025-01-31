@@ -89,7 +89,10 @@ services:
         PHP_VERSION: ${PHP_VERSION:-7.4}
     volumes:
       - .:/var/www/html/wp-content/plugins/screenly-cast
+    entrypoint: []
     command: bash -c "composer update && composer run lint"
+    profiles:
+      - lint
 
 volumes:
   wordpress_data:
