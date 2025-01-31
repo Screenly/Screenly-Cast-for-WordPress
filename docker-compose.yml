@@ -18,6 +18,8 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    profiles:
+      - dev
 
   db:
     image: mysql:8.0.32
@@ -37,6 +39,8 @@ services:
       interval: 5s
       timeout: 5s
       retries: 10
+    profiles:
+      - dev
 
   # Test environment with configurable PHP version
   wordpress-test:
@@ -54,6 +58,8 @@ services:
     depends_on:
       db-test:
         condition: service_healthy
+    profiles:
+      - test
 
   db-test:
     image: mysql:8.0.32
@@ -71,6 +77,8 @@ services:
       interval: 5s
       timeout: 5s
       retries: 10
+    profiles:
+      - test
 
   # Linting environment
   lint:
