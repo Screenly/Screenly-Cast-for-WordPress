@@ -111,6 +111,13 @@ docker compose --profile dev up --build
 docker compose --profile test up wordpress-test
 ```
 
+1. For running linting:
+
+```bash
+# Run linting checks
+docker compose --profile lint up
+```
+
 ### Release Process
 
 1. Update version and changelog:
