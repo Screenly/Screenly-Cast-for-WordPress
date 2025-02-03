@@ -31,7 +31,7 @@ these simple steps:
     * `https://www.mydomain.com/my-page-url?srly`
     * `https://www.mydomain.com/my-attachment-url?srly`
     * `https://www.mydomain.com/?somevar=1&anothervar=2&srly` &mdash; in case you're
-    using more than one parameter
+      using more than one parameter
 
     > [!NOTE]
     > There is no need to apply any value to the parameter. It just needs to exist in the query.
