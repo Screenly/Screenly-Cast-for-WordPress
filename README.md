@@ -30,7 +30,7 @@ these simple steps:
    * `https://www.mydomain.com/my-post-url?srly`
    * `https://www.mydomain.com/my-page-url?srly`
    * `https://www.mydomain.com/my-attachment-url?srly`
-   * `https://www.mydomain.com/?somevar=1&anothervar=2&srly` - In case you're
+   * `https://www.mydomain.com/?somevar=1&anothervar=2&srly` &mdash; in case you're
      using more than one parameter
 
 > [!NOTE]
@@ -46,8 +46,8 @@ these simple steps:
    is what you will see in Screenly later.
 10. Go to the **Playlists** section and go to the playlist where you want to add
     the new content.
-11. Click the "+" button beside the **Content** section.
-12. Select the content you just created and click "+" beside it. Click **Done**
+11. Click the **+** button beside the **Content** section.
+12. Select the content you just created and click **+** beside it. Click **Done**
     when you are ready.
 13. Make sure to pick an appropriate **Duration** for a good reading experience.
 14. Click **Save**.
@@ -100,11 +100,15 @@ fixed unmoving content usually looks and reads the best.
 
 ```bash
 composer install
+npm install
 ```
 
 #### With Docker
 
 ```bash
+# Install Node.js dependencies
+npm install
+
 # Start development environment (WordPress + MySQL)
 docker compose --profile dev up --build
 
