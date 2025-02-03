@@ -24,8 +24,8 @@ To make use of the plugin on your **Screenly Screen** you just need to follow
 these simple steps:
 
 1. Make sure the **plugin is activated**.
-2. **Copy and Paste** the URL of your website, post, page or attachment.
-3. Change the URL, adding a parameter called `srly`, like this:
+1. **Copy and Paste** the URL of your website, post, page or attachment.
+1. Change the URL, adding a parameter called `srly`, like this:
    * `https://www.mydomain.com/?srly`
    * `https://www.mydomain.com/my-post-url?srly`
    * `https://www.mydomain.com/my-page-url?srly`
@@ -36,21 +36,21 @@ these simple steps:
 > [!NOTE]
 > There is no need to apply any value to the parameter. It just needs to exist in the query.
 
-4. [Login to Screenly](https://login.screenlyapp.com) and navigate to **Content**
+1. [Login to Screenly](https://login.screenlyapp.com) and navigate to **Content**
    on the sidebar.
-5. Click on the button **+ New Content**.
-6. Select the tab **URL**.
-7. **Paste** the edited URL (from step 3).
-8. Click **Finish**.
-9. On the content detail page, make sure to set a **recognizable title** since this
+1. Click on the button **+ New Content**.
+1. Select the tab **URL**.
+1. **Paste** the edited URL (from step 3).
+1. Click **Finish**.
+1. On the content detail page, make sure to set a **recognizable title** since this
    is what you will see in Screenly later.
-10. Go to the **Playlists** section and go to the playlist where you want to add
+1. Go to the **Playlists** section and go to the playlist where you want to add
     the new content.
-11. Click the **+** button beside the **Content** section.
-12. Select the content you just created and click **+** beside it. Click **Done**
+1. Click the **+** button beside the **Content** section.
+1. Select the content you just created and click **+** beside it. Click **Done**
     when you are ready.
-13. Make sure to pick an appropriate **Duration** for a good reading experience.
-14. Click **Save**.
+1. Make sure to pick an appropriate **Duration** for a good reading experience.
+1. Click **Save**.
 
 Screenly Cast for WordPress works with both [Screenly](https://www.screenly.io)
 and [Anthias](https://anthias.screenly.io/), and should also work just fine with
