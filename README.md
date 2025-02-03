@@ -26,15 +26,15 @@ these simple steps:
 1. Make sure the **plugin is activated**.
 1. **Copy and Paste** the URL of your website, post, page or attachment.
 1. Change the URL, adding a parameter called `srly`, like this:
-  * `https://www.mydomain.com/?srly`
-  * `https://www.mydomain.com/my-post-url?srly`
-  * `https://www.mydomain.com/my-page-url?srly`
-  * `https://www.mydomain.com/my-attachment-url?srly`
-  * `https://www.mydomain.com/?somevar=1&anothervar=2&srly` &mdash; in case you're
+    * `https://www.mydomain.com/?srly`
+    * `https://www.mydomain.com/my-post-url?srly`
+    * `https://www.mydomain.com/my-page-url?srly`
+    * `https://www.mydomain.com/my-attachment-url?srly`
+    * `https://www.mydomain.com/?somevar=1&anothervar=2&srly` &mdash; in case you're
     using more than one parameter
 
-  > [!NOTE]
-  > There is no need to apply any value to the parameter. It just needs to exist in the query.
+    > [!NOTE]
+    > There is no need to apply any value to the parameter. It just needs to exist in the query.
 
 1. [Login to Screenly](https://login.screenlyapp.com) and navigate to **Content**
    on the sidebar.
