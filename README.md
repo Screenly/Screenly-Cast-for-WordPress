@@ -20,37 +20,37 @@ With Screenly Cast for WordPress:
 
 ## Usage with [Screenly](https://www.screenly.io)
 
-Check out our video introduction to Screenly Cast for WordPress:
-
-[![An introduction to Screenly Cast for WordPress](https://img.youtube.com/vi/rX6b9ZAYi34/0.jpg)](https://www.youtube.com/watch?v=rX6b9ZAYi34)
-
 To make use of the plugin on your **Screenly Screen** you just need to follow
 these simple steps:
 
 1. Make sure the **plugin is activated**.
-2. **Copy and Paste** the URL of your website, post, page or attachment.
-3. Change the URL, adding a parameter called `srly`, like this:
-   * `https://www.mydomain.com/?srly`
-   * `https://www.mydomain.com/my-post-url?srly`
-   * `https://www.mydomain.com/my-page-url?srly`
-   * `https://www.mydomain.com/my-attachment-url?srly`
-   * `https://www.mydomain.com/?somevar=1&anothervar=2&srly` - In case you're
-     using more than one parameter
-   * **Note:** There is no need to apply any value to the parameter. It just
-     needs to exist in the query.
-4. [Login to Screenly](https://login.screenlyapp.com) and navigate to **Assets**
-   on the top menu.
-5. Click on the button **+ Add Asset**.
-6. Select the tab **URL**.
-7. **Paste** the edited URL (from step 3).
-8. Hit **Save**.
-9. On the asset detail page, make sure to set a **recognizable title** since this
-   is what you will see in Screenly later.
-10. Go to the **Playlists** section and **add the new asset**. Make sure to pick
-    an appropriate **Duration** for a good reading experience.
-11. Hit **Save**.
+1. **Copy and Paste** the URL of your website, post, page or attachment.
+1. Change the URL, adding a parameter called `srly`, like this:
+    * `https://www.mydomain.com/?srly`
+    * `https://www.mydomain.com/my-post-url?srly`
+    * `https://www.mydomain.com/my-page-url?srly`
+    * `https://www.mydomain.com/my-attachment-url?srly`
+    * `https://www.mydomain.com/?somevar=1&anothervar=2&srly` &mdash; in case you're
+      using more than one parameter
 
-For detailed instructions, check out this [blog post](https://news.screenly.io/introducing-screenly-cast-for-wordpress-a27ff26667b7).
+    **NOTE:** There is no need to apply any value to the parameter. It just needs
+    to exist in the query.
+
+1. [Login to Screenly](https://login.screenlyapp.com) and navigate to **Content**
+   on the sidebar.
+1. Click on the button **+ New Content**.
+1. Select the tab **URL**.
+1. **Paste** the edited URL (from step 3).
+1. Click **Finish**.
+1. On the content detail page, make sure to set a **recognizable title** since this
+   is what you will see in Screenly later.
+1. Go to the **Playlists** section and go to the playlist where you want to add
+    the new content.
+1. Click the **+** button beside the **Content** section.
+1. Select the content you just created and click **+** beside it. Click **Done**
+    when you are ready.
+1. Make sure to pick an appropriate **Duration** for a good reading experience.
+1. Click **Save**.
 
 Screenly Cast for WordPress works with both [Screenly](https://www.screenly.io)
 and [Anthias](https://anthias.screenly.io/), and should also work just fine with
@@ -60,13 +60,11 @@ most other digital signage solutions, but the usage will vary.
 
 The plugin comes with a simple theme that will be used specifically for Screenly
 content. The plugin detects the `srly` parameter in your URL, like in
-`http://www.myblog.com/?srly`, and applies the template. A `template_include`
-filter is used to activate the plugin's theme files. Your content will be
-rendered using the Screenly theme, without affecting your normal theme still in
-use for the rest of your site.
+`http://www.myblog.com/?srly`, and applies the Screenly Cast theme. Enabling the
+theme will not affect your normal theme still in use for the rest of your site.
 
 Because the plugin targets Screenly devices with no end user interaction, content
-will be laid out in a simple and TV friendly layout. Just the title, content and
+will be laid out in a simple and TV-friendly layout. Just the title, content and
 featured image are used. The plugin automatically simplifies the markup and
 removes functionality not appropriate for the medium. For example, since there is
 no interaction, any clickable links is simplified to just the title text.
@@ -85,33 +83,46 @@ fixed unmoving content usually looks and reads the best.
 * PHP 7.4 or higher (for local development without Docker)
 * WordPress 6.2.4 or higher
 * Composer for dependency management
+* Node.js and NPM (for syncing version across all the relevant files in the project)
+
+> [!NOTE]
+> While there's an option to run the development environment without containerization,
+> it is highly recommended to use Docker for development to minimize the setup and
+> configuration needed.
+>
+> As for a containerized development environment, we still need to have Node.js and
+> NPM installed on your machine in the meantime while we work on a more container-friendly
+> development environment.
 
 ### Setup
 
-1. Clone this repository
-1. For local development:
+#### Without Docker
 
 ```bash
 composer install
+npm install
 ```
 
-1. Start the development environment:
+#### With Docker
 
 ```bash
+# Install Node.js dependencies
+npm install
+
 # Start development environment (WordPress + MySQL)
 docker compose --profile dev up --build
 
 # The development site will be available at http://localhost:8000
 ```
 
-1. For running tests:
+#### Running unit tests
 
 ```bash
 # Start test environment
 docker compose --profile test up wordpress-test
 ```
 
-1. For running linting:
+#### Running linting checks
 
 ```bash
 # Run linting checks
@@ -120,26 +131,26 @@ docker compose --profile lint up
 
 ### Release Process
 
-1. Update version and changelog:
-   * Update version information in plugin header (`screenly-cast.php`):
-     * `Version`
-     * `Requires at least`
-     * `Requires PHP`
-   * Run `npm run version:sync` to sync package.json version with the plugin
-   * Add detailed changelog entry in `readme.txt` under the `== Changelog ==`
-     section
-     * Follow the existing format (e.g., `= 1.0.0 =`)
-     * List all changes with proper categorization (Major/Feature/Fix)
-     * Include any breaking changes, new features, and bug fixes
+* Update version and changelog:
+  * Update the following information in the plugin header in [`screenly-cast.php`](/screenly-cast/screenly-cast.php):
+    * `Version`
+    * `Requires at least`
+    * `Requires PHP`
+  * Run `npm run version:sync` to sync [`package.json`](/package.json) version with the plugin.
+  * Add detailed changelog entry in `readme.txt` under the `== Changelog ==`
+    section
+    * Follow the existing format (e.g., `= 1.0.0 =`)
+    * List all changes with proper categorization (Major/Feature/Fix)
+    * Include any breaking changes, new features, and bug fixes
 
-1. Test the changes locally:
+* Test the changes locally:
 
 ```bash
 # Run the test suite
 docker compose run --rm wordpress-test composer test
 ```
 
-1. Build and verify the release locally:
+* Build and verify the release locally:
 
 ```bash
 # Clean install dependencies without dev packages
@@ -151,7 +162,7 @@ composer install --no-dev --optimize-autoloader
 # Verify the build output in build/screenly-cast/
 ```
 
-1. Commit changes and push to GitHub:
+* Commit changes and push to GitHub:
 
 ```bash
 git add .
@@ -159,7 +170,7 @@ git commit -m "Prepare release vX.Y.Z"
 git push origin master
 ```
 
-1. Create and push a new tag:
+* Create and push a new tag:
 
 ```bash
 # Create a new tag
@@ -173,12 +184,12 @@ git tag -d vX.Y.Z               # Delete local tag
 git push --delete origin vX.Y.Z # Delete remote tag
 ```
 
-1. The GitHub Actions workflow will automatically:
-   * Run tests across supported PHP versions
-   * Build the release package without dev dependencies
-   * If tests pass, deploy to WordPress.org plugin repository
-   * The plugin will be available in the WordPress.org plugin directory after
-     deployment
+* The GitHub Actions workflow will automatically:
+  * Run tests across supported PHP versions
+  * Build the release package without dev dependencies
+  * Deploy to WordPress.org plugin repository if the build is successful
+  * The plugin will be available in the WordPress.org plugin directory after
+     deployment.
 
 ### Version Numbers
 
@@ -203,4 +214,4 @@ The resulting `dist/screenly-cast.zip` file can be uploaded via WordPress's "Add
 
 ## License
 
-GPLv2
+This project is licensed under the [GPLv2](/LICENSE).
